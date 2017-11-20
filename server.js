@@ -8,7 +8,7 @@ var express = require('express'),
     io = require('socket.io');
 
 
-require('dotenv').config()
+require('dotenv').config();
 
 /**
  * Main application entry file.
