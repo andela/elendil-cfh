@@ -5,5 +5,9 @@ services:
   - mongodb
 env:
   - NODE_ENV=test
+
+before_script:
+  - sleep 15
+  - mongo mydb_test
 script: npm test
 
