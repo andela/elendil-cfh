@@ -6,7 +6,7 @@ config = require('../../config/config'),
 Schema = mongoose.Schema;
 
 /**
-* Question Schema
+* Article Schema
 */
 var ArticleSchema = new Schema({
 id: {
