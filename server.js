@@ -65,6 +65,7 @@ var ioObj = io.listen(server, { log: false });
 require('./config/socket/socket')(ioObj);
 console.log('Express app started on port ' + port);
 
+
 //Initializing logger
 logger.init(app, passport, mongoose);
 
