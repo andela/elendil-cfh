@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/andela/elendil-cfh.svg?branch=staging)](https://travis-ci.org/andela/elendil-cfh)
+[![Build Status](https://travis-ci.org/andela/elendil-cfh.svg?branch=staging)](https://travis-ci.org/andela/elendil-cfh)[![Coverage Status](https://coveralls.io/repos/github/andela/annie-hall-cfh/badge.svg?branch=staging)](https://coveralls.io/github/andela/annie-hall-cfh?branch=staging)
 
 Cards for Humanity - [http://cfh.io](http://cfh.io)
 ===========
