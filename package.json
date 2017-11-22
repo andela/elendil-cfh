@@ -13,6 +13,7 @@
     "npm": "3.10.10"
   },
   "scripts": {
+    "eslint": "eslint ./app",
     "start": "node node_modules/grunt-cli/bin/grunt",
     "test": "node node_modules/grunt-cli/bin/grunt test",
     "test:client": "karma start",
@@ -67,3 +68,5 @@
     "supertest": "~0.8.0"
   }
 }
+
+
