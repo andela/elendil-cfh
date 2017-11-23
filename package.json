@@ -33,6 +33,7 @@
     "grunt-bower-task": "~0.4.0",
     "grunt-cli": "~0.1.9",
     "jade": "~0.35.0",
+    "jsonwebtoken": "^8.1.0",
     "mean-logger": "~0.0.1",
     "mongodb": "^2.2.33",
     "mongoose": "~4.12.2",
@@ -52,6 +53,8 @@
     "angular": "^1.6.6",
     "angular-mocks": "^1.6.6",
     "angular-ui-router": "^0.4.3",
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
     "grunt": "~0.4.1",
     "grunt-concurrent": "~0.4.0",
     "grunt-contrib-jshint": "~0.6.4",
@@ -68,5 +71,3 @@
     "supertest": "~0.8.0"
   }
 }
-
-
