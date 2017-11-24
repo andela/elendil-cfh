@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/andela/elendil-cfh.svg?branch=staging)](https://travis-ci.org/andela/elendil-cfh)
+[![Hound Status](https://img.shields.io/badge/Protected_by-Hound-a873d1.svg)](https://houndci.com)
 
 Cards for Humanity - [http://cfh.io](http://cfh.io)
 ===========
