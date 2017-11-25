@@ -18,7 +18,7 @@
     "test": "nyc --reporter=html --reporter=text node node_modules/gulp-cli/bin/gulp test",
     "test:client": "karma start",
     "postinstall": "node node_modules/gulp-cli/bin/gulp install",
-    "heroku-postbuild": "node node_modules/gulp-cli/bin/gulp build"
+    "heroku-postbuild": "node node_modules/gulp-cli/bin/gulp build",
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test"
   },
   "dependencies": {

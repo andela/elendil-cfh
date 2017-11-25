@@ -1,3 +1,5 @@
+/* jshint esversion: 6 */
+
 const gulp = require('gulp'),
   sass = require('gulp-sass'),
   nodemon = require('gulp-nodemon'),
