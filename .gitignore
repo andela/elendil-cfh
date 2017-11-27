@@ -4,6 +4,8 @@ public/lib
 .DS_store
 c4h_keys.txt
 .env
+.nyc_output/
+coverage/
 package-lock.json
 
 
