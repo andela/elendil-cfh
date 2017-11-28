@@ -1,3 +1,5 @@
+/* jshint esversion: 6 */
+
 var chai = require('chai'),
   chaiHttp = require('chai-http'),
   mongoose = require('mongoose'),

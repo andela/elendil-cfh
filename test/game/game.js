@@ -1,7 +1,7 @@
 var should = require('should');
 var io = require('socket.io-client');
 
-var socketURL = 'http://localhost:3000';
+var socketURL = (process.env.NODE_ENV === 'test')? 'http://localhost:3001' : 'http://localhost:3000' ;
 
 var options ={
   transports: ['websocket'],
