@@ -283,13 +283,17 @@ exports.login = function(req, res, next) {
   var email = req.body.email;
   var password = req.body.password;
   if(!email || !password) {
-    return res.status(400).send({ message: 'email or password cannot be blank' });
+    return res.status(400).send({ message: "email or password cannot be blank" });
   }
   User.findOne({email}).exec(function(err, user) {
     if (err) return next(err);
+<<<<<<< HEAD
     if (!user) return res.status(401).send({ message: 'Incorrect username or password' });
+=======
+    if (!user) return res.status(404).send({ message: "User is not registered" });
+>>>>>>> feat(users): implement jwt login
     var checkPassword = user.authenticate(password);
-    if (!checkPassword ) return res.status(401).send({ message: 'Incorrect username or password' });
+    if (!checkPassword ) return res.status(401).send({ message: "Incorrect username or password" });
     var userData = {
       id: user._id,
       name: user.name,
@@ -297,7 +301,7 @@ exports.login = function(req, res, next) {
     };
     var token = jwt.jwt.sign(userData);
     res.status(200).send({
-      message: 'login successful',
+      message: "login successful",
       token: token
     });
   });
