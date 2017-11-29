@@ -1,0 +1,111 @@
+#wrapper {
+  background: #fff;
+}
+.navbar a {
+  color: #add1e7;
+  text-transform: uppercase;
+  margin-right: 1%;
+}
+
+.navbar a:hover {
+  color: #d8e7f0;
+}
+
+.navbar a.selected {
+  text-decoration: underline;
+  
+}
+.nav-pills .nav-link.active {
+  background: #ffa700;
+  
+}
+
+.navbar-nav {
+  width: 60%;
+}
+
+.header {
+  background: url(../img/card.png);
+  height: 495px;
+  background-size: auto;
+  padding: 1%;
+  width: 100;
+
+}
+
+.header-text {
+  text-align: center;
+  font-size: 320%;
+  margin-top: 8%;
+  text-shadow: 1px 1px 3px #fff;
+  font-family: fantasy;
+}
+
+.game-btn {
+  text-align: center;
+}
+
+.game-btn .btn {
+  width: 20%;
+}
+
+.game-btn .btn-light {
+  color: #ffc209;
+}
+
+
+.game-btn .btn-warning {
+  color: #fff;
+}
+
+.how-to-slider {
+  margin-top: 2%;
+}
+
+#carousel {
+  height:550px;
+  width: 100%;
+  position:;
+  clear:both;
+  overflow:hidden;
+  margin:0 auto;
+}
+#carousel img {
+  visibility:hidden; /* hide images until carousel positions them */
+  cursor:pointer;
+  width: 15%;
+}
+
+.what-is-cfh {
+  text-align: center;
+  padding-top: 13%;
+  color: #256087;
+  text-transform: uppercase;
+  background: #fff;
+}
+
+.what-is-cfh span {
+  color: red;
+}
+
+.charity {
+  background: url(../img/charity.jpg);
+  height: 520px;
+  padding: 2%;
+  background-size: cover;
+  color: #fff;
+  text-align: center;
+  border-top: 10px solid #93a1a7cf;
+}
+
+.team {
+  background: #88a1ad;
+  padding: 1%;
+  color: #ffffff;
+  text-align: center;
+}
+
+.footer {
+  background: #256087;
+  padding: 2%;
+}
