@@ -1,3 +1,6 @@
+
+var jwt = require('../../config/jwt');
+
 /**
  * Module dependencies.
  */
@@ -71,6 +74,47 @@ exports.checkAvatar = function(req, res) {
     res.redirect('/');
   }
 
+};
+
+/**
+* SignUp user with jwt
+*/
+exports.signupJwt = function (req, res) {
+ if (req.body.name && req.body.password && req.body.email) {
+   User.findOne({
+     email: req.body.email
+   })
+     .exec()
+     .then(function (err, existingUser) {
+       if (err) {
+         return res.status(409).json({
+           message: "Email already taken!"
+         });
+       }
+       if (!existingUser) {
+         var user = new User(req.body);
+         user.avatar = avatars[user.avatar];
+         user.save(function (error, newUser) {
+           if (error) {
+             return res.status(400).json({
+               message: "Unable to signUp"
+             });
+           }
+           var userDetails = { id: newUser._id, email: newUser.email, name: newUser.name };
+
+           var token = jwt.jwt.sign(userDetails);
+           res.status(200).send({
+             message: "Signup successful. Token generated",
+             token: token
+           });
+         });
+       }
+     });
+ } else {
+   return res.status(400).json({
+     message: "all fields must be filled"
+   });
+ }
 };
 
 /**
@@ -185,4 +229,34 @@ exports.user = function(req, res, next, id) {
       req.profile = user;
       next();
     });
+};
+
+/**
+ * @description login function
+ * @param {Object} req - Request object
+ * @param {Object} res - Response object
+ * @returns {object} json - payload
+ */
+exports.login = function(req, res, next) {
+  var email = req.body.email;
+  var password = req.body.password;
+  if(!email || !password) {
+    return res.status(400).send({ message: 'email or password cannot be blank' });
+  }
+  User.findOne({email}).exec(function(err, user) {
+    if (err) return next(err);
+    if (!user) return res.status(404).send({ message: 'User is not registered' });
+    var checkPassword = user.authenticate(password);
+    if (!checkPassword ) return res.status(401).send({ message: 'Incorrect username or password' });
+    var userData = {
+      id: user._id,
+      name: user.name,
+      email: user.email
+    };
+    var token = jwt.jwt.sign(userData);
+    res.status(200).send({
+      message: 'login successful',
+      token: token
+    });
+  });
 };
