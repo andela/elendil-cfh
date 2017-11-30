@@ -1,7 +1,7 @@
 /**
  * Module dependencies.
  */
-let should = require('should'),
+const should = require('should'),
   app = require('../../server'),
   mongoose = require('mongoose'),
   User = mongoose.model('User'),
@@ -22,33 +22,32 @@ describe('<Unit Test>', () => {
         password: 'password'
       });
 
-      user.save((err) => {                
-                article = new Article({
-                    title: 'Article Title',
-                    content: 'Article Content',
-                    user: user
-                });
+      user.save((err) => {
+        article = new Article({
+          title: 'Article Title',
+          content: 'Article Content',
+          user
+        });
 
-                done();
-            });
+        done();
+      });
     });
 
     describe('Method Save', () => {
-      it('should be able to save whithout problems', (done) => {
-                return article.save(function(err) {
-                    should.not.exist(err);
-                    done();
-                });
-            });
+      it('should be able to save without problems', (done) => {
+        article.save((err) => {
+          should.not.exist(err);
+          done();
+        });
+      });
 
-      it('should be able to show an error when try to save witout title', (done) => {
-                article.title = '';
-
-                return article.save(function(err) {
-                    should.exist(err);
-                    done();
-                });
-            });
+      it('should be able to show an error when try to save without title', (done) => {
+        article.title = '';
+        article.save((err) => {
+          should.exist(err);
+          done();
+        });
+      });
     });
 
     afterEach((done) => {
