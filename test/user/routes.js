@@ -1,6 +1,6 @@
 /* jshint esversion: 6 */
 
-let chai = require('chai'),
+const chai = require('chai'),
   chaiHttp = require('chai-http'),
   mongoose = require('mongoose'),
   User = mongoose.model('User');
