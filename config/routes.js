@@ -7,9 +7,11 @@ module.exports = function (app, passport, auth) {
     app.get('/signup', users.signup);
     app.get('/chooseavatars', users.checkAvatar);
     app.get('/signout', users.signout);
+    app.post('/api/auth/login', users.login);
 
-    //setup routes with api prefix
-    app.post('/api/auth/signup', users.signupJwt);
+    //Setting up the users api
+     //setup routes with api prefix
+     app.post('/api/auth/signup', users.signupJwt);
 
     // Setting up the users api
     app.post('/users', users.create);
