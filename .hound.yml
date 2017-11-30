@@ -1,5 +1,5 @@
 eslint:
   enable: true
   config_file: .eslintrc
-  ignore_file: .eslintignore
+  ignore_file: .jshintignore
   
