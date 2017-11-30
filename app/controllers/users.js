@@ -79,45 +79,6 @@ exports.checkAvatar = function (req, res) {
 
 };
 
-/**
- * SignUp user with jwt
- */
-exports.signupJwt = function (req, res) {
-  if (req.body.name && req.body.password && req.body.email) {
-    User.findOne({
-      email: req.body.email
-    })
-      .exec()
-      .then(function (err, existingUser) {
-        if (err) {
-          return res.status(409).json({
-            message: "Email already taken!"
-          });
-        }
-        if (!existingUser) {
-          var user = new User(req.body);
-          user.avatar = avatars[user.avatar];
-          user.save(function (error, newUser) {
-            if (error) {
-              return res.status(400).json({
-                message: "Unable to signUp"
-              });
-            }
-            var userDetails = { id: newUser._id, email: newUser.email, name: newUser.name };
-
-            var token = jwt.jwt.sign(userDetails);
-            res.status(200).send({
-              message: "Signup successful. Token generated",
-              token: token
-            });
-          });
-        }
-      });
-  } else {
-    return res.status(400).json({
-      message: "all fields must be filled"
-    });
-  }
 /*
 * SignUp user with jwt
 */
@@ -287,11 +248,7 @@ exports.login = function(req, res, next) {
   }
   User.findOne({email}).exec(function(err, user) {
     if (err) return next(err);
-<<<<<<< HEAD
     if (!user) return res.status(401).send({ message: 'Incorrect username or password' });
-=======
-    if (!user) return res.status(404).send({ message: "User is not registered" });
->>>>>>> feat(users): implement jwt login
     var checkPassword = user.authenticate(password);
     if (!checkPassword ) return res.status(401).send({ message: "Incorrect username or password" });
     var userData = {

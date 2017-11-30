@@ -8,3 +8,4 @@ bower_components
 .nyc_output/
 coverage/
 package-lock.json
+gruntfile

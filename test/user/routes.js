@@ -1,19 +1,20 @@
 /* jshint esversion: 6 */
 
-var chai = require('chai'),
+let chai = require('chai'),
   chaiHttp = require('chai-http'),
   mongoose = require('mongoose'),
   User = mongoose.model('User');
 
-var server = require('../../server');
+const server = require('../../server');
 
-var expect = chai.expect;
+const expect = chai.expect;
 
 chai.use(chaiHttp);
 
 describe('/POST User Sign Up (with JWT) ', () => {
   describe('validation test', () => {
-    it('should return \'all fields must be filled\' when user omits name field',
+    it(
+      'should return \'all fields must be filled\' when user omits name field',
       (done) => {
         chai.request(server)
           .post('/api/auth/signup')
@@ -29,7 +30,8 @@ describe('/POST User Sign Up (with JWT) ', () => {
           });
       });
 
-    it('should return \'all fields must be filled\' when user omits email field',
+    it(
+      'should return \'all fields must be filled\' when user omits email field',
       (done) => {
         chai.request(server)
           .post('/api/auth/signup')
@@ -45,7 +47,8 @@ describe('/POST User Sign Up (with JWT) ', () => {
           });
       });
 
-    it('should return \'all fields must be filled\' when user omits password field',
+    it(
+      'should return \'all fields must be filled\' when user omits password field',
       (done) => {
         chai.request(server)
           .post('/api/auth/signup')
@@ -74,8 +77,7 @@ describe('/POST User Sign Up (with JWT) ', () => {
         })
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
-          expect(res.body).to.have.all.deep.keys(
-            'message', 'token');
+          expect(res.body).to.have.all.deep.keys('message', 'token');
           expect(res.body.message).to.equal('Signup successful. Token generated');
           done();
         });
@@ -99,7 +101,91 @@ describe('/POST User Sign Up (with JWT) ', () => {
       });
   });
 
-  after(function (done) {
+
+  describe('/POST Login validation test', () => {
+    it(
+      'should return \'email or password cannot be blank\' when user omits email field',
+      (done) => {
+        chai.request(server)
+          .post('/api/auth/login')
+          .set('Accept', 'application/json')
+          .send({
+            email: '',
+            password: 'Hackasdkbf'
+          })
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(400);
+            expect(res.body.message).to.equal('email or password cannot be blank');
+            done();
+          });
+      });
+
+    it(
+      'should return \'email or password cannot be blank\' when user omits password field',
+      (done) => {
+        chai.request(server)
+          .post('/api/auth/login')
+          .set('Accept', 'application/json')
+          .send({
+            email: 'larrystone@gmai.com',
+            password: ''
+          })
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(400);
+            expect(res.body.message).to.equal('email or password cannot be blank');
+            done();
+          });
+      });
+  });
+
+  describe('/POST Login test', () => {
+    it('should return \'Incorrect username or password\' error when user is not registered', (done) => {
+      chai.request(server)
+        .post('/api/auth/login')
+        .set('Accept', 'application/json')
+        .send({
+          email: 'unknownUser@gmai.com',
+          password: 'Hacknets'
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(401);
+          expect(res.body).to.have.all.deep.keys('message');
+          expect(res.body.message).to.equal('Incorrect username or password');
+          done();
+        });
+    });
+    it('should return \'Incorrect username or password\' error when user enters a wrong password', (done) => {
+      chai.request(server)
+        .post('/api/auth/login')
+        .set('Accept', 'application/json')
+        .send({
+          email: 'larrystone@gmai.com',
+          password: 'wrongPassword'
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(401);
+          expect(res.body).to.have.all.deep.keys('message');
+          expect(res.body.message).to.equal('Incorrect username or password');
+          done();
+        });
+    });
+    it('should login user and return token', (done) => {
+      chai.request(server)
+        .post('/api/auth/login')
+        .set('Accept', 'application/json')
+        .send({
+          email: 'larrystone@gmai.com',
+          password: 'Hacknets'
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body).to.have.all.deep.keys('message', 'token');
+          expect(res.body.message).to.equal('login successful');
+          done();
+        });
+    });
+  });
+  after((done) => {
     mongoose.connection.db.dropDatabase(done);
   });
 });
