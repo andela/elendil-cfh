@@ -24,6 +24,9 @@ var AnswerSchema = new Schema({
         type: String,
         default: '',
         trim: true
+    },
+    location: {
+        type: String,
     }
 });
 
@@ -38,4 +41,6 @@ AnswerSchema.statics = {
     }
 };
 
-mongoose.model('Answer', AnswerSchema);
+var AnswerModel = mongoose.model('Answer', AnswerSchema);
+
+module.exports = AnswerModel;

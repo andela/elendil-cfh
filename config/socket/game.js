@@ -1,3 +1,7 @@
+/* jshint esversion: 6 */
+
+/* eslint-disable */
+
 var async = require('async');
 var _ = require('underscore');
 var questions = require(__dirname + '/../../app/controllers/questions.js');
@@ -57,7 +61,9 @@ Game.prototype.payload = function() {
     players.push({
       hand: player.hand,
       points: player.points,
+      userID: player._id,
       username: player.username,
+      email: player.email,
       avatar: player.avatar,
       premium: player.premium,
       socketID: player.socket.id,
@@ -224,9 +230,34 @@ Game.prototype.stateResults = function(self) {
 Game.prototype.stateEndGame = function(winner) {
   this.state = "game ended";
   this.gameWinner = winner;
+  /* eslint-enable */
+  const winnerProfile = {
+    userID: this.players[winner].userID,
+    username: this.players[winner].username,
+    email: this.players[winner].email,
+    avatar: this.players[winner].avatar,
+  };
+  const allPlayers = [];
+  _.each(this.players, function (player) {
+    allPlayers.push({
+      userID: player.userID,
+      username: player.username,
+      email: player.email,
+      avatar: player.avatar,
+      points: player.points
+    });
+  });
   this.sendUpdate();
+  this.io.sockets.in(this.gameID).emit('game data',
+    {
+      gameID: this.gameID,
+      winner: winnerProfile,
+      players: allPlayers,
+    }
+  );
 };
 
+/* eslint-disable */
 Game.prototype.stateDissolveGame = function() {
   this.state = "game dissolved";
   this.sendUpdate();

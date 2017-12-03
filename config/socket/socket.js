@@ -1,3 +1,7 @@
+/* jshint esversion: 6 */
+
+/* eslint-disable */
+
 var Game = require('./game');
 var Player = require('./player');
 require("console-stamp")(console, "m/dd HH:MM:ss");
@@ -92,7 +96,9 @@ module.exports = function(io) {
           player.username = 'Guest';
           player.avatar = avatars[Math.floor(Math.random()*4)+12];
         } else {
+          player.userID = user._id;
           player.username = user.name;
+          player.email = user.email;
           player.premium = user.premium || 0;
           player.avatar = user.avatar || avatars[Math.floor(Math.random()*4)+12];
         }

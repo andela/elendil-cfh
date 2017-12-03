@@ -1,9 +1,12 @@
+/* jshint esversion: 6 */
+
+/* eslint-disable */
+
 angular.module('mean.system')
 .controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', function ($scope, game, $timeout, $location, MakeAWishFactsService, $dialog) {
     $scope.hasPickedCards = false;
     $scope.winningCardPicked = false;
     $scope.showTable = false;
-    $scope.modalShown = false;
     $scope.game = game;
     $scope.pickedCards = [];
     var makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
@@ -121,12 +124,37 @@ angular.module('mean.system')
     };
 
     $scope.startGame = function() {
-      game.startGame();
+      if(game.players.length < game.playerMinLimit) {
+        const infoModal = $('#infoModal');
+        infoModal.find('.modal-title')
+          .text('Player requirement');
+        infoModal.find('.modal-body')
+         .text('Oops! Can\'t start game now, you need a minimum of (3) players to get started');
+        infoModal.modal('show');
+      } else {
+        game.startGame();
+      }
+    };
+
+    $scope.startModal = function() {
+      $('#start').modal({
+        show: true,
+        backdrop: 'static',
+        keyboard: false
+      });
+    };
+
+    $scope.dismissInfo = function() {
+      $('#infoModal').modal('hide');
+      $scope.startModal();
     };
 
     $scope.abandonGame = function() {
       game.leaveGame();
       $location.path('/');
+      $('#start').modal('hide');
+      $('body').removeClass('modal-open');
+      $('.modal-backdrop').remove();
     };
 
     // Catches changes to round to update when no players pick card
@@ -144,11 +172,17 @@ angular.module('mean.system')
 
     // In case player doesn't pick a card in time, show the table
     $scope.$watch('game.state', function() {
+      if(game.state === 'awaiting players' || game.state === null) {
+        $scope.startModal();
+      }
+      if(game.state === 'waiting for players to pick'){
+        $('#start').modal('hide');
+      }         
       if (game.state === 'waiting for czar to decide' && $scope.showTable === false) {
         $scope.showTable = true;
       }
     });
-
+    $scope.link = document.URL;
     $scope.$watch('game.gameID', function() {
       if (game.gameID && game.state === 'awaiting players') {
         if (!$scope.isCustomGame() && $location.search().game) {
@@ -159,15 +193,6 @@ angular.module('mean.system')
           // Once the game ID is set, update the URL if this is a game with friends,
           // where the link is meant to be shared.
           $location.search({game: game.gameID});
-          if(!$scope.modalShown){
-            setTimeout(function(){
-              var link = document.URL;
-              var txt = 'Give the following link to your friends so they can join your game: ';
-              $('#lobby-how-to-play').text(txt);
-              $('#oh-el').css({'text-align': 'center', 'font-size':'22px', 'background': 'white', 'color': 'black'}).text(link);
-            }, 200);
-            $scope.modalShown = true;
-          }
         }
       }
     });
@@ -180,5 +205,4 @@ angular.module('mean.system')
     } else {
       game.joinGame();
     }
-
 }]);

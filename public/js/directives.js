@@ -1,3 +1,4 @@
+/* eslint-disable */
 angular.module('mean.directives', [])
   .directive('player', function (){
     return{
@@ -63,6 +64,12 @@ angular.module('mean.directives', [])
     return{
       restrict: 'EA',
       templateUrl: '/views/timer.html',
+      link: function(scope, elem, attr){}
+    };
+  }).directive('start', function() {
+    return {
+      restrict: 'EA',
+      templateUrl: '/views/start.html',
       link: function(scope, elem, attr){}
     };
   }).directive('landing', function() {
