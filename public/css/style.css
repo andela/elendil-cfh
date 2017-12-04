@@ -120,7 +120,7 @@
 }
 
 .sign-error {
-   text-align: center;
+  margin-left: 12px;
    color: white;
    font-family: arial;
    margin-bottom: -13px;
@@ -129,7 +129,7 @@
 
  /**** Links ****/
  a {
-   color: #60B197;
+   color: #256188;
    -webkit-transition: color 0.5s ease;
    -moz-transition: color 0.5s ease;
    -ms-transition: color 0.5s ease;
@@ -139,16 +139,16 @@
 
  a:hover {
    text-decoration: none;
-   color: #2ecc71;
+   color: #256188;
    border-radius:0px !important;
  }
 
  p a {
-   color: #60B197;
+   color: #256188;
  }
 
  p a:hover {
-   color: #2ecc71;
+   color: #256188;
  }
 
 
