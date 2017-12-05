@@ -1,19 +1,15 @@
 {
   "name": "elendil-cfh",
-  "scripts": {
-  },
+  "scripts": {},
   "env": {
     "MONGODB_URI": {
       "required": true
+    },
+    "JWT": {
+      "required": true
     }
   },
-  "formation": {
-  },
-  "addons": [
-
-  ],
-  "buildpacks": [
-
-  ]
+  "formation": {},
+  "addons": [],
+  "buildpacks": []
 }
-
