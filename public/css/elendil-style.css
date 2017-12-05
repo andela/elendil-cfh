@@ -1,3 +1,8 @@
+body {
+  height: 100%;
+  background-color: transparent;
+}
+
 #wrapper {
   background: #256087;
 }
@@ -142,16 +147,155 @@
 .footer {
   background: #256087;
   padding: 2%;
+  color: #fff;
 }
 
-.footer a {
+.footer a  {
   color: #fff;
   text-decoration: underline;
 }
 
 .footer a:hover {
-  color: #F6A623
+  color: #F6A623;
 }
+
+  
+[page="signup"] {
+  background-size: cover;
+  overflow-x: hidden;
+}
+
+
+.main {
+  margin: 5rem auto;
+  width: 50%;
+  border: 1px solid white;
+  padding: 10px;
+  background-color: #ffffffbf;
+  border-radius: 3px;
+}
+
+.avatar-list {
+  padding-left: 0px;
+  margin-left: 3%;
+  overflow: hidden;
+}
+
+ul, ol {
+  margin-top: 0px;
+  margin-bottom: 4px;
+}
+
+.avatars {
+  cursor: pointer;
+}
+.avatars {
+  position: relative;
+  float: left;
+  margin: 1px 2px;
+  border-radius: 3px;
+}
+
+.avatar-list img {
+  max-width: 45px;
+}
+.avatar-list img {
+  max-width: 30%;
+}
+.avatar-list img {
+  vertical-align: middle;
+}
+.avatar-list img {
+  border-width: 0px;
+  border-style: initial;
+  border-color: initial;
+  border-image: initial;
+}
+
+.avatar-list li {
+  list-style-type: none;
+}
+
+.custom-button {
+  margin-top: 20px;
+  background: #F6A623;
+  border-width: 2px;
+  border-radius: 2px;
+}
+
+.social-icons {
+  border-radius: 20px;
+}
+
+.social-signup img {
+  max-width: 30px;
+}
+
+.sign-heading {
+  margin-top: 10px;
+}
+
+
+.auth .form-field {
+  padding: 0 10px 0 10px;
+  margin: 0 auto;
+  font-family: arial;
+  font-size: 100%;
+}
+  
+.input-control {
+  margin: 0 auto;
+  width: 300px;
+}
+  
+.cover img {
+  margin: 8px 0;
+}
+
+input[type='text'],
+input[type='password'],
+input[type='email'] {
+  background: transparent;
+  outline: 0;
+  border: 0;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  font-weight: 200;
+  border-bottom: 2px solid #ccc;
+  padding: 10px 0;
+  margin-bottom: 6px;
+}
+  
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus {
+  border-bottom-color: #4F99E2;
+}
+
+.avatar {
+  padding-top: 5px;
+}
+
+.signin-heading {
+  margin-top: 50px;
+  margin-right: 150px;
+}
+
+.sign-error {
+  margin-left: 12px;
+  font-family: arial;
+}
+
+.text-home {
+  margin-left: 70px;
+}
+  
+labelled {
+  text-transform: uppercase;
+  font-size: .6rem
+}
+    
 
 @media(min-width: 320px) and (max-width: 950px) {
   .game-btn {
