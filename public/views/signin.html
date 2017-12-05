@@ -16,14 +16,14 @@
         <div class="sign-error" ng-show="showError() === 'invalid'">
           Please check your username/password and try again.
         </div>
-        <form class="form-field"  action="/users/session" method="post">
+        <form class="form-field" ng-submit="login()">
           <div class="input-control">
             <label for="email" id="labelled">Email</label>
-            <input type="email" name="email" placeholder="email" id="email" required novalidate>
+            <input ng-model="email" type="email" name="email" placeholder="email" id="email" required novalidate>
           </div>
           <div class="input-control">
             <label for="password" id="labelled">Password</label>
-            <input type="password" placeholder="password" id="password" name="password" required novalidate>
+            <input ng-model="password" type="password" placeholder="password" id="password" name="password" required novalidate>
           </div>
           <button type="submit" class="btn btn-default btn-block custom-button">Sign In</button>
         </form>

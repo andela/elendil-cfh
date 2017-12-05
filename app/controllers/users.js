@@ -1,27 +1,31 @@
 
-var jwt = require('../../config/jwt');
+const jwt = require('../../config/jwt');
 
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
+const mongoose = require('mongoose'),
   User = mongoose.model('User');
-config = require('../../config/config');
-var avatars = require('./avatars').all();
+const config = require('../../config/config');
+const avatars = require('./avatars').all();
 
 /**
  * Auth callback
+ * @param {object} req
+ * @param {object} res
+ * @returns{object} res
  */
-exports.authCallback = function (req, res, next) {
+exports.authCallback = (req, res) => {
   res.redirect('/chooseavatars');
 };
 
-
-
 /**
  * Show login form
+ * @param {object} req
+ * @param {object} res
+ * @returns{object} res
  */
-exports.signin = function (req, res) {
+exports.signin = (req, res) => {
   if (!req.user) {
     res.redirect('/#!/signin?error=invalid');
   } else {
@@ -30,42 +34,53 @@ exports.signin = function (req, res) {
 };
 
 /**
- * Show sign up form
+ * Show login form
+ * @param {object} req
+ * @param {object} res
+ * @returns{object} res
  */
-exports.signup = function (req, res) {
+exports.signup = (req, res) => {
   if (!req.user) {
     res.redirect('/#!/signup');
   } else {
     res.redirect('/#!/app');
   }
 };
-
 /**
  * Logout
+ * @param {object} req
+ * @param {object} res
+ * @returns{object} res
  */
-exports.signout = function (req, res) {
+exports.signout = (req, res) => {
   req.logout();
   res.redirect('/');
 };
 
 /**
  * Session
+ * @param {object} req
+ * @param {object} res
+ * @returns{object} res
  */
-exports.session = function (req, res) {
+exports.session = (req, res) => {
   res.redirect('/');
 };
 
-/** 
+/**
  * Check avatar - Confirm if the user who logged in via passport
  * already has an avatar. If they don't have one, redirect them
  * to our Choose an Avatar page.
+ * @param {object} req
+ * @param {object} res
+ * @returns{object} res
  */
-exports.checkAvatar = function (req, res) {
+exports.checkAvatar = (req, res) => {
   if (req.user && req.user._id) {
     User.findOne({
       _id: req.user._id
     })
-      .exec(function (err, user) {
+      .exec((err, user) => {
         if (user.avatar !== undefined) {
           res.redirect('/#!/');
         } else {
@@ -76,112 +91,75 @@ exports.checkAvatar = function (req, res) {
     // If user doesn't even exist, redirect to /
     res.redirect('/');
   }
-
 };
 
 /*
 * SignUp user with jwt
 */
-exports.signupJwt = function (req, res) {
- if (req.body.name && req.body.password && req.body.email) {
-   User.findOne({
-     email: req.body.email
-   })
-     .exec()
-     .then(function (err, existingUser) {
-       if (err) {
-         return res.status(409).json({
-           message: "Email already taken!"
-         });
-       }
-       if (!existingUser) {
-         var user = new User(req.body);
-         user.avatar = avatars[user.avatar];
-         user.save(function (error, newUser) {
-           if (error) {
-             return res.status(400).json({
-               message: "Unable to signUp"
-             });
-           }
-           var userDetails = { id: newUser._id, email: newUser.email, name: newUser.name };
-
-           var token = jwt.jwt.sign(userDetails);
-           res.status(200).send({
-             message: "Signup successful. Token generated",
-             token: token
-           });
-         });
-       }
-     });
- } else {
-   return res.status(400).json({
-     message: "all fields must be filled"
-   });
- }
-};
-
-/**
-* SignUp user with jwt
-*/
-exports.signupJwt = function (req, res) {
- if (req.body.name && req.body.password && req.body.email) {
-   User.findOne({
-     email: req.body.email
-   })
-     .exec()
-     .then(function (err, existingUser) {
-       if (err) {
-         return res.status(409).json({
-           message: "Email already taken!"
-         });
-       }
-       if (!existingUser) {
-         var user = new User(req.body);
-         user.avatar = avatars[user.avatar];
-         user.save(function (error, newUser) {
-           if (error) {
-             return res.status(400).json({
-               message: "Unable to signUp"
-             });
-           }
-           var userDetails = { id: newUser._id, email: newUser.email, name: newUser.name };
-
-           var token = jwt.jwt.sign(userDetails);
-           res.status(200).send({
-             message: "Signup successful. Token generated",
-             token: token
-           });
-         });
-       }
-     });
- } else {
-   return res.status(400).json({
-     message: "all fields must be filled"
-   });
- }
-};
-
-/**
- * Create user
- */
-exports.create = function (req, res) {
+exports.signupJwt = (req, res) => {
   if (req.body.name && req.body.password && req.body.email) {
     User.findOne({
       email: req.body.email
-    }).exec(function (err, existingUser) {
+    })
+      .exec()
+      .then((err, existingUser) => {
+        if (err) {
+          return res.status(409).json({
+            message: 'Email already taken!'
+          });
+        }
+        if (!existingUser) {
+          const user = new User(req.body);
+          user.avatar = avatars[user.avatar];
+          user.save((error, newUser) => {
+            if (error) {
+              return res.status(400).json({
+                message: 'Unable to signUp'
+              });
+            }
+            const userDetails = { id: newUser._id, email: newUser.email, name: newUser.name };
+
+            const token = jwt.jwt.sign(userDetails);
+            res.status(200).send({
+              message: 'Signup successful. Token generated',
+              token
+            });
+          });
+        }
+      });
+  } else {
+    return res.status(400).json({
+      message: 'all fields must be filled'
+    });
+  }
+};
+
+
+/**
+ * Create user
+ * @param {object} req
+ * @param {object} res
+ * @param {object} next
+ * @returns{object} res
+ */
+exports.create = (req, res, next) => {
+  if (req.body.name && req.body.password && req.body.email) {
+    User.findOne({
+      email: req.body.email
+    }).exec((err, existingUser) => {
       if (!existingUser) {
-        var user = new User(req.body);
+        const user = new User(req.body);
         // Switch the user's avatar index to an actual avatar url
         user.avatar = avatars[user.avatar];
         user.provider = 'local';
-        user.save(function (err) {
+        user.save((err) => {
           if (err) {
             return res.render('/#!/signup?error=unknown', {
               errors: err.errors,
-              user: user
+              user
             });
           }
-          req.logIn(user, function (err) {
+          req.logIn(user, (err) => {
             if (err) return next(err);
             return res.redirect('/#!/');
           });
@@ -196,16 +174,19 @@ exports.create = function (req, res) {
 };
 
 /**
+ * @param {object} req
+ * @param {object} res
+ * @returns{object} res
  * Assign avatar to user
  */
-exports.avatars = function (req, res) {
+exports.avatars = (req, res) => {
   // Update the current user's profile to include the avatar choice they've made
   if (req.user && req.user._id && req.body.avatar !== undefined &&
     /\d/.test(req.body.avatar) && avatars[req.body.avatar]) {
     User.findOne({
       _id: req.user._id
     })
-      .exec(function (err, user) {
+      .exec((err, user) => {
         user.avatar = avatars[req.body.avatar];
         user.save();
       });
@@ -213,63 +194,76 @@ exports.avatars = function (req, res) {
   return res.redirect('/#!/app');
 };
 
-exports.addDonation = function (req, res) {
+exports.addDonation = (req, res) => {
   if (req.body && req.user && req.user._id) {
     // Verify that the object contains crowdrise data
     if (req.body.amount && req.body.crowdrise_donation_id && req.body.donor_name) {
       User.findOne({
         _id: req.user._id
       })
-        .exec(function (err, user) {
+        .exec((err, user) => {
           // Confirm that this object hasn't already been entered
-          var duplicate = false;
-          for (var i = 0; i < user.donations.length; i++) {
-            if (user.donations[i].crowdrise_donation_id === req.body.crowdrise_donation_id) {
+          let duplicate = false;
+          for (let i = 0; i < user.donations.length; i += 1) {
+            if (
+              user.donations[i].crowdrise_donation_id ===
+              req.body.crowdrise_donation_id
+            ) {
               duplicate = true;
             }
-          }
-          if (!duplicate) {
-            console.log('Validated donation');
-            user.donations.push(req.body);
-            user.premium = 1;
-            user.save();
+            if (!duplicate) {
+              user.donations.push(req.body);
+              user.premium = 1;
+              user.save();
+            }
           }
         });
     }
+    res.send();
   }
-  res.send();
 };
 
 /**
+ * @param {object} req
+ * @param {object} res
+ * @returns{object} res
  *  Show profile
  */
-exports.show = function (req, res) {
-  var user = req.profile;
+exports.show = (req, res) => {
+  const user = req.profile;
 
   res.render('users/show', {
     title: user.name,
-    user: user
+    user
   });
 };
 
 /**
+ * @param {object} req
+ * @param {object} res
+ * @returns{object} res
  * Send User
  */
-exports.me = function (req, res) {
+exports.me = (req, res) => {
   res.jsonp(req.user || null);
 };
 
 /**
+ * @returns{object} res
+ * @param {object} req
+ * @param {object} res
+ * @param {object} next
+ * @param {object} id
  * Find user by id
  */
-exports.user = function (req, res, next, id) {
+exports.user = (req, res, next, id) => {
   User
     .findOne({
       _id: id
     })
-    .exec(function (err, user) {
+    .exec((err, user) => {
       if (err) return next(err);
-      if (!user) return next(new Error('Failed to load User ' + id));
+      if (!user) return next(new Error(`Failed to load User ${id}`));
       req.profile = user;
       next();
     });
@@ -279,28 +273,31 @@ exports.user = function (req, res, next, id) {
  * @description login function
  * @param {Object} req - Request object
  * @param {Object} res - Response object
+ * @param {Object} next - Response object
  * @returns {object} json - payload
  */
-exports.login = function(req, res, next) {
-  var email = req.body.email;
-  var password = req.body.password;
-  if(!email || !password) {
-    return res.status(400).send({ message: "email or password cannot be blank" });
+exports.login = (req, res, next) => {
+  const { email } = req.body;
+  const { password } = req.body;
+  if (!email || !password) {
+    return res.status(400).send({
+      message: 'email or password cannot be blank'
+    });
   }
-  User.findOne({email}).exec(function(err, user) {
+  User.findOne({ email }).exec((err, user) => {
     if (err) return next(err);
     if (!user) return res.status(401).send({ message: 'Incorrect username or password' });
-    var checkPassword = user.authenticate(password);
-    if (!checkPassword ) return res.status(401).send({ message: "Incorrect username or password" });
-    var userData = {
+    const checkPassword = user.authenticate(password);
+    if (!checkPassword) return res.status(401).send({ message: 'Incorrect username or password' });
+    const userData = {
       id: user._id,
       name: user.name,
       email: user.email
     };
-    var token = jwt.jwt.sign(userData);
+    const token = jwt.jwt.sign(userData);
     res.status(200).send({
-      message: "login successful",
-      token: token
+      message: 'login successful',
+      token
     });
   });
 };
