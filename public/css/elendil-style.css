@@ -16,7 +16,7 @@ body {
 
 .navbar-light .navbar-nav .nav-link {
   color: #add1e7;
-  text-transform: uppercase;
+   
   margin-right: 1%;
   font-family: Bangla MN;
   
@@ -36,11 +36,11 @@ body {
 }
 
 .nav-pills .nav-link.active {
-  background: #F6A623;
+  background: #FF9900;
 }
 
 .navbar-nav {
-  width: 60%;
+  width: 50%;
 }
 
 .navbar-light .navbar-brand {
@@ -85,13 +85,15 @@ body {
 }
 
 .game-btn .btn-light {
-  color: #F6A623;
+  color: rgb(255, 153, 0);
 }
 
 
 .game-btn .btn-warning {
   color: #fff;
+  background-color: #FF9900;
 }
+
 
 .how-to-slider {
   margin-top: 2%;
@@ -113,7 +115,7 @@ body {
 
 .what-is-cfh {
   text-align: center;
-  padding-top: 13%;
+  padding-top: 15%;
   color: #256087;
   text-transform: uppercase;
   background: #fff;
@@ -137,6 +139,11 @@ body {
   border-top: 10px solid #93a1a7cf;
 }
 
+.charity .btn-warning {
+  color: #fff;
+  background-color:#FF9900;
+}
+
 .team {
   background: #88a1ad;
   padding: 1%;
@@ -150,7 +157,7 @@ body {
 }
 
 .team a:hover {
-  color: #F6A623;
+  color: #FF9900;
 }
 
 .footer {
@@ -165,7 +172,7 @@ body {
 }
 
 .footer a:hover {
-  color: #F6A623;
+  color: #FF9900;
 }
 
   
@@ -227,7 +234,7 @@ ul, ol {
 
 .custom-button {
   margin-top: 20px;
-  background: #F6A623;
+  background: #FF9900;
   border-width: 2px;
   border-radius: 2px;
 }
@@ -307,6 +314,22 @@ labelled {
     
 
 @media(min-width: 320px) and (max-width: 950px) {
+  .header {
+    padding-top: 20%;
+    height: 100%;
+  }
+
+  .header-text {
+    font-size: 100%;
+  }
+
+  .header-text h2 {
+    font-size: 200%;
+  }
+
+  .header-text p {
+    font-size: 150%;
+  }
   .game-btn {
     width: 100%;
   }
@@ -330,7 +353,7 @@ labelled {
   
   .navbar-collapse .nav-pills .nav-link.active {
     background: none;
-     color: #F6A623;
+     color: #FF9900;
   }
 }
 
