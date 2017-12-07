@@ -13,8 +13,13 @@
             <strong><a href="/signup">Sign Up</a></strong>
           </p>
         </div>
-        <div class="sign-error" ng-show="showError() === 'invalid'">
-          Please check your username/password and try again.
+        <div class="sign-error alert alert-danger alert alert-danger" ng-show="showError() === 'invalid'">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <p class="text-red">Please check your username/password and try again.</p>
+        </div>
+        <div class="sign-error alert alert-danger alert alert-danger" ng-show="showError() === 'undefined'">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <p class="text-red">Please check your username/password and try again.</p>
         </div>
         <form class="form-field" ng-submit="login()">
           <div class="input-control">

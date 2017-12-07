@@ -12,6 +12,18 @@
           <strong><a href="/signin">Sign In</a></strong>
         </p>
       </div>
+      <span class="sign-error alert alert-danger alert alert-danger" ng-show="showError() === 'existingUser'">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <p class="text-red">A user already exists with that email</p>
+      </span>
+      <span class="sign-error alert alert-danger alert alert-danger" ng-show="showError() === 'invalid'">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <p class="text-red">Invalid credentials</p>
+      </span>
+      <span class="sign-error alert alert-danger alert alert-danger" ng-show="showError() === 'undefined'">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <p class="text-red">A user already exists with that email</p>
+      </span>
       <form class="form-field" ng-submit="signup()">
         <div class="input-control">
           <label for="fullname" id="label">Fullname</label>

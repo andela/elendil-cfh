@@ -15,7 +15,7 @@ module.exports = (app, passport, auth) => {
   app.post('/api/auth/signup', users.signupJwt);
   app.post('/api/auth/login', users.login);
 
-  app.post('/api/auth/verify', users.verifyUser);
+//   app.post('/api/auth/verify', users.verifyUser);
 
   // Setting up the users api
   app.post('/users', users.create);
