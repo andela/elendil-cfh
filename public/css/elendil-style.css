@@ -62,7 +62,7 @@ body {
   font-size: 320%;
   margin-top: 8%;
   color: #fff;
-  font-family: Herculanum;
+  font-family: Telugu MN;
 }
 
 .header-text h2 {
@@ -78,7 +78,7 @@ body {
 }
 
 .game-btn .btn {
-  width: 30%;
+  width: 15%;
   border-radius: 12px;
   margin-bottom: 2%;
   font-family: Herculanum;

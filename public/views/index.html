@@ -36,10 +36,10 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
           <div class="navbar-nav nav-pills nav-fill">
-            <a class="nav-item nav-link selected" href="#" onClick="scroll(0,0)">Home <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" href="#">How to Play</a>
-            <a class="nav-item nav-link" href="#">Charity</a>
-            <a class="nav-item nav-link" href="#">About Us</a>    
+            <a class="nav-item nav-link selected" href="#!/home">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="#!/#how-to-play">How to Play</a>
+            <a class="nav-item nav-link" href="#!/#charity">Charity</a>
+            <a class="nav-item nav-link" href="#!/#about">About Us</a>    
             <a ng-show="showOptions" class="nav-item nav-link active " href="#!/signup">Sign up</a>
             <a ng-show="showOptions" class="nav-item nav-link active" href="#!/signin">Signin</a>
 
@@ -50,12 +50,12 @@
       </nav><!-- Nav ends here -->
   
   <!-- Header Start -->
-  <div class="header">
+  <div class="header" id="home">
     <div class="header-text">
       <h2>Cards For Humanity</h2>
-      <p>A game for Horrible People Desperately trying to do good </p>
+      <p>A game for Horrible <br> People Desperately trying to do good </p>
     </div>
-    <div class="game-btn" ng-show="showOptions">
+    <div class="game-btn" ng-show="showOptions" id="how-to-play">
         <a href="/tour"><button type="button" class="btn btn-warning">Take a Tour</button></a>
         <a href="/play"><button type="button" class="btn btn-light">Play as Guest</button></a>
     </div>
@@ -67,11 +67,11 @@
 
     <div class="how-to-slider">
       <div id="carousel">
+          <img src="../img/0.png" />
           <img src="../img/1a.png" />
           <img src="../img/2a.png" />
           <img src="../img/3a.png" />
           <img src="../img/4a.png" />
-          <img src="../img/1a.png" />
         </div>
     </div>
   </div> 
@@ -85,7 +85,7 @@
       All the while remaining as despicable as you naturally are
     </p>
     <br><br>
-    <p>
+    <p id="charity">
       <span>Warning: </span> This game contains offensive, profane, explicit content created by cards against humanity <br>
       and provided here, uncesnsored and complete, in digital form. Human Resource told us to say that.
     </p>
@@ -103,7 +103,7 @@
       <button type="button" style="color: #fff;" class="btn btn-warning">DONATE NOW</button>
     </div> <!-- charity ends here -->
   
-    <div class="team">
+    <div class="team" id="about">
         <h2>ABOUT US</h2>
         <p>
           We are a team of horrible people trying to make a positive difference, so we decided to redesign this awesome application
