@@ -1,4 +1,4 @@
-<div page="signup">
+<div page="signup" ng-controller="IndexController">
   <div class="main row">
     <div class="col-6 cover">
       <img src="../img/hoyleback.jpg" alt="side auth card image" width="350px">
@@ -12,18 +12,30 @@
           <strong><a href="/signin">Sign In</a></strong>
         </p>
       </div>
-      <form class="form-field" action="/users" method="post">
+      <span class="sign-error alert alert-danger alert alert-danger" ng-show="showError() === 'existingUser'">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <p class="text-red">A user already exists with that email</p>
+      </span>
+      <span class="sign-error alert alert-danger alert alert-danger" ng-show="showError() === 'invalid'">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <p class="text-red">Invalid credentials</p>
+      </span>
+      <span class="sign-error alert alert-danger alert alert-danger" ng-show="showError() === 'undefined'">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <p class="text-red">A user already exists with that email</p>
+      </span>
+      <form class="form-field" ng-submit="signup()">
         <div class="input-control">
           <label for="fullname" id="label">Fullname</label>
-          <input type="text"id="name" name="name" placeholder="fullname" id="fullname">
+          <input ng-model="name" type="text"id="name" name="name" placeholder="fullname" id="fullname" required>
         </div>
         <div class="input-control">
           <label for="email" id="label">Email</label>
-          <input type="email" id="email" type="email" name="email" placeholder="email" id="email">
+          <input ng-model="email" type="email" id="email" type="email" name="email" placeholder="email" id="email" required>
         </div>
         <div class="input-control">
           <label for="password" id="label">Password</label>
-          <input type="password" type="password" name="password" placeholder="password" id="password">
+          <input ng-model="password" type="password" type="password" name="password" placeholder="password" id="password" required>
         </div>
         <h6 class="avatar">Choose an avatar</h6>
         <ul class="avatar-list">
