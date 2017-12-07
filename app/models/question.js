@@ -28,6 +28,9 @@ var QuestionSchema = new Schema({
         type: String,
         default: '',
         trim: true
+    },
+    location: {
+        type: String,
     }
 });
 
@@ -42,4 +45,6 @@ QuestionSchema.statics = {
     }
 };
 
-mongoose.model('Question', QuestionSchema);
+var QuestionModel = mongoose.model('Question', QuestionSchema);
+
+module.exports = QuestionModel;

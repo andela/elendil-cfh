@@ -1,5 +1,9 @@
+/* jshint esversion: 6 */
+
+/* eslint-disable */
+
 angular.module('mean.system')
-  .factory('game', ['socket', '$timeout', function (socket, $timeout) {
+  .factory('game', ['socket', '$timeout', '$http', function (socket, $timeout, $http) {
 
   var game = {
     id: null, // This player's socket ID, so we know who this player is
@@ -202,6 +206,12 @@ angular.module('mean.system')
   game.pickWinning = function(card) {
     socket.emit('pickWinning',{card: card.id});
   };
+
+  socket.on('game data', function(gameData) {
+    if (game.state === 'game ended' && game.czar === game.playerIndex) {
+      $http.post(`/api/games/${game.gameID}/start`, gameData);
+    }
+  });
 
   decrementTime();
 

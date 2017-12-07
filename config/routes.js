@@ -9,15 +9,12 @@ module.exports = (app, passport, auth) => {
   app.get('/signup', users.signup);
   app.get('/chooseavatars', users.checkAvatar);
   app.get('/signout', users.signout);
-  
-  // Setting up the users api
-  // setup routes with api prefix
-  app.post('/api/auth/signup', users.signupJwt);
   app.post('/api/auth/login', users.login);
 
-//   app.post('/api/auth/verify', users.verifyUser);
+  // Setup routes with api prefix
+  app.post('/api/auth/signup', users.signupJwt);
 
-  // Setting up the users api
+  //Setting up the users api
   app.post('/users', users.create);
   app.post('/users/avatars', users.avatars);
 
@@ -80,6 +77,7 @@ module.exports = (app, passport, auth) => {
   let answers = require('../app/controllers/answers');
   app.get('/answers', answers.all);
   app.get('/answers/:answerId', answers.show);
+  
   // Finish with setting up the answerId param
   app.param('answerId', answers.answer);
 
@@ -94,8 +92,14 @@ module.exports = (app, passport, auth) => {
   let avatars = require('../app/controllers/avatars');
   app.get('/avatars', avatars.allJSON);
 
-  // Home route
+  //Home route
   let index = require('../app/controllers/index');
   app.get('/play', index.play);
   app.get('/', index.render);
+
+  // Log Game History
+  let logGame = require('../app/controllers/gamelog');
+  app.post('/api/games/:gameID/start');
+
+  app.param('gameID', logGame.saveGameLog);
 };

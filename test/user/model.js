@@ -22,28 +22,34 @@ describe('<Unit Test>', () => {
         password: 'password'
       });
 
-      done();
-    });
+      describe('Method Save', function () {
+        it('should be able to save whithout problems', function (done) {
+          user.save(function (err) {
+            should.not.exist(err);
+            done();
+          });
+        });
 
-    describe('Method Save', () => {
-      it('should be able to save without problems', (done) => {
-        user.save((err) => {
-          should.not.exist(err);
-          done();
+        it('should be able to show an error when try to save witout name', function (done) {
+          user.name = '';
+          user.save(function (err) {
+            should.exist(err);
+            done();
+          });
         });
       });
+    });
 
-      it('should be able to show an error when try to save without name', (done) => {
-        user.name = '';
-        user.save((err) => {
-          should.exist(err);
-          done();
-        });
+    it('should be able to show an error when try to save without name', (done) => {
+      user.name = '';
+      user.save((err) => {
+        should.exist(err);
+        done();
       });
     });
+  });
 
-    after((done) => {
-      done();
-    });
+  after((done) => {
+    done();
   });
 });

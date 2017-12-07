@@ -7,6 +7,6 @@ c4h_keys.txt
 bower_components
 .nyc_output/
 coverage/
-package-lock.json/
 package-lock.json
 gruntfile
+seeders/
