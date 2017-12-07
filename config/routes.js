@@ -1,10 +1,10 @@
-/* eslint-disable no-var */
+/* jshint esversion: 6 */
 
-var async = require('async');
+let async = require('async');
 
-module.exports = function (app, passport, auth) {
-  //User Routes
-  var users = require('../app/controllers/users');
+module.exports = (app, passport, auth) => {
+  // User Routes
+  let users = require('../app/controllers/users');
   app.get('/signin', users.signin);
   app.get('/signup', users.signup);
   app.get('/chooseavatars', users.checkAvatar);
@@ -29,7 +29,7 @@ module.exports = function (app, passport, auth) {
   app.get('/users/me', users.me);
   app.get('/users/:userId', users.show);
 
-  //Setting the facebook oauth routes
+  // Setting the facebook oauth routes
   app.get('/auth/facebook', passport.authenticate('facebook', {
     scope: ['email'],
     failureRedirect: '/signin'
@@ -39,7 +39,7 @@ module.exports = function (app, passport, auth) {
     failureRedirect: '/signin'
   }), users.authCallback);
 
-  //Setting the github oauth routes
+  // Setting the github oauth routes
   app.get('/auth/github', passport.authenticate('github', {
     failureRedirect: '/signin'
   }), users.signin);
@@ -48,7 +48,7 @@ module.exports = function (app, passport, auth) {
     failureRedirect: '/signin'
   }), users.authCallback);
 
-  //Setting the twitter oauth routes
+  // Setting the twitter oauth routes
   app.get('/auth/twitter', passport.authenticate('twitter', {
     failureRedirect: '/signin'
   }), users.signin);
@@ -57,7 +57,7 @@ module.exports = function (app, passport, auth) {
     failureRedirect: '/signin'
   }), users.authCallback);
 
-  //Setting the google oauth routes
+  // Setting the google oauth routes
   app.get('/auth/google', passport.authenticate('google', {
     failureRedirect: '/signin',
     scope: [
@@ -70,34 +70,35 @@ module.exports = function (app, passport, auth) {
     failureRedirect: '/signin'
   }), users.authCallback);
 
-  //Finish with setting up the userId param
+  // Finish with setting up the userId param
   app.param('userId', users.user);
 
   // Answer Routes
-  var answers = require('../app/controllers/answers');
+  let answers = require('../app/controllers/answers');
   app.get('/answers', answers.all);
   app.get('/answers/:answerId', answers.show);
+  
   // Finish with setting up the answerId param
   app.param('answerId', answers.answer);
 
   // Question Routes
-  var questions = require('../app/controllers/questions');
+  let questions = require('../app/controllers/questions');
   app.get('/questions', questions.all);
   app.get('/questions/:questionId', questions.show);
   // Finish with setting up the questionId param
   app.param('questionId', questions.question);
 
   // Avatar Routes
-  var avatars = require('../app/controllers/avatars');
+  let avatars = require('../app/controllers/avatars');
   app.get('/avatars', avatars.allJSON);
 
   //Home route
-  var index = require('../app/controllers/index');
+  let index = require('../app/controllers/index');
   app.get('/play', index.play);
   app.get('/', index.render);
 
   // Log Game History
-  var logGame = require('../app/controllers/gamelog');
+  let logGame = require('../app/controllers/gamelog');
   app.post('/api/games/:gameID/start');
 
   app.param('gameID', logGame.saveGameLog);
