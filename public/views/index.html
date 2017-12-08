@@ -36,7 +36,9 @@
         </button>
         <div ng-controller="IndexController"></div>
 
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup" ng-controller="IndexController">
           <div class="navbar-nav nav-pills nav-fill">
             <a class="nav-item nav-link selected" href="#!/home">Home <span class="sr-only">(current)</span></a>
             <a class="nav-item nav-link" href="#!/#how-to-play">How to Play</a>
@@ -50,6 +52,46 @@
           </div>
         </div>
       </nav><!-- Nav ends here -->
+
+      <div id="regionModal" ng-controller="IndexController" class="modal regionModal" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title text-region bold text-white">Choose A Region</h4>
+            </div>
+            <div class="region-error alert alert-danger alert alert-danger" ng-show="error">
+                <p class="text-red" ng-bind="error"></p>
+            </div>
+            <div class="modal-body">
+              <div class="custom-form">
+                <!-- region select form starts -->
+                <div class="form-group">
+                  <label for="region"></label>
+                  <select ng-model="region" class="one-whole" name="region" id="region">
+                    <option value="">Choose a region</option>
+                    <option value="africa">Africa</option>
+                    <option value="others">Worldwide</option>
+                  </select>
+                </div>
+                <span ng-show="showOptions">
+                  <button class="btn btn-default home-button custom-button text-white" ng-click="playWithStrangers()">PLAY GAME</button>
+                </span>
+                <span ng-hide="showOptions">
+                  <button class="btn btn-default home-button custom-button text-white" ng-click="playWithStrangers()">PLAY WITH STRANGERS</button>
+                  <button type="submit" class="btn btn-default home-button custom-button text-white" ng-click="playWithFriends()">PLAY WITH FRIENDS</button>
+                </span>
+                <button id="close" class="btn btn-default home-button custom-button text-white" data-dismiss="modal">CANCEL</button>
+                <!-- region select form ends -->
+              </div>
+            </div>
+            <div class="modal-footer">
+              <h5 class="text-border text-white">Cards For Humanity</h5>
+            </div>
+          </div>
+  
+        </div>
+      </div>
   
   <!-- Header Start -->
   <div class="header" id="home">
@@ -59,12 +101,12 @@
     </div>
     <div class="game-btn" ng-show="showOptions" id="how-to-play">
         <a href="/tour"><button type="button" class="btn btn-warning">Take a Tour</button></a>
-        <a href="/play"><button type="button" class="btn btn-light">Play as Guest</button></a>
+        <button type="button" class="btn btn-light" data-toggle="modal" data-target="#regionModal">Play as Guest</button>
     </div>
 
     <div class="game-btn" ng-hide="showOptions">
-        <a href="/play"><button type="button" class="btn btn-warning">Play Game with Strangers</button></a>
-        <a href="/play?custom"><button type="button" class="btn btn-light">Play Game with Friends</button></a>
+        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#regionModal">Play Game with Strangers</button>
+        <button type="button" class="btn btn-light" data-toggle="modal" data-target="#regionModal">Play Game with Friends</button>
     </div>
 
     <div class="how-to-slider">
