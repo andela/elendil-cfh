@@ -34,9 +34,8 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div ng-controller="IndexController"></div>
 
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+        <div ng-controller="IndexController" class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
           <div class="navbar-nav nav-pills nav-fill">
             <a class="nav-item nav-link selected" href="#!/home">Home <span class="sr-only">(current)</span></a>
             <a class="nav-item nav-link" href="#!/#how-to-play">How to Play</a>
@@ -45,7 +44,7 @@
             <a ng-show="showOptions" class="nav-item nav-link active " href="#!/signup">Sign up</a>
             <a ng-show="showOptions" class="nav-item nav-link active" href="#!/signin">Signin</a>
 
-            <a ng-hide="showOptions" class="nav-item nav-link active " href="/signout">Sign Out</a>
+            <a ng-hide="showOptions" class="nav-item nav-link active" ng-click="signOut()" href="/">Sign Out</a>
                
           </div>
         </div>
