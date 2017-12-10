@@ -208,9 +208,7 @@ angular.module('mean.system')
         $scope.showTable = true;
       }
 
-      if (game.state !== 'czar pick card'
-      && game.state !== 'awaiting players'
-      && game.state !== 'game dissolve') {
+      if (game.state !== 'czar pick card' && game.state !== 'awaiting players' && game.state !== 'game dissolve') {
       $scope.czarHasDrawn = '';
     }
     
