@@ -31,6 +31,20 @@ angular.module('mean.system')
       }
     };
 
+    $scope.startGame = function() {
+      if(game.players.length < game.playerMinLimit) {
+        const infoModal = $('#infoModal');
+        infoModal.find('.modal-title')
+          .text('Player requirement');
+        infoModal.find('.modal-body')
+         .text('Oops! Can\'t start game now, you need a minimum of (3) players to get started');
+        infoModal.modal('show');
+      } else {
+        game.startGame();
+      }
+    };
+
+
     $scope.pointerCursorStyle = function() {
       if ($scope.isCzar() && $scope.game.state === 'waiting for czar to decide') {
         return {'cursor': 'pointer'};
@@ -123,16 +137,19 @@ angular.module('mean.system')
       return game.winningCard !== -1;
     };
 
-    $scope.startGame = function() {
-      if(game.players.length < game.playerMinLimit) {
-        const infoModal = $('#infoModal');
-        infoModal.find('.modal-title')
-          .text('Player requirement');
-        infoModal.find('.modal-body')
-         .text('Oops! Can\'t start game now, you need a minimum of (3) players to get started');
-        infoModal.modal('show');
-      } else {
-        game.startGame();
+    $scope.shuffleCards = () => {
+      const card = $(`#${event.target.id}`);
+      card.addClass('animated flipOutY');
+      setTimeout(() => {
+        $scope.startNextRound();
+        card.removeClass('animated flipOutY');
+        $('#start-modal').modal('hide');
+      }, 500);
+    };
+
+    $scope.startNextRound = () => {
+      if ($scope.isCzar()) {
+        game.startNextRound();
       }
     };
 
@@ -178,9 +195,25 @@ angular.module('mean.system')
       if(game.state === 'waiting for players to pick'){
         $('#start').modal('hide');
       }         
+      if ($scope.isCzar() && game.state === 'czar pick card' && game.table.length === 0) {
+        const myModal = $('#start-modal');
+        myModal.modal('show');
+      }
+
+      if (game.state === 'game dissolved') {
+        $('#start-modal').modal('hide');
+      }
+
       if (game.state === 'waiting for czar to decide' && $scope.showTable === false) {
         $scope.showTable = true;
       }
+
+      if (game.state !== 'czar pick card'
+      && game.state !== 'awaiting players'
+      && game.state !== 'game dissolve') {
+      $scope.czarHasDrawn = '';
+    }
+    
     });
     $scope.link = document.URL;
     $scope.$watch('game.gameID', function() {
