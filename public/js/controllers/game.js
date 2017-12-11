@@ -3,7 +3,7 @@
 /* eslint-disable */
 
 angular.module('mean.system')
-.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', function ($scope, game, $timeout, $location, MakeAWishFactsService, $dialog) {
+.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$http', '$dialog', function ($scope, game, $timeout, $location, MakeAWishFactsService, $http, $dialog) {
     $scope.hasPickedCards = false;
     $scope.winningCardPicked = false;
     $scope.showTable = false;
@@ -157,6 +157,63 @@ angular.module('mean.system')
       $('.modal-backdrop').remove();
     };
 
+    // testing 
+
+    $scope.inviteCounter = 0;
+    $scope.invited = [];
+
+    $scope.search = function() {
+      const { identifier } = $scope;
+      if (identifier && identifier.length !== 0) {
+        $http({
+          method: 'GET',
+          url: `/api/search/users?q=${identifier}`
+        }).then((response) => { 
+          const users = response.data.user;
+          if (users && users.length !== 0) {
+            $scope.users = users;
+            $scope.usersShow = true;
+          }
+          $scope.result = true;
+          $scope.message = response.data.message;
+          if ($scope.message) {
+            $scope.users = ''
+          }
+        })
+      }
+    }
+
+    $scope.invitePlayers = function() {
+      $scope.result = false;
+      $('#search').modal('show');
+    };
+
+    $scope.sendInvite = (email, _id, btn) => {
+      if ($scope.inviteCounter !== 5) {
+
+        $http.post('/api/users/invite', {
+          email: email,
+          gameLink: document.URL 
+        }).then((response, err) => {
+          if (response.status === 200) {
+            $scope.invited.push(_id)
+            btn.target.disabled = $scope.invited.includes(_id);
+          } 
+          $scope.inviteCounter++; 
+          $scope.inviteMsg = `You have Sent Invtes to ${$scope.inviteCounter} Players`
+        }, function(err) {
+          $scope.inviteMsg = err.data.message;
+        });
+      } else {
+        $scope.inviteMsg = 'You cannot invite more that 11 Players.';
+      }
+    }
+
+    $scope.sentInvite = function(_id) {
+      console.log(invited.includes(_id))
+      return invited.includes(_id)
+    }
+    
     // Catches changes to round to update when no players pick card
     // (because game.state remains the same)
     $scope.$watch('game.round', function() {
