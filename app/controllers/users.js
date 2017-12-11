@@ -1,3 +1,4 @@
+/* jshint esversion: 6 */
 
 const jwt = require('../../config/jwt');
 const nodemailer = require('nodemailer');
@@ -303,7 +304,7 @@ exports.login = (req, res, next) => {
   });
 };
 
-exports.searchUsers = (req, res, next) => {
+exports.searchUsers = (req, res) => {
   const { q } = req.query;
   if (!q) {
     return res.status(400).json({
@@ -327,7 +328,7 @@ exports.searchUsers = (req, res, next) => {
   });
 };
 
-exports.sendInvites = (req, res, next) => {
+exports.sendInvites = (req, res) => {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     secure: true,

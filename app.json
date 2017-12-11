@@ -7,6 +7,12 @@
     },
     "JWT": {
       "required": true
+    },
+    "username": {
+      "required": true
+    },
+    "password": {
+      "required": true
     }
   },
   "formation": {},
