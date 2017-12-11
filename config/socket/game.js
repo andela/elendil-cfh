@@ -179,11 +179,11 @@ Game.prototype.stateChoosing = function(self) {
   self.round++;
   self.dealAnswers();
   // Rotate card czar
-  // if (self.czar >= self.players.length - 1) {
-  //   self.czar = 0;
-  // } else {
-  //   self.czar++;
-  // }
+  if (self.czar >= self.players.length - 1) {
+    self.czar = 0;
+  } else {
+    self.czar++;
+  }
   self.sendUpdate();
 
   self.choosingTimeout = setTimeout(function() {
