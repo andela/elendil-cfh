@@ -192,7 +192,6 @@ describe('/POST User Sign Up (with JWT) ', () => {
         .get('/api/search/users')
         .set('Accept', 'application/json')
         .end((err, res) => {
-          res.should.be.json;
           res.body.should.be.a('object');
           res.should.have.status(400);
           res.body.should.have.property('message').equal('Nothing to search');
@@ -205,7 +204,6 @@ describe('/POST User Sign Up (with JWT) ', () => {
         .get('/api/search/users?q=larrystone@gmai.com')
         .set('Accept', 'application/json')
         .end((err, res) => {
-          res.should.be.json;
           res.body.should.be.a('object');
           res.should.have.status(200);
           done();
@@ -222,7 +220,6 @@ describe('/POST User Sign Up (with JWT) ', () => {
           emal: 'someemail@gmain.com'
         })
         .end((err, res) => {
-          res.should.bd.jons
           res.should.have.status(200);
           done();
         });

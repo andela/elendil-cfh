@@ -174,11 +174,12 @@ angular.module('mean.system')
       $('.modal-backdrop').remove();
     };
 
-    // testing 
+    // Initialize variables for invite function  
 
     $scope.inviteCounter = 0;
     $scope.invited = [];
 
+    // search user function
     $scope.search = function() {
       const { identifier } = $scope;
       if (identifier && identifier.length !== 0) {
@@ -194,17 +195,19 @@ angular.module('mean.system')
           $scope.result = true;
           $scope.message = response.data.message;
           if ($scope.message) {
-            $scope.users = ''
+            $scope.users = '';
           }
-        })
+        });
       }
     }
 
+    // Pop up the search modal
     $scope.invitePlayers = function() {
       $scope.result = false;
       $('#search').modal('show');
     };
 
+    // Send invite to users
     $scope.sendInvite = (email, _id, btn) => {
       if ($scope.inviteCounter !== 5) {
 
@@ -213,23 +216,18 @@ angular.module('mean.system')
           gameLink: document.URL 
         }).then((response, err) => {
           if (response.status === 200) {
-            $scope.invited.push(_id)
+            $scope.invited.push(_id);
             btn.target.disabled = $scope.invited.includes(_id);
           } 
           $scope.inviteCounter++; 
-          $scope.inviteMsg = `You have Sent Invtes to ${$scope.inviteCounter} Players`
+          $scope.inviteMsg = `You have Sent Invtes to ${$scope.inviteCounter} Players`;
         }, function(err) {
           $scope.inviteMsg = err.data.message;
         });
       } else {
         $scope.inviteMsg = 'You cannot invite more that 11 Players.';
       }
-    }
-
-    $scope.sentInvite = function(_id) {
-      console.log(invited.includes(_id))
-      return invited.includes(_id)
-    }
+    };
     
     // Catches changes to round to update when no players pick card
     // (because game.state remains the same)
