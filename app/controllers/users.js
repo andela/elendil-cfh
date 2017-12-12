@@ -6,7 +6,6 @@ const jwt = require('../../config/jwt');
  */
 const mongoose = require('mongoose'),
   User = mongoose.model('User');
-const config = require('../../config/config');
 const avatars = require('./avatars').all();
 
 /**

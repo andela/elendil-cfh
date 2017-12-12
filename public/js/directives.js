@@ -78,9 +78,12 @@ angular.module('mean.directives', [])
       link: function(scope, elem, attr) {
         scope.showOptions = true;
 
-        if (scope.$$childHead.global.authenticated === true) {
+        if (localStorage.token) {
           scope.showOptions = false;
         }
+        // if (scope.$$childHead.global.authenticated === true) {
+        //   scope.showOptions = false;
+        // }
       }
     };
   }).directive('dashboard', function() {
