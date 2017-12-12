@@ -1,4 +1,6 @@
-var jwt = require('jsonwebtoken');
+/* jshint esversion: 6 */
+
+const jwt = require('jsonwebtoken');
 
 /**
  * Class Definition for the Authentication Object using Jason Web Token
@@ -10,35 +12,26 @@ exports.jwt = {
   /**
    * Verify JWT token
    *
-   * @param {object} req - HTTP Request
-   * @param {object} res - HTTP Response
-   * @param {function} next - HTTP Next()
-   * @returns {object} Class instance
+   * @param {string} token
+   * @returns {object} user
    * @memberof Auth
    */
-  verify(req, res, next) {
-    var token = req.body.token
-    || req.query.token
-    || req.headers['x-access-token'];
-
+  verify(token) {
+    let user = {};
     if (token) {
-      var secret = process.env.jwtSecret || '!^sl1@#=5';
-      jwt.verify(token, secret, function (err, decoded) {
+      const secret = process.env.jwtSecret || '!^sl1@#=5';
+      jwt.verify(token, secret, (err, decoded) => {
         if (err) {
-          return res.status(401).json({ success: false,
-            message: 'Failed to authenticate token.' });
+          user = { id: null };
+        } else {
+          user = decoded;
         }
-        req.user = decoded;
-        next();
       });
     } else {
-      return res.status(403).json({
-        success: false,
-        message: 'No token provided.'
-      });
+      user = { id: null };
     }
 
-    return this;
+    return user;
   },
 
   /**

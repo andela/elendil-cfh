@@ -14,9 +14,9 @@ angular.module('mean.system')
         $scope.signup = () => {
           if (
             $scope.name &&
-            $scope.name.length > 0 &&
-            $scope.email &&
-            $scope.password
+          $scope.name.length > 0 &&
+          $scope.email &&
+          $scope.password
           ) {
             const newUser = {
               name: $scope.name,
@@ -26,8 +26,7 @@ angular.module('mean.system')
             $http.post('/api/auth/signup', newUser)
               .then((response) => {
                 $window.localStorage.setItem('token', response.data.token);
-                $window.location = '#!/';
-                $window.location.reload();
+                $location.path('/');
               }, (err) => {
                 $location.search(`error=${err.data.error}`);
               });
@@ -37,7 +36,7 @@ angular.module('mean.system')
         $scope.login = () => {
           if (
             $scope.email &&
-            $scope.password
+          $scope.password
           ) {
             const user = {
               email: $scope.email,
@@ -46,14 +45,18 @@ angular.module('mean.system')
             $http.post('/api/auth/login', user)
               .then((response) => {
                 $window.localStorage.setItem('token', response.data.token);
-                $location.path('/#!/');
-                $window.location.reload();
+                $location.path('/');
               }, (err) => {
                 $location.search(`error=${err.data.error}`);
               });
           } else {
             $location.search('error=invalid');
           }
+        };
+
+        $scope.signOut = () => {
+          $window.localStorage.removeItem('token');
+          $location.path('/');
         };
 
         $scope.playAsGuest = () => {
