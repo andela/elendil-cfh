@@ -3,7 +3,7 @@
 /* eslint-disable */
 
 angular.module('mean.system')
-.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$http', '$dialog', function ($scope, game, $timeout, $location, MakeAWishFactsService, $http, $dialog) {
+.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog','$window', function ($scope, game, $timeout, $location, MakeAWishFactsService, $dialog, $window) {
     $scope.hasPickedCards = false;
     $scope.winningCardPicked = false;
     $scope.showTable = false;
@@ -11,7 +11,7 @@ angular.module('mean.system')
     $scope.pickedCards = [];
     var makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
     $scope.makeAWishFact = makeAWishFacts.pop();
-
+    
     $scope.pickCard = function(card) {
       if (!$scope.hasPickedCards) {
         if ($scope.pickedCards.indexOf(card.id) < 0) {
@@ -153,6 +153,7 @@ angular.module('mean.system')
       }
     };
 
+
     $scope.startModal = function() {
       $('#start').modal({
         show: true,
@@ -245,8 +246,13 @@ angular.module('mean.system')
     // In case player doesn't pick a card in time, show the table
     $scope.$watch('game.state', function() {
       if(game.state === 'awaiting players' || game.state === null) {
-        $scope.startModal();
+        $('#start').modal({
+          show: true,
+          backdrop: 'static',
+          keyboard: false
+        });
       }
+
       if(game.state === 'waiting for players to pick'){
         $('#start').modal('hide');
       }         

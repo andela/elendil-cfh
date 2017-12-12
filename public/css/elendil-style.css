@@ -11,7 +11,7 @@ body {
   background-color: #256188;
   width: 100%;
   position: fixed;
-  z-index: 999999999;
+  z-index: 1000;
 }
 
 .navbar-light .navbar-nav .nav-link {
@@ -36,11 +36,11 @@ body {
 }
 
 .nav-pills .nav-link.active {
-  background: #FF9900;
+  background: #FF8800;
 }
 
 .navbar-nav {
-  width: 50%;
+  width: 60%;
 }
 
 .navbar-light .navbar-brand {
@@ -98,7 +98,7 @@ button[disabled]{
 
 .game-btn .btn-warning {
   color: #fff;
-  background-color: #FF9900;
+  background-color: #FF8800;
 }
 
 
@@ -109,7 +109,6 @@ button[disabled]{
 #carousel {
   height:550px;
   width: 100%;
-  position: absolute;
   clear:both;
   overflow:hidden;
   margin:0 auto;
@@ -147,7 +146,7 @@ button[disabled]{
 
 .charity .btn-warning {
   color: #fff;
-  background-color:#FF9900;
+  background-color:#FF8800;
 }
 
 .team {
@@ -163,7 +162,7 @@ button[disabled]{
 }
 
 .team a:hover {
-  color: #FF9900;
+  color: #FF8800;
 }
 
 .footer {
@@ -178,7 +177,7 @@ button[disabled]{
 }
 
 .footer a:hover {
-  color: #FF9900;
+  color: #FF8800;
 }
 
   
@@ -240,7 +239,7 @@ ul, ol {
 
 .custom-button {
   margin-top: 20px;
-  background: #FF9900;
+  background: #FF8800;
   border-width: 2px;
   border-radius: 2px;
 }
@@ -359,7 +358,7 @@ labelled {
   
   .navbar-collapse .nav-pills .nav-link.active {
     background: none;
-     color: #FF9900;
+     color: #FF8800;
   }
 }
 

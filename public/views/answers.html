@@ -6,34 +6,33 @@
 
     <span ng-show="winnerPicked()"></span>
 
-    <div ng-style="{'cursor':'pointer'}" class="card smallest" id='answers' ng-click="pickCard(card)" ng-hide="showTable || isCzar()"
+    <div ng-style="{'cursor':'pointer'}" class="cardd smallest" id='answers' ng-click="pickCard(card)" ng-hide="showTable || isCzar()"
     ng-repeat="card in game.players[game.playerIndex].hand" ng-animate="{enter:'animated fadeInUp', leave: 'animated fadeInOut'}">
-        <span ng-bind-html-unsafe="card.text"></span>
-        <span id='selection-number' ng-show="showFirst(card)"> 1 </span>
-        <span id='selection-number' ng-show="showSecond(card)"> 2 </span>
+        <span ng-bind-html-unsafe="card.text" style="position:relative; min-width:100%; top:35%"></span>
+        <span id='selection-number' ng-show="showFirst(card)" style="position:absolute; right: 6%"> 1 </span>
+        <span id='selection-number' ng-show="showSecond(card)" style="position:absolute; right: 6%"> 2 </span>
     </div>
 
     <span ng-repeat="answer in game.table">
-        <div class="card smallest" ng-style="pointerCursorStyle()" id='table' ng-click="pickWinning(answer)" ng-show="showTable || isCzar()"
+        <div class="cardd smallest" ng-style="pointerCursorStyle()" id='table' ng-click="pickWinning(answer)" ng-show="showTable || isCzar()"
         ng-repeat="card in answer.card" ng-animate="{enter:'animated bounceInLeft'}" style="background-color:{{winningColor($parent.$index)}}">
-            <span ng-bind-html-unsafe="card.text"></span>
-            <span id='selection-number' ng-show="firstAnswer($index)"> 1 </span>
-            <span id='selection-number' ng-show="secondAnswer($index)"> 2 </span>
+            <span ng-bind-html-unsafe="card.text" style="position:relative; min-width:100%; top:35%"></span>
+            <span id='selection-number' ng-show="firstAnswer($index)" style="position:absolute; right: 6%"> 1 </span>
+            <span id='selection-number' ng-show="secondAnswer($index)" style="position:absolute; right: 6%"> 2 </span>
         </div>
     </span>
-
   </div>
 </div>
 
-<div id="info-container" ng-hide="game.state === 'awaiting players' || game.players.length >= game.playerMinLimit">
-  <div id="inner-info">
+<div id="info-container" ng-show="game.state === 'awaiting players'">
+  <div id="inner-info" style="position:relative; margin-top: 2em; line-height: 2">
     <div id="lobby-how-to-play">How To Play</div>
-    <ol id="oh-el">
+    <ol id="oh-el" style="font-family: Bangla MN; font-size: .95rem;">
       <li>Each player begins with, and will always have, 10 white answer cards.</li>
       <li>For each round, one player is randomly chosen as the Card Czar.</li>
       <li>Everyone else answers the black question card by clicking on the answer card they want to use.</li>
       <li>The Card Czar then picks a favorite answer, and whoever played that answer wins the round.</li>
-      <li>*Want to adorn your avatar with a glorious crown? Donate to charity after the game!</li>
+      <li>Want to adorn your avatar with a glorious crown? Donate to charity after the game!</li>
     </ol>
   </div>
 </div>
@@ -48,12 +47,12 @@
       Help yourself to another game or help a child in need? Donating will also place a lovely crown on your avatar's head.
     </div>
     <div id='inner-text-container'>
-      <a href='/#!/app'>
-      <div id="join-new-game" ng-click="game.joinGame('joinNewGame')">
+      <a style="color:#FFF; text-decoration: none" href='/#!/app'>
+      <div style="background: #FF8800; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 1.5rem; padding: .1rem 2rem; margin: 3%;max-width: 17rem; margin-left:auto; margin-right:auto" ng-click="game.joinGame('joinNewGame')">
         Join a New Game
       </div></a>
-      <a href='/'>
-        <div id="exit-match">
+      <a style="color:#FFF; text-decoration: none" href='/'>
+        <div style="background: #FF8800; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 1.5rem; padding: .1rem 2rem; margin: 3%; max-width: 17rem; margin-left:auto; margin-right:auto" >
         Return to Lobby
         </div>
       </a>
