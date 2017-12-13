@@ -1,0 +1,253 @@
+</script>
+<dashboard></dashboard>
+<div id="app-container" ng-controller="GameTourController" style="top: 6rem">
+  <div id="gameplay-container" ng-hide="introed">
+    <div id="upper-gameplay-container">
+      <div id="menu-timeremaining-container">
+        <div id="timer-container">
+          <!-- Timer Section-->
+          <div id="inner-timer-container">
+            <span id="timer-status-round">
+              Time Remaining</span>
+            <div id="time" ng-show="state === 'game is started'" ng-bind="time" ng-class="{'text-danger': time < 10}"></div>
+          </div>
+        </div>
+      </div>
+      <div id="question-container-outer">
+        <!-- Question Section -->
+        <div id="question-container-inner">
+          <div class="cardd longBlack">
+            <span id="question" ng-show="state === 'game is started'" ng-bind-html-unsafe="question"></span>
+
+            <div id="notifications" ng-if="game.notification" ng-animate="{enter:'animated fadeInLeft', leave:'animated fadeOut'}">{{game.notification}}</div>
+
+            <div id="startGame" ng-show="modal === 'start-game'">
+              <div id="start-game-container">
+                <!-- Start Game Modal -->
+                <div id="start">
+                  <div class="modal-dialog">
+                    <div class="modal-content" style="margin-left: auto; margin-right: auto; text-align:center">
+                      <div class="modal-header" style="background-color: #256188; color: #FFF; border-top-right-radius: unset; border-top-left-radius: unset">
+                        <h4 class="modal-title" style="margin-right:auto; margin-left:auto; margin-top: .5rem; line-height: 1">Cards For Humanity</h4>
+                      </div>
+                      <div class="modal-body" style="height: 200px">
+                        <span>
+                          <button id="start-game" ng-animate="{enter: 'animated fadeInLeft'}" style="background: #FF8800; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 1.1rem; padding: .1rem 2rem; cursor:pointer"
+                            class="btn btn-sm" data-dismiss="modal">
+                            Start Game
+                          </button>
+                        </span>
+                        <span>
+                          <button id="invite-friends" style="background: #FF8800; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 1.1rem; padding: .1rem 2rem; cursor:pointer"
+                            class="btn btn-sm">
+                            Invite Players
+                          </button>
+                        </span>
+                        <br/>
+                        <br/>
+                        <img src="../img/loader_3.gif" style="height:80px" alt="">
+                        <figcaption style="font-size: 14px; margin-top: 6px; color: #256188">Finding Players
+                          <br>
+                        </figcaption>
+                        <span style="font-size: 13px; font-weight: lighter; color: #256188">
+                          <p id="finding-player">3 / 12 player(s) found</p>
+                        </span>
+                      </div>
+                      <div class="modal-footer" style="background-color: #256188; color: #FFF; padding-top: 10px; padding-bottom: 10px">
+                        <button style="background: #FF8800; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 1.1rem; padding: .1rem 2rem; cursor: pointer"
+                          ng-click="abandonGame()" type="button" class="btn btn-sm" data-dismiss="modal">Exit Game</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <!-- Game Over Stuff -->
+            <div ng-show="state === 'game ended'" id="game-end-info">
+              <div ng-show="state === 'game ended'">
+                <div class="game-end-headline">Congratulations! You won the game, {{game.players[game.playerIndex].username | upperFirstLetter}}!</div>We
+                hope you feel special. If you'd like to share that special feeling with the world, consider donating to charity.
+                Or just horde it all for youself.
+              </div>
+            </div>
+
+            <div id="start-modal" class="modal fade center" role="dialog">
+              <div class="modal-dialog">
+                <div class="modal-content" style="margin-left: auto; margin-right: auto">
+                  <div class="modal-header" style="background-color: #256188; color: #FFF;">
+                    <h5 class="modal-title" style="text-align: center; margin: auto;">Cards For Humanity</h5>
+                  </div>
+                  <div class="modal-body" style="min-height: 250px; margin: auto;">
+                    <h6 id="shuffleText" style="color: rgb(0, 0, 0); text-align: center;">You are the Czar - Click card to pick question</h6>
+                    <div class="center" style="margin: auto;">
+                      <div class="shuffle" ng-click="shuffleCards()" ng-style="{'cursor':'pointer'}" style="margin: auto; cursor: pointer;">
+                        <img src="../img/hoyleback.jpg" style="width: 100px;" class="animated flipInX" id="shufflecard1">
+                        <img src="../img/hoyleback.jpg" style="width: 100px;" class="animated flipInX" id="shufflecard2">
+                        <img src="../img/hoyleback.jpg" style="width: 100px;" class="animated flipInX" id="shufflecard3">
+                        <img src="../img/hoyleback.jpg" style="width: 100px;" class="animated flipInX" id="shufflecard4">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <answers></answers> -->
+    <div id="cards-container">
+      <div id="social-bar-container">
+        <!-- Player Section -->
+        <div id="player-container" ng-show="state === 'game is started'" style="height: 60px; display: flex; flex-wrap: row">
+          <div id="above-czar-container" style="display:flex; flex-direction: row;">
+            <div id="avatar_">
+              <span ng-show="{{true}}">
+                <img ng-src="img/king.png" id="king">
+              </span>
+              <img ng-src="{{avatars[0]}}" />
+            </div>
+            <div id="player-container-inner">
+              <div id="player-name">
+                <h4>{{'kayode' | upperFirstLetter}}</h4>
+                <div id="player-score">
+                  <h2>2 / 5</h2>
+                </div>
+                <span ng-show="{{true}}" id="player-star">
+                  <img src="../img/11.png" />
+                </span>
+                <span ng-show="{{false}}" style="font-weight: 100; font-family: Verdana; position:absolute; top:1.3rem; right:0">CZAR</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="player-container" ng-show="state === 'game is started'" style="height: 60px; display: flex; flex-wrap: row">
+          <div id="above-czar-container" style="display:flex; flex-direction: row;">
+            <div id="avatar_">
+              <span ng-show="{{false}}">
+                <img ng-src="img/king.png" id="king">
+              </span>
+              <img ng-src="{{avatars[1]}}" />
+            </div>
+            <div id="player-container-inner">
+              <div id="player-name">
+                <h4>{{'Chibu' | upperFirstLetter}}</h4>
+                <div id="player-score">
+                  <h2 id="player-points">2 / 5</h2>
+                </div>
+                <span ng-show="isPlayer($index)" id="player-star">
+                  <img src="../img/11.png" />
+                </span>
+                <span id="the-czar" ng-show="{{true}}" style="font-weight: 100; font-family: Verdana; position:absolute; top:1.3rem; right:0">CZAR</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="player-container" ng-show="state === 'game is started'" style="height: 60px; display: flex; flex-wrap: row">
+          <div id="above-czar-container" style="display:flex; flex-direction: row;">
+            <div id="avatar_">
+              <span ng-show="{{false}}">
+                <img ng-src="img/king.png" id="king">
+              </span>
+              <img ng-src="{{avatars[2]}}" />
+            </div>
+            <div id="player-container-inner">
+              <div id="player-name">
+                <h4>{{'Hamdallah' | upperFirstLetter}}</h4>
+                <div id="player-score">
+                  <h2>2 / 5</h2>
+                </div>
+                <span ng-show="isPlayer($index)" id="player-star">
+                  <img src="../img/11.png" />
+                </span>
+                <span ng-show="{{false}}" style="font-weight: 100; font-family: Verdana; position:absolute; top:1.3rem; right:0">CZAR</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div ng-show="state === 'game is started' && !isCzar" id="cards" class='hand'>
+        <div id="card" ng-style="{'cursor':'pointer', 'border':'2px solid black'}" class="cardd smallest" id='answers' ng-animate="{enter:'animated fadeInUp', leave: 'animated fadeInOut'}">
+          <span ng-bind="answers[0]" style="position:relative; min-width:100%; top:35%"></span>
+          <span id='selection-number' ng-show="showFirst(card)" style="position:absolute; right: 6%"> 1 </span>
+          <span id='selection-number' ng-show="showSecond(card)" style="position:absolute; right: 6%"> 2 </span>
+        </div>
+        <div id="card" ng-style="{'cursor':'pointer', 'border':'2px solid black'}" class="cardd smallest" id='answers' ng-animate="{enter:'animated fadeInUp', leave: 'animated fadeInOut'}">
+          <span ng-bind="answers[1]" style="position:relative; min-width:100%; top:35%"></span>
+          <span id='selection-number' ng-show="showFirst(card)" style="position:absolute; right: 6%"> 1 </span>
+          <span id='selection-number' ng-show="showSecond(card)" style="position:absolute; right: 6%"> 2 </span>
+        </div>
+        <div id="card" ng-style="{'cursor':'pointer', 'border':'2px solid black'}" class="cardd smallest" id='answers' ng-animate="{enter:'animated fadeInUp', leave: 'animated fadeInOut'}">
+          <span ng-bind="answers[2]" style="position:relative; min-width:100%; top:35%"></span>
+          <span id='selection-number' ng-show="showFirst(card)" style="position:absolute; right: 6%"> 1 </span>
+          <span id='selection-number' ng-show="showSecond(card)" style="position:absolute; right: 6%"> 2 </span>
+        </div>
+        <div id="card" ng-style="{'cursor':'pointer', 'border':'2px solid black'}" class="cardd smallest" id='answers' ng-animate="{enter:'animated fadeInUp', leave: 'animated fadeInOut'}">
+          <span ng-bind="answers[3]" style="position:relative; min-width:100%; top:35%"></span>
+          <span id='selection-number' ng-show="showFirst(card)" style="position:absolute; right: 6%"> 1 </span>
+          <span id='selection-number' ng-show="showSecond(card)" style="position:absolute; right: 6%"> 2 </span>
+        </div>
+      </div>
+    </div>
+
+    <div id="game-end-container" ng-show="state === 'game ended'">
+      <div id="inner-info-exit">
+        <div class="game-end-answer-text">
+          <h2>What would you like to do now?</h2>
+          Help yourself to another game or help a child in need? Donating will also place a lovely crown on your avatar's head.
+        </div>
+        <div id='inner-text-container'>
+          <a style="color:#FFF; text-decoration: none" href='/#!/app'>
+            <div style="background: #FF8800; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 1.5rem; padding: .1rem 2rem; margin: 3%;max-width: 17rem; margin-left:auto; margin-right:auto"
+              ng-click="game.joinGame('joinNewGame')">
+              Join a New Game
+            </div>
+          </a>
+          <a style="color:#FFF; text-decoration: none" href='/'>
+            <div style="background: #FF8800; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 1.5rem; padding: .1rem 2rem; margin: 3%; max-width: 17rem; margin-left:auto; margin-right:auto">
+              Return to Lobby
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div id="charity-widget-container">
+        <!-- This is real -->
+        <a href="http://www.crowdrise.com" id="crowdriseStaticLink-fundraiser-121142" title="Fundraising Websites on Crowdrise">Fundraising Websites - Crowdrise</a>
+        <script type="text/javascript" src="https://www.crowdrise.com/widgets/donate/fundraiser/121142/?callback=userDonationCb"></script>
+      </div>
+    </div>
+    <div id="czar-blank-container" ng-show="isCzar && state=== 'game is started'">
+      <div id="czar-blank-inner">
+        You are the Card Czar.
+        <br>
+        <span id="smaller-text">Players are choosing their answers. Prepare to select a winner.</span>
+      </div>
+      <div id='charity-fact-container'>
+        <div id='charity-fact-tagline'>Did you know?</div>
+
+        <div id='charity-fact'>
+          {{ makeAWishFact }}
+        </div>
+
+        <div id='charity-logo-container'>
+          <img src='/img/make-a-wish-logo.png' />
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Region Selection Modal-->
+  <div class="regionModal" style="position: absolute; top:-40px; left:40%" role="dialog" ng-show="modal === 'region'">
+    <div class="modal-dialog" id="regionModal">
+      <region></region>
+    </div>
+  </div>
+  <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <region></region>
+  </div>
+</div>

@@ -95,6 +95,10 @@ angular.module('mean.system')
           return false;
         };
 
+        $scope.goHome = () => {
+          $window.location.href = '/';
+        };
+
         $scope.avatars = [];
         AvatarService.getAvatars()
           .then((data) => {

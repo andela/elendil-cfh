@@ -16,6 +16,10 @@ exports.play = function(req, res) {
   }
 };
 
+exports.tour = function(req, res) {
+    res.redirect('/#!/tour');
+};
+
 exports.render = function(req, res) {
     res.render('index', {
         user: req.user ? JSON.stringify(req.user) : "null"
