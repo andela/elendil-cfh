@@ -398,25 +398,3 @@ exports.sendInvites = (req, res) => {
     });
   });
 };
-/**
- * @description getDonations function
- * @param {Object} req - Request object
- * @param {Object} res - Response object
- * @returns {object} json - payload
- */
-exports.getDonations = (req, res) => {
-  User.find()
-    .then((response) => {
-      if (response.length === 0) {
-        return res.send({ message: 'no data' });
-      }
-      const donationData = [];
-      response.forEach((array) => {
-        donationData.push({ name: array.name, avatar: array.avatar, donations: array.donations.length });
-      });
-      res.send(donationData);
-    })
-    .catch((error) => {
-      res.send(error);
-    });
-};
