@@ -325,6 +325,7 @@ exports.getDonations = (req, res) => {
     .catch((error) => {
       res.send(error);
     });
+}
 
 exports.searchUsers = (req, res) => {
   const { q } = req.query;
