@@ -5,7 +5,7 @@ angular.module('mean.directives', [])
       restrict: 'EA',
       templateUrl: '/views/player.html',
       link: function(scope, elem, attr){
-        scope.colors = ['#7CE4E8', '#FFFFa5', '#FC575E', '#F2ADFF', '#398EC4', '#8CFF95'];
+        scope.colors = ['#7CE4E8', '#BFDAC5', '#FC575E', '#0C22FF', '#398EC4', '#8CFF95', '#D0C850', '#F26F34', '#F20879', '#F0A077', '#00E0F0', '#BB0000'];
       }
     };
   }).directive('answers', function() {
@@ -66,6 +66,12 @@ angular.module('mean.directives', [])
       templateUrl: '/views/timer.html',
       link: function(scope, elem, attr){}
     };
+  }).directive('search', function() {
+    return {
+      restrict: 'EA',
+      templateUrl: '/views/search.html',
+      link: function(scope, elem, attr){}
+    };
   }).directive('start', function() {
     return {
       restrict: 'EA',
@@ -85,5 +91,11 @@ angular.module('mean.directives', [])
         //   scope.showOptions = false;
         // }
       }
+    };
+  }).directive('dashboard', function() {
+    return {
+      restrict: 'EA',
+      templateUrl: '/views/dashboard.html',
+      link: function(scope, elem, attr){}
     };
   });

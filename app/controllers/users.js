@@ -1,5 +1,7 @@
 /* jshint esversion: 6 */
+
 const jwt = require('../../config/jwt');
+const nodemailer = require('nodemailer');
 
 /**
  * Module dependencies.
@@ -301,6 +303,7 @@ exports.login = (req, res, next) => {
   });
 };
 
+
 /**
  * @description getDonations function
  * @param {Object} req - Request object
@@ -322,4 +325,76 @@ exports.getDonations = (req, res) => {
     .catch((error) => {
       res.send(error);
     });
+
+exports.searchUsers = (req, res) => {
+  const { q } = req.query;
+  if (!q) {
+    return res.status(400).json({
+      message: 'Nothing to search'
+    });
+  }
+  User.find({
+    $or: [
+      { email: { $regex: `.*${q}.*` } }, { username: { $regex: `.*${q}.*` } }
+    ]
+  }, 'email name').exec((err, user) => {
+    if (err) {
+      return res.status(500).json({ Message: 'Internal server error' });
+    }
+    if (user.length <= 0) {
+      return res.status(200).json({
+        message: 'User not found!'
+      });
+    }
+    return res.status(200).json({ user });
+  });
+};
+
+exports.sendInvites = (req, res) => {
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    secure: true,
+    port: 465,
+    auth: {
+      user: process.env.username,
+      pass: process.env.password
+    }
+  });
+
+  const mailOption = {
+    from: 'Cards for Humanity Elendil',
+    to: req.body.email,
+    subject: 'Invitation to join a current game session',
+    text: `Click this link to join game: ${req.body.gameLink}`,
+    html: `
+    <div style="width: 40%; margin: 0 auto; padding: 3%;" >
+      <div style="background-color: #256188; color: #FFF; padding: 1%; text-align: center;">
+        <h4 class="modal-title">Card For Humanity - Elendil</h4>
+      </div>
+      <center>
+        <p>You have been invited to join a game session.</p>
+        <p>
+        Click this link to join game:
+        <a href="${req.body.gameLink}"><button style="background: #F6A623; color: #FFF; padding: 2%; border:0; border-radius: 5px;" >Join Game</button></a>
+         
+         </p>
+      </center>
+      <div style="font-size: 14px; margin-top: 6px; color: #fff; text-align: center; background-color: #256188; padding: 0.5%;">
+        <p>Cards for Humanity - Elendil &copy; 2017 <br/> <a style="color: #F6A623;" href="http://www.andela.com">Andela</a></p>
+      <div>
+    </div>
+    `
+  };
+
+  transporter.sendMail(mailOption, (error) => {
+    if (error) {
+      return res.status(400).json({
+        error,
+        message: 'An error occured while trying to send your invite!'
+      });
+    }
+    return res.status(200).json({
+      message: 'Message sent Successfully'
+    });
+  });
 };

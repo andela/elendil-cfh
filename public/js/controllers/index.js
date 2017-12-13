@@ -61,9 +61,32 @@ angular.module('mean.system')
         };
 
         $scope.playAsGuest = () => {
-          game.joinGame();
-          $location.path('/app');
+          if ($scope.region === undefined || $scope.region === '') {
+            $scope.error = 'Select a region first!';
+          } else {
+            $('#close').click();
+            $window.location.path('/app');
+          }
         };
+
+        $scope.playWithStrangers = () => {
+          if ($scope.region === undefined || $scope.region === '') {
+            $scope.error = 'Select a region first!';
+          } else {
+            $('#close').click();
+            $window.location.href = '/play';
+          }
+        };
+
+        $scope.playWithFriends = () => {
+          if ($scope.region === undefined || $scope.region === '') {
+            $scope.error = 'Select a region first!';
+          } else {
+            $('#close').click();
+            $window.location.href = '/play?custom';
+          }
+        };
+
 
         $scope.showError = () => {
           if ($location.search().error) {

@@ -11,7 +11,7 @@ body {
   background-color: #256188;
   width: 100%;
   position: fixed;
-  z-index: 999999999;
+  z-index: 1000;
 }
 
 .navbar-light .navbar-nav .nav-link {
@@ -36,11 +36,11 @@ body {
 }
 
 .nav-pills .nav-link.active {
-  background: #FF9900;
+  background: #FF8800;
 }
 
 .navbar-nav {
-  width: 50%;
+  width: 60%;
 }
 
 .navbar-light .navbar-brand {
@@ -50,12 +50,13 @@ body {
 
 .header {
   background: url(../img/card.png);
-  height: 695px;
+  height: 755px;
   background-size: auto;
   padding: 1%;
   width: 100;
 
 }
+
 
 .header-text {
   text-align: center;
@@ -78,10 +79,16 @@ body {
 }
 
 .game-btn .btn {
-  width: 15%;
+  width: 20%;
   border-radius: 12px;
   margin-bottom: 2%;
   font-family: Herculanum;
+}
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc !important;
+  color: #666666;
 }
 
 .game-btn .btn-light {
@@ -91,7 +98,7 @@ body {
 
 .game-btn .btn-warning {
   color: #fff;
-  background-color: #FF9900;
+  background-color: #FF8800;
 }
 
 
@@ -102,7 +109,7 @@ body {
 #carousel {
   height:550px;
   width: 100%;
-  position:;
+  position: absolute;
   clear:both;
   overflow:hidden;
   margin:0 auto;
@@ -117,7 +124,6 @@ body {
   text-align: center;
   padding-top: 15%;
   color: #256087;
-  text-transform: uppercase;
   background: #fff;
 }
 
@@ -141,7 +147,7 @@ body {
 
 .charity .btn-warning {
   color: #fff;
-  background-color:#FF9900;
+  background-color:#FF8800;
 }
 
 .team {
@@ -157,7 +163,7 @@ body {
 }
 
 .team a:hover {
-  color: #FF9900;
+  color: #FF8800;
 }
 
 .footer {
@@ -172,7 +178,7 @@ body {
 }
 
 .footer a:hover {
-  color: #FF9900;
+  color: #FF8800;
 }
 
   
@@ -234,7 +240,7 @@ ul, ol {
 
 .custom-button {
   margin-top: 20px;
-  background: #FF9900;
+  background: #FF8800;
   border-width: 2px;
   border-radius: 2px;
 }
@@ -353,9 +359,57 @@ labelled {
   
   .navbar-collapse .nav-pills .nav-link.active {
     background: none;
-     color: #FF9900;
+     color: #FF8800;
   }
 }
+
+/* Modal */
+#regionModal .modal-content {
+  border-radius: 0px;
+  margin-top: 75px;
+
+}
+
+.modal-header {
+  background-color: #256188;
+}
+
+.modal-footer {
+  background-color: #256188;
+}
+
+.custom-form input {
+border-radius: 0px;
+}
+
+select#region {
+width: 100%;
+border-radius: 0px;
+-webkit-appearance: none;
+padding: .5rem 1rem;
+border-color: #0b4f6c;
+background: #FFF;
+font-family: 'Quicksand', sans-serif;
+}
+
+select#region:focus, select#region:active {
+outline: none;
+}
+
+#regionModal .home-button {
+padding: 0.5rem 1.6rem;
+font-size: 0.5rem;
+margin-top: 50px;
+}
+
+.text-region {
+  padding-left: 6em;
+}
+
+.text-border {
+  padding-right: 8em;
+}
+
 
 @media (min-width: 990px) and (max-width: 1200px) {
   .navbar-expand-lg .navbar-nav {

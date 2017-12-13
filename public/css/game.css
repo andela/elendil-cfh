@@ -889,12 +889,3 @@ body {
   text-transform: none !important; }
   .gradientButton .donateNow {
     border-top: 0px solid black !important; }
-
-.dashboardheader {
-  background-color: #256188;
-  height: 40px;
-  color: #ffffff;
-  padding: 10px; }
-
-.table {
-  background-color: #ffffff; }

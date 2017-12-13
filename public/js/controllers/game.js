@@ -3,7 +3,7 @@
 /* eslint-disable */
 
 angular.module('mean.system')
-.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', function ($scope, game, $timeout, $location, MakeAWishFactsService, $dialog) {
+.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$http', '$dialog', function ($scope, game, $timeout, $location, MakeAWishFactsService, $http, $dialog) {
     $scope.hasPickedCards = false;
     $scope.winningCardPicked = false;
     $scope.showTable = false;
@@ -11,7 +11,7 @@ angular.module('mean.system')
     $scope.pickedCards = [];
     var makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
     $scope.makeAWishFact = makeAWishFacts.pop();
-
+    
     $scope.pickCard = function(card) {
       if (!$scope.hasPickedCards) {
         if ($scope.pickedCards.indexOf(card.id) < 0) {
@@ -153,6 +153,7 @@ angular.module('mean.system')
       }
     };
 
+
     $scope.startModal = function() {
       $('#start').modal({
         show: true,
@@ -174,6 +175,61 @@ angular.module('mean.system')
       $('.modal-backdrop').remove();
     };
 
+    // Initialize variables for invite function  
+
+    $scope.inviteCounter = 0;
+    $scope.invited = [];
+
+    // search user function
+    $scope.search = function() {
+      const { identifier } = $scope;
+      if (identifier && identifier.length !== 0) {
+        $http({
+          method: 'GET',
+          url: `/api/search/users?q=${identifier}`
+        }).then((response) => { 
+          const users = response.data.user;
+          if (users && users.length !== 0) {
+            $scope.users = users;
+            $scope.usersShow = true;
+          }
+          $scope.result = true;
+          $scope.message = response.data.message;
+          if ($scope.message) {
+            $scope.users = '';
+          }
+        });
+      }
+    }
+
+    // Pop up the search modal
+    $scope.invitePlayers = function() {
+      $scope.result = false;
+      $('#search').modal('show');
+    };
+
+    // Send invite to users
+    $scope.sendInvite = (email, _id, btn) => {
+      if ($scope.inviteCounter !== 5) {
+
+        $http.post('/api/users/invite', {
+          email: email,
+          gameLink: document.URL 
+        }).then((response, err) => {
+          if (response.status === 200) {
+            $scope.invited.push(_id);
+            btn.target.disabled = $scope.invited.includes(_id);
+          } 
+          $scope.inviteCounter++; 
+          $scope.inviteMsg = `You have Sent Invtes to ${$scope.inviteCounter} Players`;
+        }, function(err) {
+          $scope.inviteMsg = err.data.message;
+        });
+      } else {
+        $scope.inviteMsg = 'You cannot invite more that 11 Players.';
+      }
+    };
+    
     // Catches changes to round to update when no players pick card
     // (because game.state remains the same)
     $scope.$watch('game.round', function() {
@@ -190,8 +246,13 @@ angular.module('mean.system')
     // In case player doesn't pick a card in time, show the table
     $scope.$watch('game.state', function() {
       if(game.state === 'awaiting players' || game.state === null) {
-        $scope.startModal();
+        $('#start').modal({
+          show: true,
+          backdrop: 'static',
+          keyboard: false
+        });
       }
+
       if(game.state === 'waiting for players to pick'){
         $('#start').modal('hide');
       }         

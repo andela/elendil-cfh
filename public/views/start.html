@@ -1,14 +1,15 @@
 <div>
-  <div id="start" class="modal fade" role="dialog">
+  <div id="start" class="modal fade" role="dialog" >
     <div class="modal-dialog">
-      <div class="modal-content" style="max-width: 80%; margin-left: auto; margin-right: auto">
-        <div class="modal-header" style="background-color: #256188; color: #FFF;">
-          <h4 class="modal-title" style="margin-right:auto; margin-left:auto">Cards For Humanity</h4>
+      <div class="modal-content" style="margin-left: auto; margin-right: auto; text-align:center">
+        <div class="modal-header" style="background-color: #256188; color: #FFF; border-top-right-radius: unset; border-top-left-radius: unset">
+          <h4 class="modal-title" style="margin-right:auto; margin-left:auto; margin-top: .5rem; line-height: 1">Cards For Humanity</h4>
         </div>
         <div class="modal-body" style="height: 200px">
           <span >
             <button
-              style="background: #FF9900; color: #FFF"
+              ng-animate="{enter: 'animated fadeInLeft'}"
+              style="background: #FF8800; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 1.1rem; padding: .1rem 2rem; cursor:pointer"
               ng-show="game.playerIndex === 0 || (game.joinOverride && game.players.length >= game.playerMinLimit)"
               ng-click="startGame()"
               class="btn btn-sm"
@@ -19,7 +20,9 @@
           </span>
           <span>
             <button
-              style="background: #FF9900; color: #FFF"
+              ng-hide="game.players[game.playerIndex].email === null"
+              ng-click="invitePlayers()"
+              style="background: #FF8800; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 1.1rem; padding: .1rem 2rem; cursor:pointer"
               ng-disabled="game.players.length >= 12" 
               class="btn btn-sm">
               Invite Players
@@ -28,32 +31,35 @@
           <br/><br/>
           <img src="../img/loader_3.gif" style="height:80px" alt="">
           <figcaption style="font-size: 14px; margin-top: 6px; color: #256188">Finding Players <br></figcaption>
-          <span style="font-size: 13px; font-weight: lighter; color: #256188"><p>{{game.players.length}} players found</p></span>
+          <span style="font-size: 13px; font-weight: lighter; color: #256188"><p>{{game.players.length}} / {{game.playerMaxLimit}} player(s) found</p></span>
         </div>
         <div ng-show="link.slice(-3) !== 'app'" style="font-size: 13px; font-weight: lighter; margin-top: 6px; color: #256188">
           Give the following link to your friends so they can join your game:
           <br>
           {{link}}
         </div>
+        <div style="font-size: 13px; font-weight: lighter; margin-top: 6px; color: #256188" ng-if="game.notification" ng-animate="{enter:'animated fadeInLeft', leave:'animated fadeOut'}">
+          {{game.notification}}
+        </div>
         <div class="modal-footer" style="background-color: #256188; color: #FFF; padding-top: 10px; padding-bottom: 10px">
-          <button style="background: #FF9900; color: #FFF" ng-click="abandonGame()" type="button" class="btn btn-sm" data-dismiss="modal">Exit Game</button>
+          <button style="background: #FF8800; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 1.1rem; padding: .1rem 2rem; cursor: pointer" ng-click="abandonGame()" type="button" class="btn btn-sm" data-dismiss="modal">Exit Game</button>
         </div>
       </div>
     </div>
   </div>
   <div id="infoModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
-      <div class="modal-content" style="max-width: 80%; margin-left: auto; margin-right: auto">
-        <div class="modal-header" style="background-color: #256188; color: #FFF">
-          <h4 class="modal-title"></h4>
+      <div class="modal-content" style="max-width: 80%; margin-left: auto; margin-right: auto; text-align:center">
+        <div class="modal-header" style="background-color: #256188; color: #FFF;justify-content: center; border-top-right-radius: unset; border-top-left-radius: unset">
+          <h4 class="modal-title" style="margin-right:auto; margin-left:auto; margin-top: .5rem; line-height: 1"></h4>
         </div>
         <div class="modal-body" style="max-height: fit-content; font-size: 14px; font-weight: lighter; margin-top: 6px; color: #256188">
         </div>
-        <div class="modal-footer" style="background-color: #256188; color: #FFF; padding-top: 10px; padding-bottom: 10px">
-          <button ng-click="dismissInfo()" style="background: #FF9900; color: #FFF" type="button" class="btn btn-sm">Close</button>
+        <div class="modal-footer" style="background-color: #256188; color: #FFF; padding-top: 10px; padding-bottom: 10px; cursor: pointer">
+          <button ng-click="dismissInfo()" style="background: #FF8800; color: #FFF; cursor: pointer" type="button" class="btn btn-sm">Close</button>
         </div>
       </div>
     </div>
   </div>
+  <search></search>
 </div>
-

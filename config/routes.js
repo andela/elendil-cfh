@@ -10,6 +10,8 @@ module.exports = (app, passport, auth) => {
   app.get('/chooseavatars', users.checkAvatar);
   app.get('/signout', users.signout);
   app.post('/api/auth/login', users.login);
+  app.get('/api/search/users', users.searchUsers);
+  app.post('/api/users/invite', users.sendInvites);
 
   // Setup routes with api prefix
   app.post('/api/auth/signup', users.signupJwt);
