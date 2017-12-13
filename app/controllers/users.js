@@ -1,5 +1,4 @@
 /* jshint esversion: 6 */
-
 const jwt = require('../../config/jwt');
 const nodemailer = require('nodemailer');
 
