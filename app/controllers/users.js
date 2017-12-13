@@ -111,7 +111,7 @@ exports.signupJwt = (req, res) => {
         }
         if (!existingUser) {
           const user = new User(req.body);
-          user.avatar = avatars[user.avatar];
+          user.avatar = avatars[+req.body.avatar];
           user.save((error, newUser) => {
             if (error) {
               return res.status(400).json({
@@ -302,6 +302,30 @@ exports.login = (req, res, next) => {
     });
   });
 };
+
+
+/**
+ * @description getDonations function
+ * @param {Object} req - Request object
+ * @param {Object} res - Response object
+ * @returns {object} json - payload
+ */
+exports.getDonations = (req, res) => {
+  User.find()
+    .then((response) => {
+      if (response.length === 0) {
+        return res.send({ message: 'no data' });
+      }
+      const donationData = [];
+      response.forEach((array) => {
+        donationData.push({ name: array.name, avatar: array.avatar, donations: array.donations.length });
+      });
+      res.send(donationData);
+    })
+    .catch((error) => {
+      res.send(error);
+    });
+}
 
 exports.searchUsers = (req, res) => {
   const { q } = req.query;

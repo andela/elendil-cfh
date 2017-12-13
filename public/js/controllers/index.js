@@ -21,7 +21,8 @@ angular.module('mean.system')
             const newUser = {
               name: $scope.name,
               password: $scope.password,
-              email: $scope.email
+              email: $scope.email,
+              avatar: $scope.avatar
             };
             $http.post('/api/auth/signup', newUser)
               .then((response) => {
