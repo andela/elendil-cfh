@@ -8,7 +8,6 @@ const nodemailer = require('nodemailer');
  */
 const mongoose = require('mongoose'),
   User = mongoose.model('User');
-const config = require('../../config/config');
 const avatars = require('./avatars').all();
 
 /**

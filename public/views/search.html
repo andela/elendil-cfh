@@ -1,6 +1,6 @@
 <div id="search" class="modal fade" role="dialog">
     <div class="modal-dialog">
-      <div class="modal-content" style="max-width: 80%; margin-left: auto; margin-right: auto">
+        <div class="modal-content" style="margin-left: auto; margin-right: auto; text-align:center">
         <div class="modal-header" style="background-color: #256188; color: #FFF">
           <h4 class="modal-title">Card For Humanity </h4>
         </div>
@@ -11,6 +11,7 @@
             <form>
             <input type="text" ng-change="search()" ng-model="identifier" style="height: 30px;" placeholder="Enter Your Email or username">
             <button
+            style="background: #FF8800; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 1.1rem; padding: .1rem 2rem; cursor:pointer"
             style="background: #FF9900; color: #FFF"
             ng-click="search()"
             class="btn btn-sm">
@@ -20,19 +21,23 @@
           </div>
           
         </div>
-        <div ng-show="result" style="font-size: 14px; margin-top: 6px; color: #256188; height: 150px; overflow: scroll;">
+        <div ng-show="result" style="font-size: 14px; margin-top: 6px; color: #256188;">
           <p >search results</p>
           <p style="color: red;"> {{ inviteMsg }} </p>
-          <table style="width: 100%;" >
-            <tr ng-repeat="user in users">
-              <td>{{ user.name}}</td>
-              <td><button style="text-align: right; background: #F6A623; color: #FFF" ng-click="sendInvite(user.email, user._id, $event);">Invite user</button></td>
-            </tr>
-          </table>
-          <p style="color: red;">{{ message }}</p>
+          <div style="height: 150px; overflow: scroll;">
+            <table style="width: 100%;" >
+              <tr ng-repeat="user in users">
+                <td>{{ user.name}}</td>
+                <td><button style="background: #FF8800; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 1.1rem; cursor:pointer" ng-click="sendInvite(user.email, user._id, $event);">Invite user</button></td>
+              </tr>
+            </table>
+            <p style="color: red;">{{ message }}</p>
+          </div>
+          
+         
         </div>
         <div class="modal-footer" style="background-color: #256188; color: #FFF; padding-top: 10px; padding-bottom: 10px">
-          <button style="background: #F6A623; color: #FFF" type="button" class="btn btn-sm" data-dismiss="modal">Cancel</button>
+          <button style="background: #FF8800; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 1.1rem; padding: .1rem 2rem; cursor:pointer" type="button" class="btn btn-sm" data-dismiss="modal">Cancel</button>
         </div>
       </div>
     </div>
