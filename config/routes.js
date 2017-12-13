@@ -11,8 +11,18 @@ module.exports = (app, passport, auth) => {
   app.get('/signout', users.signout);
   app.post('/api/auth/login', users.login);
 
+  app.post('/api/user/friend', users.addFriend);
+  app.get('/api/user/friend', users.getFirendsList);
+
   // Setup routes with api prefix
   app.post('/api/auth/signup', users.signupJwt);
+
+
+  // Notification routes
+  const notification = require('../app/controllers/notification');
+  app.post('/api/notification', notification.addNotification);
+  app.get('/api/notification', notification.loadNotification);
+  app.put('/api/notification/:id', notification.readNotification);
 
   //Setting up the users api
   app.post('/users', users.create);

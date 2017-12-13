@@ -300,3 +300,48 @@ exports.login = (req, res, next) => {
     });
   });
 };
+
+// Add Friends
+
+exports.addFriend = (req, res) => {
+  const { friendId, friendName } = req.body;
+  const friendData = { friendId, friendName };
+  const userId = req.body.userId; // change this....
+  User.findOneAndUpdate(
+    {
+      _id: userId
+    },
+    {
+      $push: { friends: friendData }
+    }
+  ).then(() => {
+    res.status(200).json({
+      message: 'Friend Added Succesfully'
+    });
+  })
+    .catch((error) => {
+      res.status(500).json({
+        error,
+        message: 'Internal Server Error'
+      });
+    });
+};
+
+exports.getFirendsList = (req, res) => {
+  const userId = req.decoded.user;
+
+  User.find({
+    _id: userId
+  }).then((user) => {
+    if (user) {
+      console.log(user);
+      return res.status(200).json(user[0].friends);
+    }
+  })
+    .catch((error) => {
+      res.status(500).json({
+        error,
+        message: 'Internal Server Error'
+      });
+    });
+};

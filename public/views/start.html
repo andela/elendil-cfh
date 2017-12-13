@@ -19,6 +19,7 @@
           </span>
           <span>
             <button
+              ng-hide="game.players[game.playerIndex].email === null"
               style="background: #FF9900; color: #FFF"
               ng-disabled="game.players.length >= 12" 
               class="btn btn-sm">
