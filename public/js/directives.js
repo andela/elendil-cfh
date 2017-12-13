@@ -101,4 +101,10 @@ angular.module('mean.directives', [])
       templateUrl: '/views/region.html',
       link: function (scope, elem, attr) { }
     };
+  }).directive('chat', function () {
+    return {
+      restrict: 'EA',
+      templateUrl: '/views/chat.html',
+      link: function (scope, elem, attr) { }
+    };
   });
