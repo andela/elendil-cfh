@@ -98,6 +98,7 @@ module.exports = (app, passport, auth) => {
   //Home route
   let index = require('../app/controllers/index');
   app.get('/play', index.play);
+  app.get('/tour', index.tour);
   app.get('/', index.render);
 
   // Log Game History
