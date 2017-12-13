@@ -64,7 +64,7 @@ angular.module('mean.system')
             $scope.error = 'Select a region first!';
           } else {
             $('#close').click();
-            $location.path('/app');
+            $window.location.path('/app');
           }
         };
 
@@ -73,7 +73,7 @@ angular.module('mean.system')
             $scope.error = 'Select a region first!';
           } else {
             $('#close').click();
-            $location.path('/app');
+            $window.location.href = '/play';
           }
         };
 
@@ -82,7 +82,7 @@ angular.module('mean.system')
             $scope.error = 'Select a region first!';
           } else {
             $('#close').click();
-            $location.path('/app');
+            $window.location.href = '/play?custom';
           }
         };
 

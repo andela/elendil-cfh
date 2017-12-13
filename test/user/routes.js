@@ -185,7 +185,48 @@ describe('/POST User Sign Up (with JWT) ', () => {
         });
     });
   });
-  after((done) => {
-    mongoose.connection.db.dropDatabase(done);
+
+  describe('GET/ Search Users', () => {
+    it('should return error if query is empty', (done) => {
+      chai.request(server)
+        .get('/api/search/users')
+        .set('Accept', 'application/json')
+        .end((err, res) => {
+          res.body.should.be.a('object');
+          res.should.have.status(400);
+          res.body.should.have.property('message').equal('Nothing to search');
+          done();
+        });
+    });
+
+    it('should return users found', (done) => {
+      chai.request(server)
+        .get('/api/search/users?q=larrystone@gmai.com')
+        .set('Accept', 'application/json')
+        .end((err, res) => {
+          res.body.should.be.a('object');
+          res.should.have.status(200);
+          done();
+        });
+    });
   });
+
+  describe('GET/ Send Invites to 11 other Users', () => {
+    it('should send invites to other 11 users', (done) => {
+      chai.request(server)
+        .set('Accept', 'application/json')
+        .post('api/users/invite', {
+          gameLink: 'http:www.game.ling.com',
+          emal: 'someemail@gmain.com'
+        })
+        .end((err, res) => {
+          res.should.have.status(200);
+          done();
+        });
+    });
+  });
+
+  // after((done) => {
+  //   mongoose.connection.db.dropDatabase(done);
+  // });
 });

@@ -21,6 +21,8 @@ var guestNames = [
   "Dingle Dangle"
 ];
 
+let newRegion = '';
+
 function Game(gameID, io) {
   this.io = io;
   this.gameID = gameID;
@@ -31,13 +33,14 @@ function Game(gameID, io) {
   this.winnerAutopicked = false;
   this.czar = -1; // Index in this.players
   this.playerMinLimit = 3;
-  this.playerMaxLimit = 6;
+  this.playerMaxLimit = 12;
   this.pointLimit = 5;
   this.state = "awaiting players";
   this.round = 0;
   this.questions = null;
   this.answers = null;
   this.curQuestion = null;
+  this.region = '';
   this.timeLimits = {
     stateChoosing: 21,
     stateJudging: 16,
@@ -161,6 +164,7 @@ Game.prototype.changeCzar = (self) => {
 
 Game.prototype.sendUpdate = function() {
   this.io.sockets.in(this.gameID).emit('gameUpdate', this.payload());
+  newRegion = this.region;
 };
 
 Game.prototype.stateChoosing = function(self) {
@@ -278,7 +282,7 @@ Game.prototype.stateDissolveGame = function() {
 };
 
 Game.prototype.getQuestions = function(cb) {
-  questions.allQuestionsForGame(function(data){
+  questions.allQuestionsForGame(newRegion, function(data){
     cb(null,data);
   });
 };
@@ -474,6 +478,11 @@ Game.prototype.startNextRound = (self) => {
   } else if (self.state === 'czar left game') {
     self.changeCzar(self);
   }
+};
+
+Game.prototype.setRegion = function (region) {
+  this.region = region;
+  return region;
 };
 
 module.exports = Game;

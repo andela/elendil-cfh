@@ -50,12 +50,13 @@ body {
 
 .header {
   background: url(../img/card.png);
-  height: 695px;
+  height: 755px;
   background-size: auto;
   padding: 1%;
   width: 100;
 
 }
+
 
 .header-text {
   text-align: center;
@@ -78,10 +79,16 @@ body {
 }
 
 .game-btn .btn {
-  width: 15%;
+  width: 20%;
   border-radius: 12px;
   margin-bottom: 2%;
   font-family: Herculanum;
+}
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc !important;
+  color: #666666;
 }
 
 .game-btn .btn-light {
@@ -117,7 +124,6 @@ body {
   text-align: center;
   padding-top: 15%;
   color: #256087;
-  text-transform: uppercase;
   background: #fff;
 }
 

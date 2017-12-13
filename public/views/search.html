@@ -1,61 +1,44 @@
 <div id="search" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content" style="max-width: 100%; margin-left: auto; margin-right: auto">
-      <div class="modal-header" style="background-color: #256188; color: #FFF">
-        <h4 class="modal-title">Card For Humanity</h4>
-      </div>
-
-      <div>
-          <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link" id="user-tab" data-toggle="tab" href="#user" role="tab" aria-controls="user" aria-selected="false">Friends</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" id="search-tab" data-toggle="tab" href="#search" role="tab" aria-controls="search" aria-selected="true">Search Users</a>
-          </li>
-          </ul>
-          <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade" id="user" role="tabpanel" aria-labelledby="user-tab">One-</div>
-        
-            <!-- Search user Tab starts -->
-            <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="search-tab">
-                <div class="modal-body" style="height: 200px">
-                    Search for users.
-                    <br/><br/>
-                    <div style="width: 80%; margin: 0 auto;">
-                      <form>
-                      <input type="text" ng-change="search()" ng-model="identifier" style="height: 30px;" placeholder="Enter Your Email or username">
-                      <button
-                      style="background: #FF9900; color: #FFF"
-                      ng-click="search()"
-                      class="btn btn-sm">
-                      Search
-                    </button>
-                    </form>
-                    </div>
-                    
-                  </div>
-                  <div ng-show="result" style="font-size: 14px; margin-top: 6px; color: #256188">
-                    <p >search results</p>
-                    <p style="color: red;"> {{ inviteMsg }} </p>
-                    <table style="width: 100%;" >
-                      <tr ng-repeat="user in users">
-                        <td>{{ user.name}}</td>
-                        <td><button style="text-align: right; background: #F6A623; color: #FFF" ng-click="sendInvite(user.email, user._id, $event);">Invite user</button></td>
-                      </tr>
-                    </table>
-                    <p style="color: red;">{{ message }}</p>
-                  </div>
-            </div>
-            <!-- Search User tab ends -->
-          </div>
+    <div class="modal-dialog">
+        <div class="modal-content" style="margin-left: auto; margin-right: auto; text-align:center">
+        <div class="modal-header" style="background-color: #256188; color: #FFF">
+          <h4 class="modal-title">Card For Humanity </h4>
         </div>
-
-      <div class="modal-footer" style="background-color: #256188; color: #FFF; padding-top: 10px; padding-bottom: 10px">
-        <button style="background: #F6A623; color: #FFF" ng-click="abandonGame()" type="button" class="btn btn-sm" data-dismiss="modal">Exit Game</button>
+        <div class="modal-body" style="height: 200px">
+         Search for users.
+          <br/><br/>
+          <div style="width: 80%; margin: 0 auto;">
+            <form>
+            <input type="text" ng-change="search()" ng-model="identifier" style="height: 30px;" placeholder="Enter Your Email or username">
+            <button
+            style="background: #FF8800; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 1.1rem; padding: .1rem 2rem; cursor:pointer"
+            style="background: #FF9900; color: #FFF"
+            ng-click="search()"
+            class="btn btn-sm">
+            Search
+          </button>
+          </form>
+          </div>
+          
+        </div>
+        <div ng-show="result" style="font-size: 14px; margin-top: 6px; color: #256188;">
+          <p >search results</p>
+          <p style="color: red;"> {{ inviteMsg }} </p>
+          <div style="height: 150px; overflow: scroll;">
+            <table style="width: 100%;" >
+              <tr ng-repeat="user in users">
+                <td>{{ user.name}}</td>
+                <td><button style="background: #FF8800; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 1.1rem; cursor:pointer" ng-click="sendInvite(user.email, user._id, $event);">Invite user</button></td>
+              </tr>
+            </table>
+            <p style="color: red;">{{ message }}</p>
+          </div>
+          
+         
+        </div>
+        <div class="modal-footer" style="background-color: #256188; color: #FFF; padding-top: 10px; padding-bottom: 10px">
+          <button style="background: #FF8800; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 1.1rem; padding: .1rem 2rem; cursor:pointer" type="button" class="btn btn-sm" data-dismiss="modal">Cancel</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
-<button data-toggle="modal" data-target="#search">Invite Player</button>
