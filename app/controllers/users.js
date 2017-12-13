@@ -109,7 +109,7 @@ exports.signupJwt = (req, res) => {
         }
         if (!existingUser) {
           const user = new User(req.body);
-          user.avatar = avatars[user.avatar];
+          user.avatar = avatars[+req.body.avatar];
           user.save((error, newUser) => {
             if (error) {
               return res.status(400).json({

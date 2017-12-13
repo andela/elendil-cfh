@@ -27,7 +27,7 @@
        <br>
   
       <div class="panel panel-default signup-panel" > 
-          <div class="dashboardHeader">
+          <div class="dashboardheader">
             <span>Dashboard</span>
           </div>
           <div ng-show="noDonations">
@@ -39,6 +39,7 @@
         <thead>
           <tr>
             <th class="text-center">#</th>
+            <th class="text-center">Avatar</th>
             <th class="text-center">User</th>
             <th class="text-center">Donations</th>
           </tr>
@@ -46,8 +47,9 @@
         <tbody>
           <tr ng-repeat="information in donationData">
               <td>{{ $index+1 }}</td>
-              <td>{{information.name}}</td>
-              <td>{{information.donations}}</td>
+              <td><img src="{{ information.avatar }}" /></td>
+              <td>{{ information.name }}</td>
+              <td>{{ information.donations }}</td>
           </tr>
         </tbody>
        </table>
