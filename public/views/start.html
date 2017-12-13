@@ -20,6 +20,8 @@
           </span>
           <span>
             <button
+              ng-hide="game.players[game.playerIndex].email === null"
+              ng-click="invitePlayers()"
               style="background: #FF8800; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 1.1rem; padding: .1rem 2rem; cursor:pointer"
               ng-disabled="game.players.length >= 12" 
               class="btn btn-sm">
@@ -59,4 +61,5 @@
       </div>
     </div>
   </div>
+  <search></search>
 </div>
