@@ -24,9 +24,11 @@ angular.module('mean.system')
 
     $scope.chats = $firebaseArray(ref);
 
+
     if (firstTime) {
       ref.remove();
     }
+
 
     const emoji = $('#messageInput').emojioneArea({
       hidePickerOnBlur: true,
@@ -62,7 +64,6 @@ angular.module('mean.system')
         };
         $scope.chats.$add($scope.newMessage);
         emoji.data('emojioneArea').setText('');
-        $scope.messageInput = '';
         scrollMessages();
       }
     };
