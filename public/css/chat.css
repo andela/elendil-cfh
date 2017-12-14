@@ -5,9 +5,6 @@
   overflow: scroll;
 }
 
-#messageInput {
-  background: whitesmoke;
-}
 
 .chat_header {
   background-color: #256188; 
@@ -23,8 +20,9 @@
 }
 
 .chat_message {
+  margin: 5px 0px;
   width: 280px;
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.356);
 }
 
 .chat_icon {

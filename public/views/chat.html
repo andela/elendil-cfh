@@ -13,7 +13,7 @@
           <div>
             <div style="display: flex; flex-wrap:wrap;">
               <div>
-                <strong ng-bind="chat.author" style="font-style: italic;"></strong>
+                <strong ng-bind="chat.author" style="font-style: italic; font-size:13px;"></strong>
               </div>&nbsp;&nbsp;&nbsp;&nbsp;
               <div style="font-size:10px; margin-left:auto;" ng-bind="showTime(chat.time)"></div>
             </div>
@@ -22,7 +22,7 @@
         </div>
       </div>
       <form class="chat_compose" ng-submit="addChat()">
-        <input ng-model="messageInput" id="messageInput" type="text" name="message" placeholder="Enter a message" />
+        <input id="messageInput" type="text" name="message" placeholder="Enter a message" />
         <input type="submit" style="background: #FF8800; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 1.1rem; margin-left:2px; cursor:pointer" value="send">
       </form>
     </div>

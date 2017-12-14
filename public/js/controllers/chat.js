@@ -23,9 +23,19 @@ angular.module('mean.system')
     const firstTime = true;
 
     $scope.chats = $firebaseArray(ref);
+
+
     if (firstTime) {
       ref.remove();
     }
+
+
+    const emoji = $('#messageInput').emojioneArea({
+      hidePickerOnBlur: true,
+      recentEmojis: true,
+      pickerPosition: 'top',
+      emojiPlaceholder: ':smile_cat:',
+    });
 
     $scope.chats.$watch(function (e) {
       if (!$scope.isChatOpen) {
@@ -43,6 +53,7 @@ angular.module('mean.system')
     });
 
     $scope.addChat = function () {
+      $scope.messageInput = (emoji.data('emojioneArea').getText());
       if ($scope.messageInput) {
         $scope.isChatOpen = true;
         $scope.newMessage = {
@@ -52,7 +63,7 @@ angular.module('mean.system')
           time: new Date().toISOString(),
         };
         $scope.chats.$add($scope.newMessage);
-        $scope.messageInput = '';
+        emoji.data('emojioneArea').setText('');
         scrollMessages();
       }
     };

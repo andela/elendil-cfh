@@ -14,9 +14,9 @@ angular.module('mean.system')
         $scope.signup = () => {
           if (
             $scope.name &&
-      $scope.name.length > 0 &&
-      $scope.email &&
-      $scope.password
+        $scope.name.length > 0 &&
+        $scope.email &&
+        $scope.password
           ) {
             const newUser = {
               name: $scope.name,
@@ -37,7 +37,7 @@ angular.module('mean.system')
         $scope.login = () => {
           if (
             $scope.email &&
-      $scope.password
+        $scope.password
           ) {
             const user = {
               email: $scope.email,
