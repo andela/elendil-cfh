@@ -1,119 +1,75 @@
 <div page="signup" ng-controller="IndexController">
-  <div class="main row">
-    <div class="col-6 cover">
-      <img src="../img/hoyleback.jpg" alt="side auth card image" width="350px">
-    </div>
-    <div class="col-6 auth">
-      <div class="text-center">
-        <h3 class="dark-grey-text">
-          <strong>Sign up</strong>
-        </h3>
-        <p>Have an account?
-          <strong><a href="/signin">Sign In</a></strong>
-        </p>
-      </div>
-      <span class="sign-error alert alert-danger alert alert-danger" ng-show="showError() === 'existingUser'">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <p class="text-red">A user already exists with that email</p>
-      </span>
-      <span class="sign-error alert alert-danger alert alert-danger" ng-show="showError() === 'invalid'">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <p class="text-red">Invalid credentials</p>
-      </span>
-      <span class="sign-error alert alert-danger alert alert-danger" ng-show="showError() === 'undefined'">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <p class="text-red">A user already exists with that email</p>
-      </span>
-      <form class="form-field" ng-submit="signup()">
-        <div class="input-control">
-          <label for="fullname" id="label">Fullname</label>
-          <input ng-model="name" type="text"id="name" name="name" placeholder="fullname" id="fullname" required>
+  <div>
+    <div>
+      <div class="sign-head">
+        <div class="form-head">
+          <h4 class="form-center head-text">Sign up</h4>
         </div>
-        <div class="input-control">
-          <label for="email" id="label">Email</label>
-          <input ng-model="email" type="email" id="email" type="email" name="email" placeholder="email" id="email" required>
+        <div>
+          <div class="top">
+            <div class="text-center">
+              <p>Have an account?
+                <strong><a href="#!/signin">Sign In</a></strong>
+              </p>
+            </div>
+            <div class="sign-error alert alert-danger" ng-show="showError() === 'undefined'">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              <span class="text-red">A user already exists with that email</span>
+            </div>
+            <span class="sign-error alert alert-danger" ng-show="showError() === 'invalid'">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              <p class="text-red">Invalid credentials</p>
+            </span>
+            <span class="sign-error alert alert-danger" ng-show="showError() === 'existingUser'">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              <p class="text-red">A user already exists with that email</p>
+            </span>
+            <form class="form-field mr-auto" ng-submit="signup()" method="post">
+              <div class="control-group">
+                <div class="input-control">
+                  <label for="fullname" id="label">Full Name</label>
+                  <input ng-model="name" type="text" placeholder="Full Name" id="fullname" required>
+                </div>
+              </div>
+              <div class="control-group">
+                <div class="input-control">
+                  <label for="email" id="label">Email</label>
+                  <input ng-model="email" type="email" placeholder="john@doe.com" id="email" required>
+                </div>
+              </div>
+              <div class="input-control">
+                <div class="control-group">
+                  <label for="password" id="label">Password</label>
+                  <input ng-model="password" type="password" placeholder="password" id="password" required>
+                </div>
+              </div>
+              <div id="contain-avatars">
+                <h6>Choose an Avatar</h6>
+                <ul ng-controller="IndexController" class="avatar-list">
+                  <li ng-repeat="avatar in avatars" class="avatars ng-scope">
+                      <input name="avatar" type='radio' value="{{$index}}">
+                        <img ng-src="{{avatar}}">
+                      </input>
+                  </li>
+                </ul>
+              </div>
+                <button class="btn btn-md btn-sign" type="submit">Sign up</button>
+            </form>
+            <div>
+              
+              <h5 class="text-mv"> OR </h5>
+              <br>
+              <div class="social-signup">
+                <span class="signin-heading">Sign up with</span>
+                <a href="/auth/google"><img class="social-icons" src="../img/icon/google.png" alt="Google"></a>
+                <a href="/auth/facebook"><img class="social-icons" src="../img/icon/facebook.png" alt="Facebook"></a>
+                <a href="/auth/twitter"><img class="social-icons" src="../img/icon/twitter.png" alt="Twitter"></a>
+                <a href="/auth/github"><img class="social-icons" src="../img/icon/github.png" alt="Github"></a>
+  
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="input-control">
-          <label for="password" id="label">Password</label>
-          <input ng-model="password" type="password" type="password" name="password" placeholder="password" id="password" required>
-        </div>
-        <h6 class="avatar">Choose an avatar</h6>
-        <ul class="avatar-list">
-          <div class="d-flex flex-row">
-            <li class="avatars p-1">
-              <input ng-model="avatar" name="avatar" type="radio" value="0">
-              <img src="../img/chosen/E01.png">
-            </li>
-            <li class="avatars p-1">
-              <input ng-model="avatar" name="avatar" type="radio" value="1">
-              <img src="../img/chosen/F01.png">
-            </li>
-            <li class="avatars p-1">
-              <input ng-model="avatar" name="avatar" type="radio" value="2">
-              <img src="../img/chosen/FA04.png">
-            </li>
-          </div>
-          <div class="d-flex flex-row">
-            <li class="avatars p-1">
-              <input ng-model="avatar" name="avatar" type="radio" value="3">
-              <img src="../img/chosen/FB03.png">
-            </li>
-            <li class="avatars p-1">
-              <input ng-model="avatar" name="avatar" type="radio" value="4">
-              <img src="../img/chosen/FC01.png">
-            </li>
-            <li class="avatars p-1">
-              <input ng-model="avatar" name="avatar" type="radio" value="5">
-              <img src="../img/chosen/FD01.png">
-            </li>
-          </div>
-          <div class="d-flex flex-row">
-            <li class="avatars p-1">
-              <input ng-model="avatar" name="avatar" type="radio" value="6">
-              <img src="../img/chosen/FE01.png">
-  
-            </li>
-            <li class="avatars p-1">
-              <input ng-model="avatar" name="avatar" type="radio" value="7">
-              <img src="../img/chosen/FH03.png">
-  
-            </li>
-  
-            <li class="avatars p-1">
-              <input ng-model="avatar" name="avatar" type="radio" value="8">
-              <img src="../img/chosen/FI02.png">
-            </li>
-          </div>
-          <div class="d-flex flex-row">
-            <li class="avatars p-1">
-              <input ng-model="avatar" name="avatar" type="radio" value="9">
-              <img src="../img/chosen/H01.png">
-  
-            </li>
-            <li class="avatars p-1">
-              <input ng-model="avatar" name="avatar" type="radio" value="10">
-              <img src="../img/chosen/J01.png">
-            </li>
-            <li class="avatars p-1">
-              <input ng-model="avatar" name="avatar" type="radio" value="11">
-              <img src="../img/chosen/M05.png">
-            </li>
-          </div>
-        </ul>
-        <button type="submit" class="btn btn-default btn-block custom-button" type="submit">Sign Up</button>
-      </form>
-    </div>
-    <div class="col-12 back-home">
-      <div class="social-signup text-center">
-        <p class="signin-heading"> Or Signup With 
-          <a href="/auth/google"><img class="social-icons" src="../img/icon/google.png" alt="Google"></a>
-          <a href="/auth/facebook"><img class="social-icons" src="../img/icon/facebook.png" alt="Facebook"></a>
-          <a href="/auth/twitter"><img class="social-icons" src="../img/icon/twitter.png" alt="Twitter"></a>
-      </p>
-      </div>
-      <div class="text-center">
-        <a href="/" title="BackHome" class="text-home">Back Home</a>
       </div>
     </div>
   </div>
-</div>
