@@ -37,6 +37,7 @@ module.exports = (app, passport, auth) => {
 
   // Donation Routes
   app.post('/donations', users.addDonation);
+  app.get('/api/donations', users.getDonations);
 
   app.post('/users/session', passport.authenticate('local', {
     failureRedirect: '/signin',
@@ -112,11 +113,14 @@ module.exports = (app, passport, auth) => {
   // Home route
   const index = require('../app/controllers/index');
   app.get('/play', index.play);
+  app.get('/tour', index.tour);
   app.get('/', index.render);
 
   // Log Game History
   const logGame = require('../app/controllers/gamelog');
   app.post('/api/games/:gameID/start');
-
   app.param('gameID', logGame.saveGameLog);
+
+  app.get('/api/leaderboard', logGame.getLeaderBoard);
+  app.get('/api/games/history', logGame.gameHistory);
 };

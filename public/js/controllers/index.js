@@ -14,14 +14,15 @@ angular.module('mean.system')
         $scope.signup = () => {
           if (
             $scope.name &&
-          $scope.name.length > 0 &&
-          $scope.email &&
-          $scope.password
+        $scope.name.length > 0 &&
+        $scope.email &&
+        $scope.password
           ) {
             const newUser = {
               name: $scope.name,
               password: $scope.password,
-              email: $scope.email
+              email: $scope.email,
+              avatar: $scope.avatar
             };
             $http.post('/api/auth/signup', newUser)
               .then((response) => {
@@ -36,7 +37,7 @@ angular.module('mean.system')
         $scope.login = () => {
           if (
             $scope.email &&
-          $scope.password
+        $scope.password
           ) {
             const user = {
               email: $scope.email,
@@ -92,6 +93,10 @@ angular.module('mean.system')
             return $location.search().error;
           }
           return false;
+        };
+
+        $scope.goHome = () => {
+          $window.location.href = '/';
         };
 
         $scope.avatars = [];

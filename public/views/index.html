@@ -42,6 +42,7 @@
             <a style="background: #FF8800; color: #FFF; border-radius: 12px;font-family: cursive; font-size: 1.1rem; padding: .1rem 2rem" ng-show="showOptions" class="nav-item nav-link active " href="#!/signup">Sign up</a>
             <a style="background: #FF8800; color: #FFF; border-radius: 12px;font-family: cursive; font-size: 1.1rem; padding: .1rem 2rem" ng-show="showOptions" class="nav-item nav-link active" href="#!/signin">Sign in</a>
 
+            <a ng-hide="showOptions" class="nav-item nav-link" style="font-family: cursive;" href="#!/dashboard">Dashboard</a>
             <a ng-hide="showOptions" class="nav-item nav-link active" ng-click="signOut()" href="/">Sign Out</a>
                
           </div>
@@ -93,7 +94,7 @@
   <div class="header" id="home">
     <div class="header-text">
       <h2>Cards For Humanity</h2>
-      <p>A game for Horrible <br> People Desperately trying to do good </p>
+      <p>A game for horrible <br> people desperately trying to do good </p>
     </div>
     <div class="game-btn" ng-show="showOptions" id="how-to-play">
         <a href="/tour"><button type="button" class="btn btn-warning">Take a Tour</button></a>
@@ -118,7 +119,7 @@
   <!-- header End -->
 
   <div class="what-is-cfh" ng-controller="IndexController">
-    <h3>What is Cards for Humanity?</h3>
+    <h3>What is cards for humanity?</h3>
     <p>
       Cards for Humanity is a fast-paced online version of the card game <br>
       Cards for Humanity that gives you the opputunity to donate to children in need<br>
@@ -140,7 +141,7 @@
         your account and place a crown on you avatar's head ( to remind other players how much better you are than them ).<br>
         All donations go to the Make-A-Wish-Foundation and benefit children in need
       </p>
-      <button type="button" style="color: #fff;" class="btn btn-warning">DONATE NOW</button>
+      <button type="button" style="color: #fff;" class="btn btn-warning"><a href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity?widget=true&redirect_to=http%3A%2F%2Fcfh.io%2F%23!%2F&stylesheet=&amounts=" style="    color: #fff">DONATE NOW</a></button>
     </div> <!-- charity ends here -->
   
     <div class="team" id="about">
