@@ -1,7 +1,7 @@
 /* jshint esversion: 6 */
 
 const jwt = require('jsonwebtoken');
-
+const { jwtSecret } = require('./env/all');
 /**
  * Class Definition for the Authentication Object using Jason Web Token
  *
@@ -19,7 +19,7 @@ exports.jwt = {
   verify(token) {
     let user = {};
     if (token) {
-      const secret = process.env.jwtSecret || '!^sl1@#=5';
+      const secret = jwtSecret || '!^sl1@#=5';
       jwt.verify(token, secret, (err, decoded) => {
         if (err) {
           user = { id: null };
@@ -42,7 +42,7 @@ exports.jwt = {
    * @memberof Auth
    */
   sign(user) {
-    this.secret = process.env.jwtSecret || '!^sl1@#=5';
+    this.secret = jwtSecret || '!^sl1@#=5';
     return jwt.sign(user, this.secret);
   }
 };

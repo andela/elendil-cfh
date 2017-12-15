@@ -7,8 +7,8 @@
           </div>
           <div class="modal-body" style="height: 200px; overflow: scroll;">
             <table class="table table-striped">
-              <tr ng-repeat="notice in notifications">
-                <td>{{notice.message}}</td>
+              <tr ng-repeat="notice in notifications" class="notification" >
+                <td ng-click="readNotifications()">{{notice.message}}</td>
                 <td><a target="_blank" href="{{notice.link}}"><button>join</button></a></td>
               </tr>
             </table>

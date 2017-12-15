@@ -14,18 +14,19 @@
         </li> 
       
     </ul>
-    <div class="tab-content" id="myTabContent">
+    <div class="tab-content" id="myTabContent" style="min-height:  200px;">
       <!-- Frinds tab -->
       <div class="tab-pane fade" id="friends" role="tabpanel" aria-labelledby="friends-tab" style="font-size: 0.8rem;">
         <br>
         <p>Friends</p>
         <div>
-          <div ng-hide="friendsList" style="height: 200px;"></div>
+          <div ng-hide="friendsList" style="min-height: 120px;"> You have no friends yet</div>
           <table class="table table-striped">
+            {{friendId}}
             <tr ng-repeat="friend in friendsList">
               <td>{{friend.friendName}}</td>
-              <td style="width: 100px;"><button style="background: #FF8800; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 0.7rem; cursor:pointer" ng-click="sendNotification(friend.friendId);">Invite</button></td>
-              <td style="width: 100px;"><button style="background: #256188; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 0.7rem; cursor:pointer" ng-click="sendInvite(user.email, user._id);">Remove</button></td> 
+              <td style="width: 100px;"><button ng-disabled="inviteList.includes(friend.friendId)" style="background: #FF8800; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 0.7rem; cursor:pointer" ng-click="sendNotification(friend.friendId, friend.friendEmail);">Invite</button></td>
+              <td style="width: 100px;"><button style="background: #256188; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 0.7rem; cursor:pointer" ng-click="removeFriend(friend.friendId);">Remove</button></td> 
             </tr>
             
           </table>
@@ -59,7 +60,7 @@
                     
                     <tr ng-repeat="user in users">
                       <td>{{ user.name}}</td>
-                      <td style="width: 100px;"><button ng-disabled="friendsId.includes(user._id)" style="background: #FF8800; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 0.7rem; cursor:pointer" ng-click="addFriend(user.name, user._id);">Add Friend</button></td>
+                      <td style="width: 100px;"><button ng-disabled="friendsId.includes(user._id)" style="background: #FF8800; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 0.7rem; cursor:pointer" ng-click="addFriend(user.name, user._id, user.email);">Add Friend</button></td>
                       <td style="width: 100px;"><button ng-disabled="invited.includes(user._id)" style="background: #256188; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 0.7rem; cursor:pointer" ng-click="sendInvite(user.email, user._id);">Invite user</button></td>
                     </tr>
                   </table>

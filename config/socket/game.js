@@ -90,7 +90,6 @@ Game.prototype.payload = function() {
 };
 
 Game.prototype.broadcastNotification = function(userId) {
-  console.log('fron sockets', userId)
   this.io.sockets.emit('notificationReceived', userId);
 }
 
@@ -187,12 +186,6 @@ Game.prototype.stateChoosing = function(self) {
   }
   self.round++;
   self.dealAnswers();
-  // Rotate card czar
-  if (self.czar >= self.players.length - 1) {
-    self.czar = 0;
-  } else {
-    self.czar++;
-  }
   self.sendUpdate();
 
   self.choosingTimeout = setTimeout(function() {
