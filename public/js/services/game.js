@@ -68,6 +68,7 @@ angular.module('mean.system')
     game.playerMaxLimit = data.playerMaxLimit;
     game.pointLimit = data.pointLimit;
     game.timeLimits = data.timeLimits;
+    game.region = data.region
   });
 
   socket.on('gameUpdate', function(data) {
@@ -200,7 +201,8 @@ angular.module('mean.system')
     createPrivate = createPrivate || false;
     const token = localStorage.getItem('token');
     var userID = !!window.user ? user._id : 'unauthenticated';
-    socket.emit(mode,{userID: userID, room: room, createPrivate: createPrivate, token});
+    var region = localStorage.getItem('region');
+    socket.emit(mode,{userID: userID,region: region, room: room, createPrivate: createPrivate, token});
   };
 
   game.startGame = function() {

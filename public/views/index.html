@@ -66,15 +66,15 @@
                   <label for="region"></label>
                   <select ng-model="region" class="one-whole" name="region" id="region">
                     <option value="">Choose a region</option>
-                    <option value="africa">Africa</option>
-                    <option value="others">Worldwide</option>
+                    <option value="Africa">Africa</option>
+                    <option value="Global">Worldwide</option>
                   </select>
                 </div>
                 <span ng-show="showOptions">
                   <button class="btn btn-default home-button custom-button text-white" ng-click="playWithStrangers()">PLAY GAME</button>
                 </span>
                 <span ng-hide="showOptions">
-                  <button class="btn btn-default home-button custom-button text-white" ng-click="playWithStrangers()">PLAY WITH STRANGERS</button>
+                  <button class="btn btn-default home-button custom-button text-white" ng-click="playWithStrangers()">PLAY GAME</button>
                   <button type="submit" class="btn btn-default home-button custom-button text-white" ng-click="playWithFriends()">PLAY WITH FRIENDS</button>
                 </span>
                 <button id="close" class="btn btn-default home-button custom-button text-white" data-dismiss="modal">CANCEL</button>
@@ -90,19 +90,19 @@
       </div>
   
   <!-- Header Start -->
-  <div class="header" id="home">
+  <div ng-controller="IndexController" class="header" id="home">
     <div class="header-text">
       <h2>Cards For Humanity</h2>
       <p>A game for Horrible <br> People Desperately trying to do good </p>
     </div>
     <div class="game-btn" ng-show="showOptions" id="how-to-play">
         <a href="/tour"><button type="button" class="btn btn-warning">Take a Tour</button></a>
-        <button type="button" class="btn btn-light" data-toggle="modal" data-target="#regionModal">Play as Guest</button>
+        <a href="/play" ng-click="playAsGuest()"><button type="button" class="btn btn-light">Play as Guest</button></a>
     </div>
 
     <div class="game-btn" ng-hide="showOptions">
-        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#regionModal">Play Game with Strangers</button>
-        <button type="button" class="btn btn-light" data-toggle="modal" data-target="#regionModal">Play Game with Friends</button>
+        <a href="/play" ng-click="playWithStrangers()"><button type="button" class="btn btn-warning" style="background: #fff; color:#FF8800">Play With Strangers</button></a>
+        <a href="/play?custom" ng-click="playWithFriends()"><button type="button" class="btn btn-warning">Play With Friends</button></a>
     </div>
 
     <div class="how-to-slider">
