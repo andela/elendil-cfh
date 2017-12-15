@@ -226,7 +226,7 @@ describe('/POST User Sign Up (with JWT) ', () => {
     });
   });
 
-  // after((done) => {
-  //   mongoose.connection.db.dropDatabase(done);
-  // });
+  after((done) => {
+    mongoose.connection.db.dropDatabase(done);
+  });
 });

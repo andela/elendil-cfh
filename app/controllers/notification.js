@@ -4,16 +4,15 @@ const Notification = mongoose.model('Notification');
 
 
 exports.addNotification = (req, res) => {
-  const { myFriends, link } = req.body;
-  const list = myFriends.map(id => ({
-    to: id,
+  const { friendId, link } = req.body;
+
+  Notification.create({
+    to: friendId,
     from: req.decoded.name,
     message: `${req.decoded.name} has invited you to a game`,
     link,
     read: 0
-  }));
-
-  Notification.create(list)
+  })
     .then(() => {
       res.status(200).send({
         message: 'Notification has been sent'
@@ -27,7 +26,7 @@ exports.addNotification = (req, res) => {
 };
 
 exports.loadNotification = (req, res) => {
-  const userId = 1;
+  const userId = req.decoded.id;
 
   Notification.find({
     to: userId,

@@ -1,20 +1,25 @@
 /* jshint esversion: 6 */
 
-let async = require('async');
+const async = require('async');
 
 module.exports = (app, passport, auth) => {
   // User Routes
-  let users = require('../app/controllers/users');
+  const users = require('../app/controllers/users');
+  const checkToken = require('./middlewares/auth');
+
   app.get('/signin', users.signin);
   app.get('/signup', users.signup);
   app.get('/chooseavatars', users.checkAvatar);
   app.get('/signout', users.signout);
   app.post('/api/auth/login', users.login);
+
+  // search and invite users
   app.get('/api/search/users', users.searchUsers);
   app.post('/api/users/invite', users.sendInvites);
 
-  app.post('/api/user/friend', users.addFriend);
-  app.get('/api/user/friend', users.getFirendsList);
+  // Add friends
+  app.put('/api/user/friends', checkToken.validateToken, users.addFriend);
+  app.get('/api/user/friends', checkToken.validateToken, users.getFirendsList);
 
   // Setup routes with api prefix
   app.post('/api/auth/signup', users.signupJwt);
@@ -22,11 +27,11 @@ module.exports = (app, passport, auth) => {
 
   // Notification routes
   const notification = require('../app/controllers/notification');
-  app.post('/api/notification', notification.addNotification);
-  app.get('/api/notification', notification.loadNotification);
-  app.put('/api/notification/:id', notification.readNotification);
+  app.post('/api/notifications', checkToken.validateToken, notification.addNotification);
+  app.get('/api/notifications', checkToken.validateToken, notification.loadNotification);
+  app.put('/api/notification/:id', checkToken.validateToken, notification.readNotification);
 
-  //Setting up the users api
+  // Setting up the users api
   app.post('/users', users.create);
   app.post('/users/avatars', users.avatars);
 
@@ -86,31 +91,31 @@ module.exports = (app, passport, auth) => {
   app.param('userId', users.user);
 
   // Answer Routes
-  let answers = require('../app/controllers/answers');
+  const answers = require('../app/controllers/answers');
   app.get('/answers', answers.all);
   app.get('/answers/:answerId', answers.show);
-  
+
   // Finish with setting up the answerId param
   app.param('answerId', answers.answer);
 
   // Question Routes
-  let questions = require('../app/controllers/questions');
+  const questions = require('../app/controllers/questions');
   app.get('/questions', questions.all);
   app.get('/questions/:questionId', questions.show);
   // Finish with setting up the questionId param
   app.param('questionId', questions.question);
 
   // Avatar Routes
-  let avatars = require('../app/controllers/avatars');
+  const avatars = require('../app/controllers/avatars');
   app.get('/avatars', avatars.allJSON);
 
-  //Home route
-  let index = require('../app/controllers/index');
+  // Home route
+  const index = require('../app/controllers/index');
   app.get('/play', index.play);
   app.get('/', index.render);
 
   // Log Game History
-  let logGame = require('../app/controllers/gamelog');
+  const logGame = require('../app/controllers/gamelog');
   app.post('/api/games/:gameID/start');
 
   app.param('gameID', logGame.saveGameLog);
