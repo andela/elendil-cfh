@@ -74,6 +74,9 @@ body {
   padding-bottom: 4%;
 }
 
+.header-text p {
+  font-size: 3rem;
+}
 .game-btn {
   text-align: center;
 }
@@ -95,7 +98,9 @@ button[disabled]{
   color: rgb(255, 153, 0);
 }
 
-
+.notification {
+  color: orange;
+}
 .game-btn .btn-warning {
   color: #fff;
   background-color: #FF8800;
@@ -321,7 +326,7 @@ labelled {
 
 @media(min-width: 320px) and (max-width: 950px) {
   .header {
-    padding-top: 20%;
+    padding-top: 20% 2% 2% 2%;
     height: 100%;
   }
 
@@ -330,14 +335,16 @@ labelled {
   }
 
   .header-text h2 {
-    font-size: 200%;
+    padding-top: 15%;
+    font-size: 2.5rem;
   }
 
   .header-text p {
-    font-size: 150%;
+    font-size: 2rem;
   }
   .game-btn {
     width: 100%;
+    padding: 2%;
   }
   .game-btn .btn {
     width: 100%;
