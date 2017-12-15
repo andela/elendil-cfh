@@ -64,8 +64,7 @@ angular.module('mean.system')
           if ($scope.region === undefined || $scope.region === '') {
             $scope.error = 'Select a region first!';
           } else {
-            $('#close').click();
-            $window.location.path('/app');
+            $window.location.href = '/app';
           }
         };
 
@@ -73,7 +72,6 @@ angular.module('mean.system')
           if ($scope.region === undefined || $scope.region === '') {
             $scope.error = 'Select a region first!';
           } else {
-            $('#close').click();
             $window.location.href = '/play';
           }
         };
@@ -82,7 +80,6 @@ angular.module('mean.system')
           if ($scope.region === undefined || $scope.region === '') {
             $scope.error = 'Select a region first!';
           } else {
-            $('#close').click();
             $window.location.href = '/play?custom';
           }
         };

@@ -5,11 +5,11 @@
         <div class="modal-header" style="background-color: #256188; color: #FFF; border-top-right-radius: unset; border-top-left-radius: unset">
           <h4 class="modal-title" style="margin-right:auto; margin-left:auto; margin-top: .5rem; line-height: 1">Cards For Humanity</h4>
         </div>
-        <div class="modal-body" style="height: 200px">
+        <div class="modal-body" style="max-height: 250px">
           <span >
             <button
               ng-animate="{enter: 'animated fadeInLeft'}"
-              style="background: #FF8800; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 1.1rem; padding: .1rem 2rem; cursor:pointer"
+              style="background: #FF8800; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 1.1rem; padding: .1rem 2rem; cursor:pointer; margin-top: 0"
               ng-show="game.playerIndex === 0 || (game.joinOverride && game.players.length >= game.playerMinLimit)"
               ng-click="startGame()"
               class="btn btn-sm"
@@ -22,18 +22,22 @@
             <button
               ng-hide="game.players[game.playerIndex].email === null"
               ng-click="invitePlayers()"
-              style="background: #FF8800; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 1.1rem; padding: .1rem 2rem; cursor:pointer"
+              style="background: #FF8800; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 1.1rem; padding: .1rem 2rem; cursor:pointer; margin-top: 0"
               ng-disabled="game.players.length >= 12" 
               class="btn btn-sm">
               Invite Players
             </button>
           </span>
-          <br/><br/>
-          <img src="../img/loader_3.gif" style="height:80px" alt="">
-          <figcaption style="font-size: 14px; margin-top: 6px; color: #256188">Finding Players <br></figcaption>
-          <span style="font-size: 13px; font-weight: lighter; color: #256188"><p>{{game.players.length}} / {{game.playerMaxLimit}} player(s) found</p></span>
+          <div class="form-group" style="margin-bottom: .5rem">
+            <label for="region"></label>
+            <input ng-model="region" type="radio" value="Africa" style="position: absolute; top: 21.5%; left: 35%"></input><span style="font-size:1rem; color:#256188; position: absolute; top: 26%; left: 39%">Africa</span>
+            <input ng-model="region" type="radio" value="Global" style="position: absolute; top: 21.5%; left: 53%"></input><span style="font-size:1rem; color:#256188; position: absolute; top: 26%; left: 57%">Global</span>
+          </div>
+          <img src="../img/loader_3.gif" style="height:80px; margin-top: -2px; margin-bottom: 2px" alt="">
+          <div style="font-size: 14px; margin-top: 6px; color: #256188">Finding Players</div>
+          <span style="font-size: 13px; font-weight: lighter; color: #256188;"><p style="margin-top: 0; margin-bottom: 0">{{game.players.length}} / {{game.playerMaxLimit}} player(s) found</p></span>
         </div>
-        <div ng-show="link.slice(-3) !== 'app'" style="font-size: 13px; font-weight: lighter; margin-top: 6px; color: #256188">
+        <div ng-show="link.slice(-3) !== 'app'" style="font-size: 13px; font-weight: lighter; margin-top: 0; color: #256188">
           Give the following link to your friends so they can join your game:
           <br>
           {{link}}
@@ -42,7 +46,7 @@
           {{game.notification}}
         </div>
         <div class="modal-footer" style="background-color: #256188; color: #FFF; padding-top: 10px; padding-bottom: 10px">
-          <button style="background: #FF8800; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 1.1rem; padding: .1rem 2rem; cursor: pointer" ng-click="abandonGame()" type="button" class="btn btn-sm" data-dismiss="modal">Exit Game</button>
+          <button style="background: #FF8800; margin-top: auto; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 1.1rem; padding: .1rem 2rem; cursor: pointer" ng-click="abandonGame()" type="button" class="btn btn-sm" data-dismiss="modal">Exit Game</button>
         </div>
       </div>
     </div>

@@ -14,6 +14,7 @@ module.exports.saveGameLog = function (req, res) {
   gamelog.gameId = req.body.gameID;
   gamelog.players = req.body.players;
   gamelog.winner = req.body.winner;
+  gamelog.rounds = req.body.rounds;
   gamelog.save((err) => {
     if (err) {
       return res.json({ message: 'An error occured' });

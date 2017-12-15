@@ -1,4 +1,5 @@
 /* jshint esversion: 6 */
+/* eslint-disable */
 const jwt = require('../../config/jwt');
 const nodemailer = require('nodemailer');
 
@@ -397,4 +398,9 @@ exports.sendInvites = (req, res) => {
       message: 'Message sent Successfully'
     });
   });
+};
+
+exports.setRegion = function(req, res) {
+  localStorage.setItem('region', req.body.region);
+  return res.send({ message: 'Region set' });
 };
