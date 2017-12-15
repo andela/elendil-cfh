@@ -47,7 +47,18 @@ angular.module('mean.system')
          .text('Oops! Can\'t start game now, you need a minimum of (3) players to get started');
         infoModal.modal('show');
       } else {
-        game.startGame();
+        if ($scope.region === undefined || $scope.region === '') {
+        const infoModal = $('#infoModal');
+          infoModal.find('.modal-title')
+          .text('Select region');
+        infoModal.find('.modal-body')
+         .text('Oops! Can\'t start game, you probably forgot to select a region');
+        infoModal.modal('show');
+        } else {
+          $scope.data = { region: $scope.region };
+          $http.post('/api/region', $scope.data);
+          game.startGame();
+        }
       }
     };
 
@@ -382,7 +393,7 @@ angular.module('mean.system')
         const myModal = $('#start-modal');
         myModal.modal('show');
       }
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
       if (game.state === 'game dissolved') {
         playTone('error', 0.4);
         $('#start-modal').modal('hide');

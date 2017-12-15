@@ -30,6 +30,9 @@ const GamelogSchema = new Schema({
     type: Object,
     default: '',
   },
+  rounds: {
+    type: String
+  }
 });
 
 const Gamelog = mongoose.model('Gamelog', GamelogSchema);
