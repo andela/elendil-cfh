@@ -29,11 +29,10 @@ let QuestionSchema = new Schema({
     default: '',
     trim: true
   },
-  region: {
+  location: {
     type: String,
     default: '',
     trim: true,
-    lowercase: true
   }
 });
 

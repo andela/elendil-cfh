@@ -470,3 +470,7 @@ exports.getFirendsList = (req, res) => {
   });
 };
  */
+exports.setRegion = function(req, res) {
+  localStorage.setItem('region', req.body.region);
+  return res.send({ message: 'Region set' });
+}

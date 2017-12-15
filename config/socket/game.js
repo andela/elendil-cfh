@@ -20,9 +20,7 @@ var guestNames = [
   "The Spleen",
   "Dingle Dangle"
 ];
-
-let newRegion = '';
-
+let newRegion = localStorage.getItem('region');
 function Game(gameID, io) {
   this.io = io;
   this.gameID = gameID;
@@ -37,10 +35,10 @@ function Game(gameID, io) {
   this.pointLimit = 5;
   this.state = "awaiting players";
   this.round = 0;
+  this.region = '';
   this.questions = null;
   this.answers = null;
   this.curQuestion = null;
-  this.region = '';
   this.timeLimits = {
     stateChoosing: 21,
     stateJudging: 16,
@@ -60,6 +58,7 @@ function Game(gameID, io) {
 
 Game.prototype.payload = function() {
   var players = [];
+  var self = this;
   this.players.forEach(function(player,index) {
     players.push({
       hand: player.hand,
@@ -70,7 +69,8 @@ Game.prototype.payload = function() {
       avatar: player.avatar,
       premium: player.premium,
       socketID: player.socket.id,
-      color: player.color
+      color: player.color,
+      region: this.region
     });
   });
   return {
@@ -127,9 +127,10 @@ Game.prototype.prepareGame = function() {
       playerMinLimit: this.playerMinLimit,
       playerMaxLimit: this.playerMaxLimit,
       pointLimit: this.pointLimit,
-      timeLimits: this.timeLimits
-    });
-
+      timeLimits: this.timeLimits,
+      region: this.region
+    }
+  );
   var self = this;
   async.parallel([
     this.getQuestions,
@@ -139,9 +140,9 @@ Game.prototype.prepareGame = function() {
       if (err) {
         console.log(err);
       }
-      self.questions = results[0];
-      self.answers = results[1];
-
+      self.questions = results[0].filter(result => result.location === localStorage.getItem('region'));
+      self.answers = results[1].filter(result => result.location === localStorage.getItem('region'));
+      
       self.startGame();
     });
 };
@@ -152,7 +153,6 @@ Game.prototype.startGame = function() {
   this.shuffleCards(this.answers);
   this.changeCzar(this);
   this.sendUpdate();
-  //this.stateChoosing(this);
 };
 
 Game.prototype.changeCzar = (self) => {
@@ -169,7 +169,6 @@ Game.prototype.changeCzar = (self) => {
 
 Game.prototype.sendUpdate = function() {
   this.io.sockets.in(this.gameID).emit('gameUpdate', this.payload());
-  newRegion = this.region;
 };
 
 Game.prototype.stateChoosing = function(self) {
@@ -480,7 +479,7 @@ Game.prototype.startNextRound = (self) => {
 };
 
 Game.prototype.setRegion = function (region) {
-  this.region = region;
+  this.region = region
   return region;
 };
 

@@ -29,7 +29,17 @@
               
             </button>
           </span>
-          <br/><br/>
+          <div class="form-group">
+            <label for="region"></label>
+            <input ng-model="region" type="radio" value="Africa" style="font-size:.5rem"><span style="font-size:1rem; color:#256188">Africa</span></input>
+            <input ng-model="region" type="radio" value="Global" style="font-size:.5rem"><span style="font-size:1rem; color:#256188">Global</span></input>
+            <!-- <select ng-model="region" class="one-whole" name="region" id="region">
+              <option type="radio" value="">Choose a region</option>
+              <option value="Africa">Africa</option>
+              <option value="Global">Worldwide</option>
+            </select> -->
+          </div>
+
           <img src="../img/loader_3.gif" style="height:80px" alt="">
           <figcaption style="font-size: 14px; margin-top: 6px; color: #256188">Finding Players <br></figcaption>
           <span style="font-size: 13px; font-weight: lighter; color: #256188"><p>{{game.players.length}} / {{game.playerMaxLimit}} player(s) found</p></span>
