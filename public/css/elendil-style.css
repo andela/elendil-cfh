@@ -61,7 +61,7 @@ body {
 .header-text {
   text-align: center;
   font-size: 320%;
-  margin-top: 8%;
+  /* margin-top: 8%; */
   color: #fff;
   font-family: Telugu MN;
 }
@@ -239,7 +239,7 @@ ul, ol {
 }
 
 .custom-button {
-  margin-top: 20px;
+  /* margin-top: 20px; */
   background: #FF8800;
   border-width: 2px;
   border-radius: 2px;
@@ -372,7 +372,7 @@ labelled {
 /* Modal */
 #regionModal .modal-content {
   border-radius: 0px;
-  margin-top: 75px;
+  margin-top: 0px;
 
 }
 
@@ -405,7 +405,7 @@ outline: none;
 #regionModal .home-button {
 padding: 0.5rem 1.6rem;
 font-size: 0.5rem;
-margin-top: 50px;
+/* margin-top: 50px; */
 }
 
 .text-region {
@@ -452,10 +452,10 @@ margin-top: 50px;
 
 }
 
-button { 
+/* button { 
   margin-top: 2em;
   margin-bottom: 0;
-}
+} */
 
 @media (max-width: 780px) {
   .sign-head {
