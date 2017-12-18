@@ -143,8 +143,6 @@ angular.module('mean.system')
     }
 
 
-
-
     if (data.state === 'czar pick card') {
       game.czar = data.czar;
       if (game.czar === game.playerIndex) {
@@ -218,6 +216,7 @@ angular.module('mean.system')
   };
 
   game.pickWinning = function(card) {
+
     socket.emit('pickWinning',{card: card.id});
   };
 
@@ -235,3 +234,9 @@ angular.module('mean.system')
 
   return game;
 }]);
+
+const playTone = function (toneID, volume) {
+  const audio = new Audio(`../../sounds/${toneID}.mp3`);
+  audio.volume = volume || 0.3;
+  audio.play();
+};

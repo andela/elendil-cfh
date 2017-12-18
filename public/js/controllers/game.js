@@ -13,6 +13,7 @@ angular.module('mean.system')
     $scope.makeAWishFact = makeAWishFacts.pop();
     
     $scope.pickCard = function(card) {
+      playTone('beep1');
       if (!$scope.hasPickedCards) {
         if ($scope.pickedCards.indexOf(card.id) < 0) {
           $scope.pickedCards.push(card.id);
@@ -128,6 +129,7 @@ angular.module('mean.system')
 
     $scope.pickWinning = function(winningSet) {
       if ($scope.isCzar()) {
+        playTone('beep2', 0.4);
         game.pickWinning(winningSet.card[0]);
         $scope.winningCardPicked = true;
       }
@@ -148,6 +150,7 @@ angular.module('mean.system')
     };
 
     $scope.startNextRound = () => {
+      playTone('newRound');
       if ($scope.isCzar()) {
         game.startNextRound();
       }
@@ -245,6 +248,14 @@ angular.module('mean.system')
 
     // In case player doesn't pick a card in time, show the table
     $scope.$watch('game.state', function() {
+      if (game.state === 'game ended') {
+        if (game.gameWinner === game.playerIndex) {
+          playTone('winner');
+        } else {
+          playTone('loser');
+        }
+      }
+
       if(game.state === 'awaiting players' || game.state === null) {
         $('#start').modal({
           show: true,
@@ -262,6 +273,7 @@ angular.module('mean.system')
       }
 
       if (game.state === 'game dissolved') {
+        playTone('error', 0.4);
         $('#start-modal').modal('hide');
       }
 
