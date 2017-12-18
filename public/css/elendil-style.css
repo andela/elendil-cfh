@@ -180,13 +180,12 @@ button[disabled]{
 .footer a:hover {
   color: #FF8800;
 }
-
-  
+ 
 [page="signup"] {
   background-size: cover;
   overflow-x: hidden;
+  padding-bottom: 3%;
 }
-
 
 .main {
   margin: 5rem auto;
@@ -199,7 +198,7 @@ button[disabled]{
 
 .avatar-list {
   padding-left: 0px;
-  margin-left: 3%;
+  margin-left: 5%;
   overflow: hidden;
 }
 
@@ -219,10 +218,10 @@ ul, ol {
 }
 
 .avatar-list img {
-  max-width: 45px;
+  max-width: 50px;
 }
 .avatar-list img {
-  max-width: 30%;
+  max-width: 45%;
 }
 .avatar-list img {
   vertical-align: middle;
@@ -236,6 +235,7 @@ ul, ol {
 
 .avatar-list li {
   list-style-type: none;
+  padding: 6px;
 }
 
 .custom-button {
@@ -247,6 +247,11 @@ ul, ol {
 
 .social-icons {
   border-radius: 20px;
+}
+
+.social-signup {
+  text-align: center;
+  padding-bottom: 2%;
 }
 
 .social-signup img {
@@ -267,7 +272,7 @@ ul, ol {
   
 .input-control {
   margin: 0 auto;
-  width: 300px;
+  width: 88%;
 }
   
 .cover img {
@@ -296,16 +301,17 @@ input[type="email"]:focus {
 }
 
 .avatar {
-  padding-top: 5px;
+  padding: 3%;
 }
 
-.signin-heading {
-  margin-top: 50px;
-  margin-right: 150px;
+#contain-avatars {
+  padding: 5%;
 }
+
 
 .sign-error {
   margin-left: 12px;
+  padding: 4%;
   font-family: arial;
 }
 
@@ -408,6 +414,82 @@ margin-top: 50px;
 
 .text-border {
   padding-right: 8em;
+}
+
+/* latest */
+
+.top {
+  background-color: rgb(252, 249, 243);
+  margin-top: -5px;
+}
+
+.sign-head {
+  max-width: 35%;
+  margin-left: auto;
+  margin-right: auto
+}
+.form-head {
+  background-color: #256188; 
+  color: #FFF;
+  margin-top: 8em;
+  padding: 25px;
+}
+
+.text-mv {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.form-center {
+  text-align: center;
+}
+
+.btn-sign {
+  background: #F6A623; 
+  color: #FFF;
+  margin-left: 43%;
+  
+
+}
+
+button { 
+  margin-top: 2em;
+  margin-bottom: 0;
+}
+
+@media (max-width: 780px) {
+  .sign-head {
+    max-width: 85%;
+  }
+  .btn-sign {
+    position: relative;
+    right: 20px;
+  }
+  #contain-avatars {
+    padding: 5px;
+  }
+  .avatar-list img {
+    max-width: 20px;
+  }
+  .avatar-list img {
+    max-width: 25%;
+  }
+  .avatar-list img {
+    border-width: 0px;
+    border-style: initial;
+    border-color: initial;
+    border-image: initial;
+  }
+
+  .avatars {
+    position: relative;
+    float: left;
+    border-radius: 3px;
+  }
+  
+  .avatar-list li {
+    list-style-type: none;
+  }
 }
 
 
