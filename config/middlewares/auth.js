@@ -1,3 +1,7 @@
+/* jshint esversion: 6 */
+
+/* eslint-disable */
+
 const jwt = require('jsonwebtoken');
 const { jwtSecret } = require('../env/all');
 
