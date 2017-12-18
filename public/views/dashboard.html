@@ -4,7 +4,26 @@
   </button>
   <a class="navbar-brand" href="#!"> <img src="../img/cfh-logo.png" style="width: 60%;" ></a>
   <div div class="collapse navbar-collapse" id="gameOptions">
-    <ul class="navbar-nav ml-auto" style="position:relative; width: 42% ">
+    <ul class="navbar-nav ml-auto" style="position:relative; width: 46% ">
+      <li>
+        <button 
+          ng-click="viewNotification()"
+          class="dropdown show"
+          style="
+          border: 0;
+          color: #FFF;
+          font-family: cursive;
+          font-size: 1.1rem;
+          cursor: pointer;
+          background: none;
+          margin-right: 10px;
+          width: 50px;
+          margin-right: 10px;"
+          >
+            <i class="fa fa-bell" aria-hidden="true"></i> <sup style="top: -1.5em;">{{notifications.length}}</sup>
+          </button>             
+        </li> 
+    
       <li><a href="/tour" class="nav-item btn btn-sm" style="background: #FF8800; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 1.1rem; padding: .1rem 2rem; cursor:pointer">Take a Tour</a></li>
       <li ng-click="abandonGame()"><button class="nav-item btn btn-sm" style="background: #FF8800; color: #FFF; border-radius: 12px; margin-left: 14px; font-family: cursive; font-size: 1.1rem; padding: .1rem 2rem; cursor:pointer">Abandon Game</button></li>
       <li>
@@ -14,3 +33,4 @@
     </ul>
   </div>
 </nav>
+<notification></notification>

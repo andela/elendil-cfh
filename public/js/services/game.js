@@ -70,6 +70,11 @@ angular.module('mean.system')
     game.timeLimits = data.timeLimits;
   });
 
+  game.broadcastNotification = function(data) {
+    socket.emit('broadcastNotification', data)
+  }
+
+  
   socket.on('gameUpdate', function(data) {
 
     // Update gameID field only if it changed.
@@ -230,7 +235,7 @@ angular.module('mean.system')
   game.startNextRound = () => {
     socket.emit('czarCardSelected');
   };
-  
+
   decrementTime();
 
   return game;
