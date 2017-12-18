@@ -308,6 +308,7 @@ angular.module('mean.system')
       userID = game.players[game.playerIndex].socketID;
       if (userId === userID) {
         $scope.loadNotifications();
+
       }
     });
 
