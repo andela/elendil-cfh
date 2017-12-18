@@ -8,7 +8,7 @@
         <div>
           <div class="top">
             <div class="text-center">
-              <p>Have an account?
+              <p class="text-account">Have an account?
                 <strong><a href="#!/signin">Sign In</a></strong>
               </p>
             </div>
@@ -26,18 +26,18 @@
             </span>
             <form class="form-field mr-auto" ng-submit="signup()" method="post">
               <div class="control-group">
-                <div class="input-control">
+                <div class="input-control" id="control">
                   <label for="fullname" id="label">Full Name</label>
                   <input ng-model="name" type="text" placeholder="Full Name" id="fullname" required>
                 </div>
               </div>
               <div class="control-group">
-                <div class="input-control">
+                <div class="input-control" id="control">
                   <label for="email" id="label">Email</label>
                   <input ng-model="email" type="email" placeholder="john@doe.com" id="email" required>
                 </div>
               </div>
-              <div class="input-control">
+              <div class="input-control" id="control">
                 <div class="control-group">
                   <label for="password" id="label">Password</label>
                   <input ng-model="password" type="password" placeholder="password" id="password" required>
@@ -55,19 +55,6 @@
               </div>
                 <button class="btn btn-md btn-sign" type="submit">Sign up</button>
             </form>
-            <div>
-              
-              <h5 class="text-mv"> OR </h5>
-              <br>
-              <div class="social-signup">
-                <span class="signin-heading">Sign up with</span>
-                <a href="/auth/google"><img class="social-icons" src="../img/icon/google.png" alt="Google"></a>
-                <a href="/auth/facebook"><img class="social-icons" src="../img/icon/facebook.png" alt="Facebook"></a>
-                <a href="/auth/twitter"><img class="social-icons" src="../img/icon/twitter.png" alt="Twitter"></a>
-                <a href="/auth/github"><img class="social-icons" src="../img/icon/github.png" alt="Github"></a>
-  
-              </div>
-            </div>
           </div>
         </div>
       </div>
