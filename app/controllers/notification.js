@@ -1,6 +1,6 @@
-/* jshint esversion: 6 */
-
 /* eslint-disable */
+
+/*jshint esversion: 6 */
 
 const mongoose = require('mongoose');
 
