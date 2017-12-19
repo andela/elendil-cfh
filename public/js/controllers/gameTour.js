@@ -38,7 +38,7 @@ angular.module('mean.system')
     $scope.gameTour = introJs();
     $scope.gameTour.setOptions({
       steps: [{
-        intro: `<center><img src="../img/cfh-logo.png"/> <strong>Welcome to Cards for Humanity.</strong> </center><br/> Let's walk you through this game, Shall we?
+        intro: `<center><img src="../img/cfh-logo.png"/><br/> <strong>Welcome to Cards for Humanity.</strong> </center><br/> Let's walk you through this game, Shall we?
         <br/> Use the arrow keys for navigation or hit ESC to proceed to playing the game.`
       },
       {
@@ -103,7 +103,7 @@ angular.module('mean.system')
       },
       {
         element: '#home',
-        intro: `<center><img src="../img/cfh-logo.png"/> <strong>Thanks for your time.</strong><br/> And that's it! <br/> You can view this tour again by clicking the <strong>Take a Tour</strong> button above. </center>`,
+        intro: `<center><img src="../img/cfh-logo.png"/> <br /><strong>Thanks for your time.</strong><br/> And that's it! <br/> You can view this tour again by clicking the <strong>Take a Tour</strong> button above. </center>`,
         position: 'bottom'
       }]
     });
