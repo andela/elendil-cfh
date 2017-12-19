@@ -81,10 +81,8 @@ module.exports = function (io) {
 
 
     socket.on('broadcastNotification', (userId) => {
-      console.log('Broad Casting.........', userId)
       const thisGame = allGames[socket.gameID];
       thisGame.broadcastNotification(userId);
-      console.log('sending notifications.....')
     });
 
 

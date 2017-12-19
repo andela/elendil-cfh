@@ -14,23 +14,24 @@
         </li> 
       
     </ul>
-    <div class="tab-content" id="myTabContent">
+    <div class="tab-content" id="myTabContent" style="min-height:  200px;">
       <!-- Frinds tab -->
       <div class="tab-pane fade" id="friends" role="tabpanel" aria-labelledby="friends-tab" style="font-size: 0.8rem;">
         <br>
         <p>Friends</p>
         <div>
-          <div ng-hide="friendsList" style="height: 200px;"></div>
+          <div ng-hide="friendsList" style="min-height: 120px;"> You have no friends yet</div>
           <table class="table table-striped">
+            {{friendId}}
             <tr ng-repeat="friend in friendsList">
               <td>{{friend.friendName}}</td>
-              <td style="width: 100px;"><button style="background: #FF8800; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 0.7rem; cursor:pointer" ng-click="sendNotification(friend.friendId, friend.friendEmail);">Invite</button></td>
-              <td style="width: 100px;"><button style="background: #256188; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 0.7rem; cursor:pointer" ng-click="sendInvite(user.email, user._id);">Remove</button></td> 
+              <td style="width: 100px;"><button ng-disabled="inviteList.includes(friend.friendId)" style="background: #FF8800; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 0.7rem; cursor:pointer" ng-click="sendNotification(friend.friendId, friend.friendEmail);">Invite</button></td>
+              <td style="width: 100px;"><button style="background: #256188; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 0.7rem; cursor:pointer" ng-click="removeFriend(friend.friendId);">Remove</button></td> 
             </tr>
             
           </table>
         </div>
-        <div style="text-align: left;">Firends: {{friendsList.length}}</div>
+        <div style="text-align: left; padding: 1%;">Friends: {{friendsList.length}}</div>
       </div>
 
       <!-- Search Tab -->
@@ -53,7 +54,7 @@
               <div ng-show="result" style="color: #256188;">
                 <p >search results</p>
                 <p style="color: red;"> {{ inviteMsg }} </p>
-                <div style="height: 150px; overflow: scroll;">
+                <div style="height: 162px; overflow: scroll;">
                   
                   <table style="width: 100%;" class="table table-striped" >
                     

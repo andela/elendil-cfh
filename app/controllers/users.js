@@ -315,7 +315,7 @@ exports.getDonations = (req, res) => {
       if (response.length === 0) {
         return res.send({ message: 'no data' });
       }
-      const donationData = [];
+      const donationData = []; 
       response.forEach((array) => {
         donationData.push({ name: array.name, avatar: array.avatar, donations: array.donations.length });
       });
@@ -324,7 +324,7 @@ exports.getDonations = (req, res) => {
     .catch((error) => {
       res.send(error);
     });
-}
+};
 
 exports.searchUsers = (req, res) => {
   const { q } = req.query;
@@ -446,27 +446,20 @@ exports.getFirendsList = (req, res) => {
     });
 };
 
-/* exports.deleteFriend = (req, res) => {
-  const userId = '5a2f9fee420cca1bb8ee74ce'; //req.decoded.user;
-  const { friendId } = req.body;
-
-  User.find({
-    _id: userId
-  }).then((user) => {
-    const friendData = user[0].friends;
-
-    User.findOneAndUpdate(
-      {
-        _id: userId
-      },
-      {
-        $push: { friends: friendData.filter(e => e !== friendId) }
-      }
-    ).then(() => {
-      res.status(200).json({
-        message: 'Friend Deleted Succesfully'
-      });
+exports.deleteFriend = (req, res) => {
+  const userId = req.decoded.id;
+  const { friendId } = req.params;
+  User.findOneAndUpdate(
+    {
+      _id: userId
+    },
+    {
+      $pull: { friends: { friendId } }
+    },
+    { multi: true }
+  ).then(() => {
+    res.status(200).json({
+      message: 'Friend removed sucessfully!'
     });
   });
 };
- */

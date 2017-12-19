@@ -6,9 +6,10 @@
             <h4 class="modal-title" style="margin-right:auto; margin-left:auto; margin-top: .5rem; line-height: 1">Cards For Humanity</h4>
           </div>
           <div class="modal-body" style="height: 200px; overflow: scroll;">
+              <div ng-hide="notifications" style="min-height: 120px;"> You have no Notifications</div>
             <table class="table table-striped">
               <tr ng-repeat="notice in notifications" class="notification" >
-                <td ng-click="readNotifications()">{{notice.message}}</td>
+                <td ng-click="readNotifications(notice._id)">{{notice.message}}</td>
                 <td><a target="_blank" href="{{notice.link}}"><button>join</button></a></td>
               </tr>
             </table>

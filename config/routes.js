@@ -14,12 +14,13 @@ module.exports = (app, passport, auth) => {
   app.post('/api/auth/login', users.login);
 
   // search and invite users
-  app.get('/api/search/users', users.searchUsers);
+  app.get('/api/search/users', checkToken.validateToken, users.searchUsers);
   app.post('/api/users/invite', users.sendInvites);
 
   // Add friends
   app.put('/api/user/friends', checkToken.validateToken, users.addFriend);
   app.get('/api/user/friends', checkToken.validateToken, users.getFirendsList);
+  app.delete('/api/user/friends/:friendId', checkToken.validateToken, users.deleteFriend);
 
   // Setup routes with api prefix
   app.post('/api/auth/signup', users.signupJwt);

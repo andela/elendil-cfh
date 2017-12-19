@@ -77,7 +77,7 @@ angular.module('mean.directives', [])
       restrict: 'EA',
       templateUrl: '/views/notification.html',
       link: function(scope, elem, attr){}
-    }
+    };
   }).directive('start', function () {
     return {
       restrict: 'EA',

@@ -71,8 +71,8 @@ angular.module('mean.system')
   });
 
   game.broadcastNotification = function(data) {
-    socket.emit('broadcastNotification', data)
-  }
+    socket.emit('broadcastNotification', data);
+  };
 
   
   socket.on('gameUpdate', function(data) {
