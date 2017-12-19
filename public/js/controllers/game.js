@@ -191,7 +191,8 @@ angular.module('mean.system')
         }).then((response) => { 
           const users = response.data.user;
           if (users && users.length !== 0) {
-            $scope.users = users;
+            email = game.players[game.playerIndex].email;
+            $scope.users = users.filter(e => e.email !== email);;
             $scope.usersShow = true;
           }
           $scope.result = true;

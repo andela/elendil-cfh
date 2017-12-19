@@ -315,7 +315,7 @@ exports.getDonations = (req, res) => {
       if (response.length === 0) {
         return res.send({ message: 'no data' });
       }
-      const donationData = [];
+      const donationData = []; 
       response.forEach((array) => {
         donationData.push({ name: array.name, avatar: array.avatar, donations: array.donations.length });
       });
@@ -324,7 +324,7 @@ exports.getDonations = (req, res) => {
     .catch((error) => {
       res.send(error);
     });
-}
+};
 
 exports.searchUsers = (req, res) => {
   const { q } = req.query;
