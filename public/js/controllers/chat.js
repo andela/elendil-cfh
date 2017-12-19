@@ -39,7 +39,7 @@ angular.module('mean.system')
 
     $scope.chats.$watch(function (e) {
       if (!$scope.isChatOpen) {
-        playTone();
+        playTone('newMessage');
         newLength = $scope.chats.length;
         $scope.unreadCount = newLength - oldLength;
         var { author, message } = $scope.chats[newLength - 1];
@@ -79,9 +79,3 @@ angular.module('mean.system')
       $scope.unreadCount = null;
     };
   }]);
-
-const playTone = function () {
-  const audio = new Audio('../../sounds/newMessage.mp3');
-  audio.volume = 0.2;
-  audio.play();
-};
