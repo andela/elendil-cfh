@@ -23,6 +23,7 @@ var UserSchema = new Schema({
     facebook: {},
     twitter: {},
     github: {},
+    friends: [],
     google: {}
 });
 

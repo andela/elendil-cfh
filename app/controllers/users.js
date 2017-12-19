@@ -315,7 +315,7 @@ exports.getDonations = (req, res) => {
       if (response.length === 0) {
         return res.send({ message: 'no data' });
       }
-      const donationData = [];
+      const donationData = []; 
       response.forEach((array) => {
         donationData.push({ name: array.name, avatar: array.avatar, donations: array.donations.length });
       });
@@ -324,7 +324,7 @@ exports.getDonations = (req, res) => {
     .catch((error) => {
       res.send(error);
     });
-}
+};
 
 exports.searchUsers = (req, res) => {
   const { q } = req.query;
@@ -335,7 +335,7 @@ exports.searchUsers = (req, res) => {
   }
   User.find({
     $or: [
-      { email: { $regex: `.*${q}.*` } }, { username: { $regex: `.*${q}.*` } }
+      { email: { $regex: `.*${q}.*` } }, { name: { $regex: `.*${q}.*` } }
     ]
   }, 'email name').exec((err, user) => {
     if (err) {
@@ -395,6 +395,71 @@ exports.sendInvites = (req, res) => {
     }
     return res.status(200).json({
       message: 'Message sent Successfully'
+    });
+  });
+};
+
+// Add Friends
+
+exports.addFriend = (req, res) => {
+  const { friendId, friendName, friendEmail } = req.body;
+  const friendData = { friendId, friendName, friendEmail };
+  const userId = req.decoded.id;
+  User.findOneAndUpdate(
+    {
+      _id: userId
+    },
+    {
+      $push: { friends: friendData }
+    }
+  ).then(() => {
+    res.status(200).json({
+      message: 'Friend Added Succesfully'
+    });
+  })
+    .catch((error) => {
+      res.status(500).json({
+        error,
+        message: 'Internal Server Error'
+      });
+    });
+};
+
+exports.getFirendsList = (req, res) => {
+  const userId = req.decoded.id;
+
+  User.find({
+    _id: userId
+  }).then((user) => {
+    if (!user) {
+      return res.status(404).json({
+        message: 'User not found'
+      });
+    }
+    return res.status(200).json(user[0].friends);
+  })
+    .catch((error) => {
+      res.status(500).json({
+        error,
+        message: 'Internal Server Error'
+      });
+    });
+};
+
+exports.deleteFriend = (req, res) => {
+  const userId = req.decoded.id;
+  const { friendId } = req.params;
+  User.findOneAndUpdate(
+    {
+      _id: userId
+    },
+    {
+      $pull: { friends: { friendId } }
+    },
+    { multi: true }
+  ).then(() => {
+    res.status(200).json({
+      message: 'Friend removed sucessfully!'
     });
   });
 };
