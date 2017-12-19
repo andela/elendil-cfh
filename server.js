@@ -7,7 +7,10 @@ const express = require('express'),
   fs = require('fs'),
   passport = require('passport'),
   logger = require('mean-logger'),
-  io = require('socket.io');
+  io = require('socket.io'),
+  LocalStorage = require('node-localstorage').LocalStorage;
+
+  localStorage = new LocalStorage('./scratch');
 
 
 require('dotenv').config();
