@@ -8,7 +8,7 @@
         <div>
           <div class="top">
             <div class="text-center">
-              <p>Don't have an account?
+              <p class="text-account">Don't have an account?
                 <strong><a href="#!/signup">Sign up</a></strong>
               </p>
             </div>
@@ -21,28 +21,21 @@
               <span class="text-red">Please check your username/password and try again.</span>
             </div>
             <form class="form-field mr-auto" ng-submit="login()">
-              <div class="input-control">
+              <div class="control-group">
+              <div class="input-control" id="control">
                 <label for="email" id="label">Email</label>
                 <input type="email" ng-model="email" placeholder="john@doe.com" id="email" required novalidate>
               </div>
-              <div class="input-control">
+              </div>
+
+              <div class="control-group">
+              <div class="input-control" id="control">
                 <label for="password" id="label">Password</label>
                 <input type="password" ng-model="password" placeholder="password" id="password" required novalidate>
               </div>
+              </div>
               <button type="submit" class="btn btn-md btn-sign">Sign in</button>
             </form>
-            <div>
-              <h5 class="text-mv"> OR </h5>
-              <br>
-              <div class="social-signup">
-                <span class="signin-heading">Sign in with</span>
-                <a href="/auth/google"><img class="social-icons" src="../img/icon/google.png" alt="Google"></a>
-                <a href="/auth/facebook"><img class="social-icons" src="../img/icon/facebook.png" alt="Facebook"></a>
-                <a href="/auth/twitter"><img class="social-icons" src="../img/icon/twitter.png" alt="Twitter"></a>
-                <a href="/auth/github"><img class="social-icons" src="../img/icon/github.png" alt="Github"></a>
-  
-              </div>
-            </div>
           </div>
         </div>
       </div>

@@ -270,8 +270,8 @@ ul, ol {
   font-size: 100%;
 }
   
-.input-control {
-  margin: 0 auto;
+#control {
+  margin: 24px !important;
   width: 88%;
 }
   
@@ -291,7 +291,7 @@ input[type='email'] {
   font-weight: 200;
   border-bottom: 2px solid #ccc;
   padding: 10px 0;
-  margin-bottom: 6px;
+  margin-bottom: 24px;
 }
   
 input[type="text"]:focus,
@@ -440,14 +440,20 @@ margin-top: 50px;
   margin-top: 10px;
 }
 
+.text-account {
+  padding-top: 1em !important;
+}
+
 .form-center {
   text-align: center;
+  padding: 9px;
 }
 
 .btn-sign {
   background: #F6A623; 
   color: #FFF;
   margin-left: 43%;
+  margin-bottom: 20px;
   
 
 }
