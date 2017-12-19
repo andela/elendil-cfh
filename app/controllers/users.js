@@ -1,4 +1,5 @@
 /* jshint esversion: 6 */
+/* eslint-disable */
 const jwt = require('../../config/jwt');
 const nodemailer = require('nodemailer');
 
@@ -462,4 +463,9 @@ exports.deleteFriend = (req, res) => {
       message: 'Friend removed sucessfully!'
     });
   });
+};
+
+exports.setRegion = function(req, res) {
+  localStorage.setItem('region', req.body.region);
+  return res.send({ message: 'Region set' });
 };

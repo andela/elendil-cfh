@@ -305,7 +305,8 @@ body {
               font-family: 'Bangla MN' }
               #main-container #app-container #social-bar-container #player-container #above-czar-container #player-container-inner #player-score h2 {
                 font-size: 1rem;
-                margin-top: 1.5rem;
+                margin-top: .4rem;
+                float: left;
                 margin-bottom: 0; }
                 @media only screen and (min-width: 521px) and (max-width: 768px) {
                   #main-container #app-container #social-bar-container #player-container #above-czar-container #player-container-inner #player-score h2 {

@@ -16,6 +16,7 @@ module.exports = (app, passport, auth) => {
   // search and invite users
   app.get('/api/search/users', checkToken.validateToken, users.searchUsers);
   app.post('/api/users/invite', users.sendInvites);
+  app.post('/api/region', users.setRegion);
 
   // Add friends
   app.put('/api/user/friends', checkToken.validateToken, users.addFriend);
