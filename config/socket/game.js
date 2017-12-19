@@ -89,6 +89,10 @@ Game.prototype.payload = function() {
   };
 };
 
+Game.prototype.broadcastNotification = function(userId) {
+  this.io.sockets.emit('notificationReceived', userId);
+};
+
 Game.prototype.sendNotification = function(msg) {
   this.io.sockets.in(this.gameID).emit('notification', {notification: msg});
 };

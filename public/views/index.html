@@ -28,7 +28,7 @@
   <div landing id="wrapper">
     <!-- Fixed Logo & Menu Bar Start -->
       <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #256188;">
-        <a class="navbar-brand" href="#!/#home"> <img src="../img/cfh-logo.png" style="width: 60%;" ></a>
+        <a class="navbar-brand" href="#!/#home" style="font-family: Telugu MN;"> <img src="../img/cfh-logo.png" style="width: 19%;" > Cards For Humanity</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -42,11 +42,12 @@
             <a style="background: #FF8800; color: #FFF; border-radius: 12px;font-family: cursive; font-size: 1.1rem; padding: .1rem 2rem" ng-show="showOptions" class="nav-item nav-link active " href="#!/signup">Sign up</a>
             <a style="background: #FF8800; color: #FFF; border-radius: 12px;font-family: cursive; font-size: 1.1rem; padding: .1rem 2rem" ng-show="showOptions" class="nav-item nav-link active" href="#!/signin">Sign in</a>
 
-            <a ng-hide="showOptions" class="nav-item nav-link" href="#!/dashboard">Dashboard</a>
-            <a ng-hide="showOptions" class="nav-item nav-link active" ng-click="signOut()" href="/">Sign Out</a>
+            <a ng-hide="showOptions" class="nav-item nav-link" style="font-family: cursive;" href="#!/dashboard">Dashboard</a>
+            <a style="background: #FF8800; color: #FFF; border-radius: 12px;font-family: cursive; font-size: 1.1rem; padding: .1rem 2rem" ng-hide="showOptions" class="nav-item nav-link active" ng-click="signOut()" href="/">Sign Out</a>
                
           </div>
         </div>
+        
       </nav><!-- Nav ends here -->
 
       <div id="regionModal" ng-controller="IndexController" class="modal regionModal" role="dialog">
@@ -92,8 +93,7 @@
   <!-- Header Start -->
   <div class="header" id="home">
     <div class="header-text">
-      <h2>Cards For Humanity</h2>
-      <p>A game for Horrible <br> People Desperately trying to do good </p>
+      <p>A game for horrible <br> people desperately trying to do good </p>
     </div>
     <div class="game-btn" ng-show="showOptions" id="how-to-play">
         <a href="/tour"><button type="button" class="btn btn-warning">Take a Tour</button></a>
@@ -105,7 +105,7 @@
         <button type="button" class="btn btn-light" data-toggle="modal" data-target="#regionModal">Play Game with Friends</button>
     </div>
 
-    <div class="how-to-slider">
+    <div class="how-to-slider" style="margin-top: 8%">
       <div id="carousel">
           <img src="../img/0.png" />
           <img src="../img/1a.png" />
@@ -118,7 +118,7 @@
   <!-- header End -->
 
   <div class="what-is-cfh" ng-controller="IndexController">
-    <h3>What is Cards for Humanity?</h3>
+    <h3>What is cards for humanity?</h3>
     <p>
       Cards for Humanity is a fast-paced online version of the card game <br>
       Cards for Humanity that gives you the opputunity to donate to children in need<br>
