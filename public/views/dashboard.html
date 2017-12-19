@@ -3,9 +3,9 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <a class="navbar-brand" href="#!"> <img src="../img/cfh-logo.png" style="width: 60%;" ></a>
-  <div div class="collapse navbar-collapse" id="gameOptions">
+  <div class="collapse navbar-collapse" id="gameOptions">
     <ul class="navbar-nav ml-auto" style="position:relative; width: 46% ">
-      <li>
+      <li ng-hide="showOptions">
         <button 
           ng-click="viewNotification()"
           class="dropdown show"
@@ -20,8 +20,8 @@
           width: 50px;
           margin-right: 10px;"
           >
-            <i class="fa fa-bell" aria-hidden="true"></i> <sup style="top: -1.5em;">{{notifications.length}}</sup>
-          </button>             
+            <span ng-class="{ 'notification': notifications.length > 0  }">{{showOptions}}<i class="fa fa-bell" aria-hidden="true"></i> <sup style="top: -1.5em;">{{notifications.length}}</sup></span>
+          </button>            
         </li> 
     
       <li><a href="/tour" class="nav-item btn btn-sm" style="background: #FF8800; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 1.1rem; padding: .1rem 2rem; cursor:pointer">Take a Tour</a></li>

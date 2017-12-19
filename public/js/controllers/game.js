@@ -194,7 +194,8 @@ angular.module('mean.system')
         }).then((response) => { 
           const users = response.data.user;
           if (users && users.length !== 0) {
-            $scope.users = users;
+            email = game.players[game.playerIndex].email;
+            $scope.users = users.filter(e => e.email !== email);;
             $scope.usersShow = true;
           }
           $scope.result = true;
@@ -239,7 +240,7 @@ angular.module('mean.system')
     
     // Set http header
     $scope.setHttpHeader = () => {
-      const token = $window.localStorage.getItem('token')
+      const token = $window.localStorage.getItem('token');
       $http.defaults.headers.common.token = token;
     };
 
@@ -262,7 +263,7 @@ angular.module('mean.system')
           $scope.getFriendsList();
         });
 
-    }
+    };
 
     // get Friends list
     $scope.getFriendsList = () => {
@@ -271,14 +272,23 @@ angular.module('mean.system')
         .then(
         (response) => {
           $scope.friendsList = response.data;
-         console.log($scope.friendsList)
-          $scope.friendsId = response.data.map(friend => friend.friendId)
+          $scope.friendsId = response.data.map(friend => friend.friendId);
           
         },
         (error) => {
           $scope.friendsList = [];
         });
-    }
+    };
+
+    // remove friend
+    $scope.removeFriend = (friendId) => {
+      $scope.setHttpHeader();
+      $http.delete(`/api/user/friends/${friendId}`).then((response) => {
+        $scope.getFriendsList();
+      }, (error) => {
+        $scope.getFriendsList();
+      });
+    };
 
     // send notifications
     $scope.sendNotification =  (friendId, friendEmail) => {
@@ -290,37 +300,32 @@ angular.module('mean.system')
       $http.post('/api/notifications', payload).then(
         (response) => {
           $scope.inviteList.push(friendId);
-          console.log('here %%%%')
-          userID = game.players.filter(e => e.email === friendEmail)
-          console.log('it works >>', userID[0])
-          game.broadcastNotification(userID[0].socketID);
+          userID = game.players.filter(e => e.email === friendEmail);
+          if (userID.length > 0) {
+            game.broadcastNotification(userID[0].socketID);
+          }
         });
-    }
+    };
 
    
     socket.on('notificationReceived', (userId) => {
       userID = game.players[game.playerIndex].socketID;
       console.log('>>>>>>>>>>>', game.playerIndex)
       if (userId === userID) {
-        console.log('userId:  >>>', userID)
         $scope.loadNotifications();
-      } else {
-        console.log('not you man')
       }
     });
 
     
 
     $scope.loadNotifications = () => {
-      console.log('loading Notifications....')
       $scope.setHttpHeader();
       $http.get('/api/notifications')
         .then(
         (response) => {
-          console.log('from response', response.data)
           $scope.notifications = response.data.notifications.sort(function(a, b){ return b.id - a.id });
           if ($scope.notifications.length >= 1) {
-            toastr.success(`You have ${$scope.notifications.length} new Notification${$scope.notifications.length >1?'s': ''}!`)
+            toastr.success(`You have ${$scope.notifications.length} new Notification${$scope.notifications.length >1?'s': ''}!`);
           }
         },
         (error) => {
@@ -338,7 +343,7 @@ angular.module('mean.system')
           (error) => {
           $scope.loadNotifications();
         });
-    }
+    };
     
     // Catches changes to round to update when no players pick card
     // (because game.state remains the same)
