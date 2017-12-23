@@ -28,7 +28,9 @@
   
       <div class="panel panel-default signup-panel" > 
           <div style="background-color: #256188; height: 40px; color: #ffffff; padding: 10px;">
-            <span>Dashboard</span>
+            <span ng-show="gameLog">Game Logs</span>
+            <span ng-show="leaderboard">Leaderboard</span>
+            <span ng-show="donations">Donations</span>
           </div>
           <div ng-show="noDonations">
               <h3>You haven't made any donations yet</h3>
@@ -76,7 +78,8 @@
                 <tr>
                   <th class="text-center">#</th>
                   <th class="text-center">Winner</th>
-                  <th class="text-center">Friends Played with</th>
+                  <th class="text-center">Friends played with</th>
+                  <th class="text-center">Rounds played</th>
               </tr>
             </thead>
             <tbody>
@@ -91,6 +94,7 @@
                       </ul>
   
                   </td>
+                  <td>{{ gamelog.rounds }}</td>
               </tr>
           </tbody>
        </table>
